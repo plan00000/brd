@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd"
+	default-lazy-init="true">
+	<!-- ApiConfig配置 -->
+	<bean id="apiConfig" class="com.github.sd4324530.fastweixin.api.config.ApiConfig"
+		scope="singleton">
+		<constructor-arg name="appid" value="${weixin.appId}" />
+		<constructor-arg name="secret" value="${weixin.appsecret}" />
+		<constructor-arg name="enableJsApi" value="${weixin.enableJsApi}" />
+	</bean>
+	<!-- 客服api -->
+	<bean id="customAPI" class="com.github.sd4324530.fastweixin.api.CustomAPI">
+		<constructor-arg name="config" ref="apiConfig"></constructor-arg>
+	</bean>
+	<!-- 数据统计api -->
+	<bean id="dataCubeAPI" class="com.github.sd4324530.fastweixin.api.DataCubeAPI">
+		<constructor-arg name="config" ref="apiConfig"></constructor-arg>
+	</bean>
+	<!-- jsApi -->
+	<bean id="jsAPI" class="com.github.sd4324530.fastweixin.api.JsAPI">
+		<constructor-arg name="config" ref="apiConfig"></constructor-arg>
+	</bean>	
+	<!-- 素材api -->
+	<bean id="materialAPI" class="com.github.sd4324530.fastweixin.api.MaterialAPI">
+		<constructor-arg name="config" ref="apiConfig"></constructor-arg>
+	</bean>
+	<!-- 多媒体资源API -->
+	<bean id="mediaAPI" class="com.github.sd4324530.fastweixin.api.MediaAPI">
+		<constructor-arg name="config" ref="apiConfig"></constructor-arg>
+	</bean>	
+	<!-- 菜单相关API -->
+	<bean id="menuAPI" class="com.github.sd4324530.fastweixin.api.MenuAPI">
+		<constructor-arg name="config" ref="apiConfig"></constructor-arg>
+	</bean>	
+	<!-- 消息相关API -->
+	<bean id="messageAPI" class="com.github.sd4324530.fastweixin.api.MessageAPI">
+		<constructor-arg name="config" ref="apiConfig"></constructor-arg>
+	</bean>	
+	<!-- 网页授权API -->
+	<bean id="oauthAPI" class="com.github.sd4324530.fastweixin.api.OauthAPI">
+		<constructor-arg name="config" ref="apiConfig"></constructor-arg>
+	</bean>	
+	<!-- 二维码相关API -->
+	<bean id="qrcodeAPI" class="com.github.sd4324530.fastweixin.api.QrcodeAPI">
+		<constructor-arg name="config" ref="apiConfig"></constructor-arg>
+	</bean>	
+	<!-- 系统API -->
+	<bean id="systemAPI" class="com.github.sd4324530.fastweixin.api.SystemAPI">
+		<constructor-arg name="config" ref="apiConfig"></constructor-arg>
+	</bean>	
+	<!-- 模版消息 api -->
+	<bean id="templateMsgAPI" class="com.github.sd4324530.fastweixin.api.TemplateMsgAPI">
+		<constructor-arg name="config" ref="apiConfig"></constructor-arg>
+	</bean>	
+	<!-- 用户管理相关API -->
+	<bean id="userAPI" class="com.github.sd4324530.fastweixin.api.UserAPI">
+		<constructor-arg name="config" ref="apiConfig"></constructor-arg>
+	</bean>	
+</beans>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd"
+	default-lazy-init="true">
+
+	<description>使用Spring的 Scheduled的定时任务配置 【约定：所有批处理都在凌晨后执行】</description>
+	
+	<!-- 数据统计批处理 -->
+	<!-- 每天晚上1点执行 -->
+	<bean id="dataStatisticsSchedule" class="com.zzy.brd.scheduler.DataStatisticsSchedule" lazy-init="false">
+		<property name="cronExpression" value="0 0 1 * * ?"/>
+		<property name="shutdownTimeout" value="20" />
+	</bean>
+	
+	<!-- 会员每日数据统计 -->
+	<!-- 每天晚上 1点30执行 -->
+	<bean id="userDailyStatisticsSchedule" class="com.zzy.brd.scheduler.UserDailyStatisticsSchedule" lazy-init="false" >
+		 <property name="cronExpression" value="0 30 1 * * ?"/>
+		<property name="shutdownTimeout" value="20" />	
+	</bean> 
+	
+</beans>

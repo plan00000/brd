@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+	default-lazy-init="true">
+
+	<description>Shiro安全配置</description>
+
+	<bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+		<constructor-arg value="rememberMe" />
+		<property name="httpOnly" value="true" />
+		<!-- 默认记住7天（单位：秒） -->
+		<property name="maxAge" value="604800" />
+	</bean>
+	<!-- cipherKey 每个项目都要不同，必须是16位 -->
+	<bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+		<property name="cipherKey"
+			value="#{T(org.apache.shiro.codec.Base64).decode('1t43gns419h1g61dpnpfe')}" />
+		<property name="cookie" ref="rememberMeCookie" />
+	</bean>
+
+	<bean id="sessionDAO" class="com.zzy.brd.shiro.session.CustomCacheSessionDAO">
+		<property name="activeSessionsCacheName" value="shiro-activeSessionCache" />
+		<!-- <property name="sessionIdGenerator" ref="userSessionIdGenerator"/> -->
+	</bean>
+
+	<bean id="sessionManager"
+		class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+		<property name="sessionDAO" ref="sessionDAO" />
+		<property name="sessionValidationInterval" value="1800000" />  <!-- 相隔多久检查一次session的有效性 -->
+		<property name="globalSessionTimeout" value="1800000" />  <!-- session 有效时间为半小时 （毫秒单位） -->
+		<property name="sessionIdCookieEnabled" value="true" />
+		<property name="sessionIdCookie" ref="sessionIdCookie"/> 
+	</bean>
+	<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+		<constructor-arg value="sid" />
+		<property name="httpOnly" value="true" />
+		<property name="maxAge" value="-1" />
+		<property name="name" value="jsid" />
+	</bean>
+	<!-- 用户授权信息Cache, 采用EhCache -->
+	<bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<property name="cacheManagerConfigFile" value="classpath:cache/ehcache-shiro.xml" />
+	</bean>
+	<!-- Shiro's main business-tier object for web-enabled applications -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="sessionMode" value="native" />
+		<property name="realm" ref="shiroAdminDbRealm" />
+		<property name="cacheManager" ref="shiroEhcacheManager" />
+		<property name="rememberMeManager" ref="rememberMeManager" />
+		<property name="sessionManager" ref="sessionManager" />
+	</bean>
+
+	<!-- 項目自定义的Realm, 所有accountService依赖的dao都需要用depends-on声明 -->
+	<bean id="shiroAdminDbRealm" class="com.zzy.brd.shiro.realm.ShiroAdminDbRealm">
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<bean id="apiAuthBasic"
+		class="com.zzy.brd.mobile.rest.filter.ApiAuthenticationFilter">
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<!-- api验证 -->
+	<bean id="securityManager1" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="apiShiroDbRealm" />
+		<property name="sessionManager" ref="sessionManager"/>  
+	</bean>
+	<bean id="apiShiroDbRealm" class="com.zzy.brd.mobile.rest.common.ApiShiroDbRealm">
+		<property name="userService" ref="userService" />
+	</bean>
+	<bean id="apiShiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager1" />
+		<property name="loginUrl" value="/api/user/login" />
+		<property name="successUrl" value="/api/user/loginSuccess" />
+		<property name="filters">
+			<map>
+				<entry key="apiauthc" value-ref="apiAuthBasic" />
+			</map>
+		</property>
+		<property name="filterChainDefinitions">
+			<value>
+				/api/user/** = apiauthc
+			</value>
+		</property>
+	</bean>
+
+	<!-- 自定义认证过滤器 -->
+	<bean id="myCapchaFilter" class="com.zzy.brd.filter.FormAuthenticationCaptchaFilter">
+		<property name="rememberMeParam" value="rememberMe" />
+	</bean>
+	
+
+	<!-- 强制用户退出过滤器 -->
+	<bean id="forceLogoutFilter" class="com.zzy.brd.filter.ForceLogoutFilter"></bean>
+	<!-- Shiro Filter -->
+	<bean id="adminShiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+ 		<property name="loginUrl" value="/admin/login" />
+		<property name="successUrl" value="/admin/login/succ" />
+		<property name="filters">
+			<map>
+				<entry key="authc" value-ref="myCapchaFilter" />
+				<entry key="forceLogout" value-ref="forceLogoutFilter"/>
+			</map>
+		</property>
+		<property name="filterChainDefinitions">
+			<value>
+				<!-- 先配置详细连接，后**，否则会被忽略掉 -->
+				<!-- 使用user的可以用rememberMe到原来的页面，但是如果用authc,输入原来页面的链接,将跳转到登录页面 -->
+				/admin/main = forceLogout,user
+				/admin/login = forceLogout,authc
+				/admin/orderform/** = forceLogout,user
+				/admin/product/** = forceLogout,user
+				/admin/department/** = forceLogout,authc
+				/admin/role/** = forceLogout,authc
+				/admin/employee/** = forceLogout,authc
+				/admin/user/** = forceLogout,authc
+				/admin/operlog/** = forceLogout,authc
+				/admin/information/** = forceLogout,authc
+				/admin/activity/** = forceLogout,authc
+				/admin/qrCodeActivity/** = forceLogout,authc
+				/admin/platformSetting/** = forceLogout,authc
+				/admin/weixinPost/** = forceLogout,authc
+				/admin/reportStatistics/** = forceLogout,authc
+				/admin/advertisement/pc/ad/** = forceLogout,authc 
+				/admin/advertisement/weixin/ad/** = forceLogout,authc
+				/api/** = anon
+				/html/** = anon
+				/pc/** = anon
+				/** = forceLogout,anon
+				
+			</value>
+		</property>
+	</bean>
+	<!-- 微信手机站配置 -->
+	
+	<bean id="shiroUserDbRealm" class="com.zzy.brd.shiro.realm.ShiroUserDbRealm">
+		<property name="userService" ref="userService" />
+	</bean>
+	<bean id="sessionManager2"
+		class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+		<property name="sessionDAO" ref="sessionDAO" />
+		<property name="sessionValidationInterval" value="7200000" />  <!-- 相隔多久检查一次session的有效性 -->
+		<property name="globalSessionTimeout" value="7200000" />  <!-- session 有效时间为半小时 （毫秒单位） -->
+		<property name="sessionIdCookieEnabled" value="true" />
+		<property name="sessionIdCookie" ref="sessionIdCookie"/> 
+	</bean>  
+	<bean id="securityManager2" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="sessionMode" value="native" />
+		<property name="realms" >
+			<list>
+               <ref bean="shiroUserDbRealm"/>
+            </list>
+		</property>
+		<property name="cacheManager" ref="shiroEhcacheManager" />
+		<property name="rememberMeManager" ref="rememberMeManager" />
+		<property name="sessionManager" ref="sessionManager2" />
+	</bean>
+	
+	<bean id="forceLogoutFilter1" class="com.zzy.brd.filter.ForceLogoutFilter">
+		<property name="loginUrl"  value="/user/login"/>
+	</bean>
+	<bean id="weixinAuthenticationFilter" class="com.zzy.brd.filter.WeixinAuthenticationFilter">
+		<property name="userService" ref="userService" />
+	</bean>
+	<!-- Shiro Filter -->
+	  <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager2" />
+		<property name="loginUrl" value="/user/login" />
+		<property name="filters">
+			<map>
+				<entry key="forceLogout" value-ref="forceLogoutFilter1"/>
+				<entry key="weixinAuth" value-ref="weixinAuthenticationFilter"/>
+			</map>
+		</property>
+		<property name="filterChainDefinitions">
+			<value>
+				<!-- 先配置详细连接，后**，否则会被忽略掉
+				使用user的可以用rememberMe到原来的页面，但是如果用authc,输入原来页面的链接,将跳转到登录页面 -->
+				/weixin/user/toLogin = anon
+				/weixin/user/register = anon
+				/weixin/usercenter/** = weixinAuth,forceLogout
+				/weixin/loan/myloan = weixinAuth,forceLogout
+				/weixin/bankinfo/** = weixinAuth,forceLogout
+				/weixin/withdraw/** = weixinAuth,forceLogout
+				/weixin/orderform/** = weixinAuth,forceLogout
+				/weixin/generalUserCenter/** = weixinAuth,forceLogout
+				/weixin/activity/** = weixinAuth,forceLogout
+				/weixin/index/judgment = weixinAuth,forceLogout
+				/weixin/** = anon
+			</value>
+		</property>
+	</bean>
+
+
+
+	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+</beans>
