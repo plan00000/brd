@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib 
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+    version="2.1">
+
+    <display-name>Custom Functions</display-name>    
+    <tlib-version>1.0</tlib-version>
+    <uri>functions</uri>
+	<function>
+        <name>urlEncode</name>
+        <function-class>org.springside.modules.utils.Encodes</function-class>
+        <function-signature>java.lang.String urlEncode(java.lang.String)</function-signature>
+    </function>
+    <!-- 格式化时间 格式:yyyy-MM-dd hh:mm:ss -->
+	<function>
+        <name>formatNormalDate</name>
+        <function-class>com.zzy.brd.util.tld.DateUtils</function-class>
+        <function-signature>java.lang.String formatNormalDate(java.util.Date)</function-signature>
+    </function>
+    <!-- 格式化时间 格式:yyyy-MM-dd-->
+    <function>
+        <name>formatShortDate</name>
+        <function-class>com.zzy.brd.util.tld.DateUtils</function-class>
+        <function-signature>java.lang.String formatShortDate(java.util.Date)</function-signature>
+    </function>
+    <!-- 显示money，未带单位  -->
+    <function>
+        <name>showMoneyWithoutUnit</name>
+        <function-class>com.zzy.brd.util.tld.PriceUtils</function-class>
+        <function-signature>java.lang.String showMoneyWithoutUnit(java.math.BigDecimal)</function-signature>
+    </function>
+    <!-- 显示money，单位元 -->
+    <function>
+        <name>showMoney</name>
+        <function-class>com.zzy.brd.util.tld.PriceUtils</function-class>
+        <function-signature>java.lang.String showMoney(java.math.BigDecimal)</function-signature>
+    </function>
+    <!-- 显示价格，单位元 -->
+   <function>
+        <name>showPrice</name>
+        <function-class>com.zzy.brd.util.tld.PriceUtils</function-class>
+        <function-signature>java.lang.String showPrice(java.math.BigDecimal)</function-signature>
+    </function>
+    <function>
+        <name>showPriceWithoutUnit</name>
+        <function-class>com.zzy.brd.util.tld.PriceUtils</function-class>
+        <function-signature>java.lang.String showPriceWithoutUnit(java.math.BigDecimal)</function-signature>
+    </function>
+    <!-- 显示价格 万元 -->
+    <function>
+        <name>showTenThousandPrice</name>
+        <function-class>com.zzy.brd.util.tld.PriceUtils</function-class>
+        <function-signature>java.lang.String tenThousandPrice(java.math.BigDecimal)</function-signature>
+    </function>
+   <!-- 显示利率，单位% -->
+   <function>
+   		<name>showRate</name>
+        <function-class>com.zzy.brd.util.tld.PriceUtils</function-class>
+        <function-signature>java.lang.String showRate(java.math.BigDecimal)</function-signature>
+   </function>
+   <function>
+   		<name>showRateWithoutUnit</name>
+        <function-class>com.zzy.brd.util.tld.PriceUtils</function-class>
+        <function-signature>java.lang.String showRateWithoutUnit(java.math.BigDecimal)</function-signature>
+   </function>
+   <!-- 显示利率，单位‰ -->
+   <function>
+   		<name>showThousandRate</name>
+        <function-class>com.zzy.brd.util.tld.PriceUtils</function-class>
+        <function-signature>java.lang.String showThousandRate(java.math.BigDecimal)</function-signature>
+   </function>
+   <function>
+   		<name>showThousandRateWithoutUnit</name>
+        <function-class>com.zzy.brd.util.tld.PriceUtils</function-class>
+        <function-signature>java.lang.String showThousandRateWithoutUnit(java.math.BigDecimal)</function-signature>
+   </function>
+   <!-- 显示月 -->
+   <function>
+   		<name>showMonth</name>
+        <function-class>com.zzy.brd.util.tld.PriceUtils</function-class>
+        <function-signature>java.lang.String showMonth(java.lang.Integer)</function-signature>
+   </function>
+   <function>
+   		<name>showMonthWithoutUnit</name>
+        <function-class>com.zzy.brd.util.tld.PriceUtils</function-class>
+        <function-signature>java.lang.String showMonthWithoutUnit(java.lang.Integer)</function-signature>
+   </function>
+  
+   <!-- 显示天 -->
+    <function>
+   		<name>showDay</name>
+        <function-class>com.zzy.brd.util.tld.PriceUtils</function-class>
+        <function-signature>java.lang.String showDay(java.lang.Integer)</function-signature>
+   </function>
+   <function>
+   		<name>showDayWithoutUnit</name>
+        <function-class>com.zzy.brd.util.tld.PriceUtils</function-class>
+        <function-signature>java.lang.String showDayWithoutUnit(java.lang.Integer)</function-signature>
+   </function>
+    <!-- 编辑器html内容解码 -->
+    <function>
+   		<name>htmlUnescape</name>
+        <function-class>com.zzy.brd.util.tld.HtmlEscapse</function-class>
+        <function-signature>java.lang.String htmlUnescape(java.lang.String)</function-signature>
+   </function>
+   <function>
+   		<name>htmlEscape</name>
+   		<function-class>com.zzy.brd.util.tld.HtmlEscapse</function-class>
+        <function-signature>java.lang.String htmlEscape(java.lang.String)</function-signature>
+   </function>
+   <function>
+   		<name>showMobileno</name>
+   		<function-class>com.zzy.brd.util.tld.PriceUtils</function-class>
+        <function-signature>java.lang.String showMobileno(java.lang.String)</function-signature>
+   </function>
+</taglib>
