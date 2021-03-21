@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/*
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -39,6 +39,7 @@ import com.zzy.brd.util.weixin.Token;
 
  
  
+
 @Service
 public class WeixinTemplateService {
 	private static Logger log = LoggerFactory.getLogger(WeixinTemplateService.class);
@@ -48,10 +49,12 @@ public class WeixinTemplateService {
 	@Autowired
 	private WeixinPostService weixinPostService;
     
+*/
 /**
  * temp
  * @return int 返回0就是发送成功 不是零返回错误代码。
- */
+ *//*
+
     public int sendTemplateMessage(NewInfoTemplate temp) {
     	String appid = null;
     	String appsecret = null;
@@ -81,11 +84,13 @@ public class WeixinTemplateService {
 		return result;
  }
     
-    /**
+    */
+/**
      * 贷款提交后的通知
      * @param openId
      * @return NewInfoTemplate
-     */
+     *//*
+
     public NewInfoTemplate getLoadSubmit(Orderform orderform,HttpServletRequest request){
     	User user = orderform.getUser();
     	NewInfoTemplate temp = new NewInfoTemplate();
@@ -121,11 +126,13 @@ public class WeixinTemplateService {
     	return temp;
     }
     
-    /**
+    */
+/**
      * 贷款审核成功通知
      * @param openId
      * @return NewInfoTemplate
-     */
+     *//*
+
     public NewInfoTemplate getAuditSuccess(Orderform orderform,HttpServletRequest request){
     	User user = orderform.getUser();
     	NewInfoTemplate temp = new NewInfoTemplate();
@@ -160,11 +167,13 @@ public class WeixinTemplateService {
     	}
          return temp;
     }
-    /**
+    */
+/**
      * 贷款审核失败通知
      * @param openId
      * @return NewInfoTemplate
-     */
+     *//*
+
     public NewInfoTemplate getAuditFailure(Orderform orderform,HttpServletRequest request){
     	User user = orderform.getUser();
     	NewInfoTemplate temp = new NewInfoTemplate();
@@ -200,11 +209,13 @@ public class WeixinTemplateService {
     	return temp;
     }
 
-    /**
+    */
+/**
      * 放款成功的通知
      * @param openId
      * @return NewInfoTemplate
-     */
+     *//*
+
     public NewInfoTemplate getLoadSuccess(Orderform orderform,HttpServletRequest request){
     	User user = orderform.getUser();
     	NewInfoTemplate temp = new NewInfoTemplate();
@@ -240,12 +251,14 @@ public class WeixinTemplateService {
          return temp;
     }
 
-    /**
+    */
+/**
      * 佣金生成通知列表
      * @param brokerageApply
      * @param request
      * @return
-     */
+     *//*
+
     public boolean getBrokerageCreateList(BrokerageApply brokerageApply ,HttpServletRequest request){
     	int res1= 0 ;
     	int res2= 0 ;
@@ -296,12 +309,14 @@ public class WeixinTemplateService {
     		return true;
     	}
     }
-    /**
+    */
+/**
      * 佣金放款通知列表
      * @param brokerageApply
      * @param request
      * @return
-     */
+     *//*
+
     public boolean getBrokerageLoadList(BrokerageApply brokerageApply ,HttpServletRequest request){
     	int res1= 0 ;
     	int res2= 0 ;
@@ -352,11 +367,13 @@ public class WeixinTemplateService {
     	}
     }
     
-    /**
+    */
+/**
      * 佣金生成通知
      * @param openId
      * @return NewInfoTemplate
-     */
+     *//*
+
     public NewInfoTemplate getBrokerageCreate(BrokerageApply brokerageApply ,HttpServletRequest request,int userType){
     	User user = brokerageApply.getUser();
     	NewInfoTemplate temp = new NewInfoTemplate();
@@ -439,11 +456,13 @@ public class WeixinTemplateService {
          }
          return temp;
     }
-    /**
+    */
+/**
      * 佣金放款通知
      * @param openId
      * @return NewInfoTemplate
-     */
+     *//*
+
     public NewInfoTemplate getBrokerageLoad(BrokerageApply brokerageApply ,HttpServletRequest request,int userType){
     	User user = brokerageApply.getUser();
     	NewInfoTemplate temp = new NewInfoTemplate();
@@ -535,11 +554,13 @@ public class WeixinTemplateService {
     	return temp;
     }
 
-    /**
+    */
+/**
      * 提现到款通知
      * @param openId
      * @return NewInfoTemplate
-     */
+     *//*
+
     public NewInfoTemplate getWithdrawArrival(FlowWithdraw flowWithdraw,HttpServletRequest request){
     	User user = flowWithdraw.getUser();
     	NewInfoTemplate temp = new NewInfoTemplate();
@@ -575,7 +596,8 @@ public class WeixinTemplateService {
         return temp;
    }
     
-    /**
+    */
+/**
      * 微信开发者验证
      * @param wxAccount
      *
@@ -584,7 +606,8 @@ public class WeixinTemplateService {
      * @param nonce
      * @param echostr
      * @return
-     */
+     *//*
+
     @Transactional
     public String validate(String wxToken, CheckModel tokenModel){
         String signature = tokenModel.getSignature();
@@ -605,11 +628,13 @@ public class WeixinTemplateService {
         }
         return "error";
     }
-    /**
+    */
+/**
      * 得到url
      * @param request
      * @return
-     */
+     *//*
+
     public String url(HttpServletRequest request){
     	String url=null;
 		if (request.getServerPort() != 80) {
@@ -666,4 +691,4 @@ public class WeixinTemplateService {
         }
 		return result;
     }
-}
+}*/

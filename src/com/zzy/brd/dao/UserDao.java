@@ -13,7 +13,7 @@ import com.zzy.brd.entity.Role;
 import com.zzy.brd.entity.User;
 import com.zzy.brd.entity.User.State;
 import com.zzy.brd.entity.User.UserType;
-import com.zzy.brd.mobile.web.dto.rep.apprentice.RepMyApprenticeDTO;
+//import com.zzy.brd.mobile.web.dto.rep.apprentice.RepMyApprenticeDTO;
 
 
 public interface UserDao extends BaseDao<User>{
@@ -222,8 +222,8 @@ public interface UserDao extends BaseDao<User>{
 			+ "on u.userInfoBoth.id = ub.id  left join (select r.user.id userid,sum(r.haveBrokerage) brokerage "
 			+ "from RecordBrokerage r where r.user.id = ?1 and r.relate =1 group by r.gainUser.id) s "
 			+ "on u.id = s.userid where u.state = 1 and ub.parent.id = ?1")*/
-	@Query("select u from User u where u.id = userId")
-	List<RepMyApprenticeDTO> getMyApprentices(long userId);
+	/*@Query("select u from User u where u.id = userId")
+	List<RepMyApprenticeDTO> getMyApprentices(long userId);*/
 	
 	//查询商家为某个人的全部会员
 	@Query("select u from User u where u.userInfoBoth.seller.id =?1 and u.state!='2'")

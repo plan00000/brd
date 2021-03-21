@@ -12,8 +12,8 @@ import org.apache.shiro.web.util.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.zzy.brd.mobile.rest.common.ZzyCheckToken;
-import com.zzy.brd.mobile.rest.filter.ApiAuthenticationFilter;
+//import com.zzy.brd.mobile.rest.common.ZzyCheckToken;
+//import com.zzy.brd.mobile.rest.filter.ApiAuthenticationFilter;
 import com.zzy.brd.service.UserService;
 
 /**
@@ -21,7 +21,7 @@ import com.zzy.brd.service.UserService;
  * @author lzh 2016/9/13
  *
  */
-public class WeixinAuthenticationFilter extends AuthenticatingFilter{
+/*public class WeixinAuthenticationFilter extends AuthenticatingFilter{
 	
 	private static Logger logger = LoggerFactory.getLogger(WeixinAuthenticationFilter.class);
 	//private String weixinLoginUrl = "/weixin/user/toLogin";
@@ -117,4 +117,4 @@ public class WeixinAuthenticationFilter extends AuthenticatingFilter{
 		this.userService = userService;
 	}
 
-}
+}*/

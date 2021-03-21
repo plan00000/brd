@@ -12,9 +12,9 @@ import com.zzy.brd.dto.rep.RepSimpleMessageDTO;
 import com.zzy.brd.entity.SysInfo;
 import com.zzy.brd.entity.WeixinPost;
 import com.zzy.brd.entity.WeixinPost.NoticeType;
-import com.zzy.brd.mobile.web.dto.req.weixinpost.ReqWeixinPostDTO;
+//import com.zzy.brd.mobile.web.dto.req.weixinpost.ReqWeixinPostDTO;
 import com.zzy.brd.service.SysInfoService;
-import com.zzy.brd.service.WeixinPostService;
+//import com.zzy.brd.service.WeixinPostService;
 
 /**
  * @author:CSY
@@ -25,8 +25,8 @@ import com.zzy.brd.service.WeixinPostService;
 public class AdminWeixinPostController {
 	@Autowired
 	private SysInfoService sysInfoService;
-	@Autowired
-	private WeixinPostService weixinPostService;
+//	@Autowired
+//	private WeixinPostService weixinPostService;
 	/***
 	 * 转到基础设置
 	 * @throws ParseException 
@@ -34,7 +34,7 @@ public class AdminWeixinPostController {
 	@RequestMapping(value="weixinPost")
 	public String baseSetting(Model model){
 		SysInfo sysInfo = sysInfoService.getSysInfo(1l);
-		WeixinPost weixinPost0 = weixinPostService.findWeixinPostByType(NoticeType.LOADSUBMIT);
+		/*WeixinPost weixinPost0 = weixinPostService.findWeixinPostByType(NoticeType.LOADSUBMIT);
 		WeixinPost weixinPost1 = weixinPostService.findWeixinPostByType(NoticeType.AUDITSUCCESS);
 		WeixinPost weixinPost2 = weixinPostService.findWeixinPostByType(NoticeType.AUDITFAILURE);
 		WeixinPost weixinPost3 = weixinPostService.findWeixinPostByType(NoticeType.LOADSUCCESS);
@@ -48,7 +48,7 @@ public class AdminWeixinPostController {
 		model.addAttribute("weixinPost3", weixinPost3);
 		model.addAttribute("weixinPost4", weixinPost4);
 		model.addAttribute("weixinPost5", weixinPost5);
-		model.addAttribute("weixinPost6", weixinPost6);
+		model.addAttribute("weixinPost6", weixinPost6);*/
 		model.addAttribute("sysInfo", sysInfo);
 		return "admin/platformSetting/weixinPost";
 		
@@ -61,7 +61,7 @@ public class AdminWeixinPostController {
 	 * @param departmentlevel
 	 * @return
 	 */
-	@RequestMapping(value="editWeixinPost",method=RequestMethod.POST)
+	/*@RequestMapping(value="editWeixinPost",method=RequestMethod.POST)
 	   @ResponseBody
 	   public RepSimpleMessageDTO editWeixinPost(@Valid ReqWeixinPostDTO req ){
 		   RepSimpleMessageDTO res = new RepSimpleMessageDTO() ;
@@ -193,6 +193,6 @@ public class AdminWeixinPostController {
 				   res.setMes("设置失败！");
 				}
 		   return res;
-	   }	
+	   }*/
 	
 }

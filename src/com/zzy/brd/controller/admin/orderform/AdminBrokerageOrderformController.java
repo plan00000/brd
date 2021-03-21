@@ -44,8 +44,8 @@ import com.zzy.brd.service.BrokeragePaymentRecordsService;
 import com.zzy.brd.service.RecordBrokerageService;
 import com.zzy.brd.service.UserInfoBothService;
 import com.zzy.brd.service.UserService;
-import com.zzy.brd.service.WeixinPostService;
-import com.zzy.brd.service.WeixinTemplateService;
+/*import com.zzy.brd.service.WeixinPostService;
+import com.zzy.brd.service.WeixinTemplateService;*/
 import com.zzy.brd.util.excel.ExcelUtil;
 import com.zzy.brd.util.excel.ExcelUtil.ExcelBean;
 import com.zzy.brd.util.tld.DateUtils;
@@ -72,10 +72,10 @@ public class AdminBrokerageOrderformController {
 	private RecordBrokerageService recordBrokerageService;
 	@Autowired
 	private BrokeragePaymentRecordsService brokeragePaymentRecordsService;
-	@Autowired
+/*	@Autowired
 	private WeixinTemplateService weixinTemplateService;
 	@Autowired
-	private WeixinPostService weixinPostService;
+	private WeixinPostService weixinPostService;*/
 	/**
 	 * 列表
 	 * @param pageNum
@@ -431,7 +431,7 @@ public class AdminBrokerageOrderformController {
 					if(oldSalesmanBrokerage.compareTo(new BigDecimal(salesmanBrokerage))!= 0){
 						content = content+"修改业务员佣金￥"+oldSalesmanBrokerage+"修改为￥"+salesmanBrokerage + "；";
 					}
-					WeixinPost weixinPost = weixinPostService.findWeixinPostByType(NoticeType.BROKERAGECREATE);
+					/*WeixinPost weixinPost = weixinPostService.findWeixinPostByType(NoticeType.BROKERAGECREATE);
 					if(weixinPost!=null){
 						WeixinPost.State state = weixinPost.getState();
 						if(state!=null){
@@ -443,7 +443,7 @@ public class AdminBrokerageOrderformController {
 								}
 						     }
 						}
-					}
+					}*/
 					BrokerageApplyModifyHistory brokerageHistory = new BrokerageApplyModifyHistory();
 					brokerageHistory.setOper(user);
 					brokerageHistory.setBrokerageApply(brokerageApply);
@@ -826,7 +826,7 @@ public class AdminBrokerageOrderformController {
 						brokerageHistory.setBrokerageApply(brokerageApply);
 						brokerageHistory.setAddDate(new Date());
 						
-						WeixinPost weixinPost = weixinPostService.findWeixinPostByType(NoticeType.BROKERAGELOAD);
+						/*WeixinPost weixinPost = weixinPostService.findWeixinPostByType(NoticeType.BROKERAGELOAD);
 						if(weixinPost!=null){
 							WeixinPost.State state = weixinPost.getState();
 							if(state!=null){
@@ -838,7 +838,7 @@ public class AdminBrokerageOrderformController {
 									}
 								}
 							}
-						}		
+						}		*/
 						String content = "CEO确定审核通过。";
 						content = content + "确认提单人佣金：￥"+brokerageApply.getSelfBrokerage() + "；";
 						content = content + "确认师父佣金：￥"+brokerageApply.getFatherBrokerage() + "；";
@@ -964,7 +964,7 @@ public class AdminBrokerageOrderformController {
 						content = content + "确认商家佣金：￥"+brokerageApply.getBusinessSubmitBrokerage() + "；";
 						content = content + "确认业务员佣金：￥"+brokerageApply.getSalesmanSubmitBrokerage() + "；";
 						
-						WeixinPost weixinPost = weixinPostService.findWeixinPostByType(NoticeType.BROKERAGELOAD);
+						/*WeixinPost weixinPost = weixinPostService.findWeixinPostByType(NoticeType.BROKERAGELOAD);
 						if(weixinPost!=null){
 							WeixinPost.State state = weixinPost.getState();
 							if(state!=null){
@@ -976,7 +976,7 @@ public class AdminBrokerageOrderformController {
 										}
 									}
 								}
-							}
+							}*/
 						brokerageHistory.setContent(content);
 						brokerageMHistoryService.addBrokerageMHistory(brokerageHistory);
 						rep.setCode(1);

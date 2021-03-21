@@ -21,7 +21,7 @@ import com.zzy.brd.dao.DepartmentDao;
 import com.zzy.brd.dto.rep.RepSimpleMessageDTO;
 import com.zzy.brd.entity.Department;
 import com.zzy.brd.entity.User;
-import com.zzy.brd.mobile.util.ShiroUtil;
+//import com.zzy.brd.mobile.util.ShiroUtil;
 import com.zzy.brd.service.DepartmentService;
 import com.zzy.brd.service.UserOperLogService;
 import com.zzy.brd.service.UserService;
@@ -197,11 +197,11 @@ public class AdminDepartmentController {
 			res.setCode(0);
 			res.setMes("添加成功");
 			// 添加日志
-			long opertorid = ShiroUtil.getUserId(request);
+			/*long opertorid = ShiroUtil.getUserId(request);
 			User opertor = userService.findById(opertorid);
 			String content = "添加" + department.getLevel() + "级部门:"
 					+ department.getName();
-			userOperlogService.addOperlog(opertor, content);
+			userOperlogService.addOperlog(opertor, content);*/
 			return res;
 		} else {
 			res.setCode(1);
@@ -251,11 +251,11 @@ public class AdminDepartmentController {
 		if (departmentService.editDepartment(department)) {
 			rep.setCode(0);
 			rep.setMes("修改成功");
-			long opertorid = ShiroUtil.getUserId(request);
+			/*long opertorid = ShiroUtil.getUserId(request);
 			User opertor = userService.findById(opertorid);
 			String content = department.getLevel() + "级部门:" + oldname + "修改为:"
 					+ department.getLevel() + "级部门:" + department.getName();
-			userOperlogService.addOperlog(opertor, content);
+			userOperlogService.addOperlog(opertor, content);*/
 			return rep;
 		} else {
 			rep.setCode(1);
@@ -295,10 +295,10 @@ public class AdminDepartmentController {
 		departmentService.editDepartment(department);
 		res.setCode(0);
 		res.setMes("删除成功");
-		long opertorid = ShiroUtil.getUserId(request);
+		/*long opertorid = ShiroUtil.getUserId(request);
 		User opertor = userService.findById(opertorid);
 		String content = opertor.getRealname() + "删除部门:" + name;
-		userOperlogService.addOperlog(opertor, content);
+		userOperlogService.addOperlog(opertor, content);*/
 
 		return res;
 	}
@@ -313,8 +313,8 @@ public class AdminDepartmentController {
 	@ResponseBody
 	public RepSimpleMessageDTO delRoles(long[] ids, HttpServletRequest request) {
 		RepSimpleMessageDTO res = new RepSimpleMessageDTO();
-		long opertorid = ShiroUtil.getUserId(request);
-		User opertor = userService.findById(opertorid);
+		/*long opertorid = ShiroUtil.getUserId(request);
+		User opertor = userService.findById(opertorid);*/
 		String content = "删除部门:";
 		List<Department> delDepartment = new ArrayList<Department>();
 		for (long id : ids) {
@@ -339,7 +339,7 @@ public class AdminDepartmentController {
 		departmentDao.save(delDepartment);
 		res.setCode(0);
 		res.setMes("删除成功");
-		userOperlogService.addOperlog(opertor, content);
+//		userOperlogService.addOperlog(opertor, content);
 		return res;
 	}
 

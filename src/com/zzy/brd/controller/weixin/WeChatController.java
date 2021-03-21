@@ -44,8 +44,8 @@ import com.zzy.brd.util.weixin.WeixinCommonUtil;
 @RequestMapping("/wechat")
 public class WeChatController {
 	private static Logger log = LoggerFactory.getLogger(WeChatController.class);
-    @Autowired
-    private WeixinTemplateService weixinTemplateService;
+    /*@Autowired
+    private WeixinTemplateService weixinTemplateService;*/
 	@Autowired
 	private UserService userService;
 	@Autowired
@@ -65,10 +65,10 @@ public class WeChatController {
      * @throws ParseException
      * @throws IOException
      */
-    @RequestMapping(value = "/check/{wxToken}", method = RequestMethod.GET, produces = "text/plain")
+    /*@RequestMapping(value = "/check/{wxToken}", method = RequestMethod.GET, produces = "text/plain")
     public @ResponseBody String validate(@PathVariable("wxToken")String wxToken,CheckModel tokenModel) throws ParseException, IOException {
         return weixinTemplateService.validate(wxToken,tokenModel);
-    }
+    }*/
 
 	/**
 	 * 接收微信推送事件
@@ -78,7 +78,7 @@ public class WeChatController {
 	 * @throws ParseException
 	 * @throws IOException
 	 */
-	@RequestMapping(value = "/check/{wxToken}", method = RequestMethod.POST, produces = "text/plain")
+	/*@RequestMapping(value = "/check/{wxToken}", method = RequestMethod.POST, produces = "text/plain")
 	public @ResponseBody String receiveMessage(@PathVariable("wxToken")String wxToken,CheckModel tokenModel, HttpServletRequest request) throws ParseException, IOException {
 		if ("error".equals(weixinTemplateService.validate(wxToken, tokenModel))) {
 			return "error";
@@ -86,7 +86,7 @@ public class WeChatController {
 
 		weChatService.processRequest(request);
 		return "";
-	}
+	}*/
     
     /**
      * 发送模板消息
@@ -94,17 +94,17 @@ public class WeChatController {
      * appSecret 公众账号的密钥
      * openId 用户标识
      */
-    @RequestMapping(value = "send", method = RequestMethod.GET, produces = "text/plain")
+    /*@RequestMapping(value = "send", method = RequestMethod.GET, produces = "text/plain")
     @ResponseBody
     public int send_template_message(HttpServletRequest request) {
     	Orderform orderform = orderformService.findOrderById(1l);
 		NewInfoTemplate newInfoTemplate = weixinTemplateService.getLoadSubmit(orderform,request);
 		int res = weixinTemplateService.sendTemplateMessage(newInfoTemplate);
-/*		
+*//*
     	Long userId = Long.parseLong("2");
-    	BigDecimal money = BigDecimal.valueOf(10000.00);*/
+    	BigDecimal money = BigDecimal.valueOf(10000.00);*//*
     	return res;
-    }
+    }*/
     
     
 	/***

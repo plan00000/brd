@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by yonixee on 2017/1/21.
  */
-@Service
+/*@Service
 @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 public class WeixinScanRecordService  extends BaseService {
 
@@ -33,4 +33,4 @@ public class WeixinScanRecordService  extends BaseService {
     public void editRecord(WeixinScanRecord record) {
         weixinScanRecordDao.save(record);
     }
-}
+}*/

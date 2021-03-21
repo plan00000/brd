@@ -67,8 +67,8 @@ import com.zzy.brd.service.ProductService;
 import com.zzy.brd.service.ProductTypeService;
 import com.zzy.brd.service.UserInfoBothService;
 import com.zzy.brd.service.UserService;
-import com.zzy.brd.service.WeixinPostService;
-import com.zzy.brd.service.WeixinTemplateService;
+/*import com.zzy.brd.service.WeixinPostService;
+import com.zzy.brd.service.WeixinTemplateService;*/
 import com.zzy.brd.util.date.DateUtil;
 import com.zzy.brd.util.excel.ExcelUtil;
 import com.zzy.brd.util.excel.ExcelUtil.ExcelBean;
@@ -110,10 +110,10 @@ public class AdminWeixinOrderformController {
 	private ActivityStarOrderService activityStarOrderService;
 	@Autowired
 	private ActivityService activityService;
-	@Autowired
+	/*@Autowired
 	private WeixinTemplateService weixinTemplateService;
 	@Autowired
-	private WeixinPostService weixinPostService;
+	private WeixinPostService weixinPostService;*/
 	/**
 	 * 贷款订单列表
 	 * @param pageNum
@@ -263,7 +263,7 @@ public class AdminWeixinOrderformController {
 	 * 订单详情
 	 * @param id
 	 * @param request
-	 * @param pageNumber
+	 * @param
 	 * @param model
 	 * @return
 	 */
@@ -405,7 +405,7 @@ public class AdminWeixinOrderformController {
 	/**
 	 * 订单详情修改
 	 * @param status
-	 * @param remark
+	 * @param
 	 * @param orderformId
 	 * @param refuse
 	 * @param loanActualManey
@@ -413,7 +413,7 @@ public class AdminWeixinOrderformController {
 	 * @param loanInsterestRate
 	 * @param spreadRate
 	 * @param brokerageRateNum
-	 * @param comtractNum
+	 * @param
 	 * @return
 	 */
 	@RequestMapping(value = "changeStatus",method =RequestMethod.POST)
@@ -791,7 +791,7 @@ public class AdminWeixinOrderformController {
 			
 				if(wxUser!=null){
 					WeixinUser weixinUser = wxUser.getWeixinUser();
-					if(weixinUser!=null){
+					/*if(weixinUser!=null){
 						WeixinPost weixinPost = weixinPostService.findWeixinPostByType(NoticeType.AUDITSUCCESS);
 						if(weixinPost!=null){
 							WeixinPost.State state = weixinPost.getState();
@@ -806,7 +806,7 @@ public class AdminWeixinOrderformController {
 								}
 							}
 						}
-					}
+					}*/
 				}
 
 			}
@@ -814,7 +814,7 @@ public class AdminWeixinOrderformController {
 				oLog.setOperContent("修改订单状态：审核拒绝");
 				oLog.setOperatType(OrderformOperatType.CHECKFAIL);	
 				
-				if(wxUser!=null){
+				/*if(wxUser!=null){
 					WeixinUser weixinUser = wxUser.getWeixinUser();
 					if(weixinUser!=null){
 						WeixinPost weixinPost = weixinPostService.findWeixinPostByType(NoticeType.AUDITFAILURE);
@@ -832,7 +832,7 @@ public class AdminWeixinOrderformController {
 								}
 							}
 						}
-					}
+					}*/
 			}
 			if(oldStatus == OrderformStatus.UNLOAN && "LOANED".equals(status)){
 				oLog.setOperContent("修改订单状态：放款");
@@ -842,7 +842,7 @@ public class AdminWeixinOrderformController {
 					dto.setMes("保存星级订单失败");
 				}
 				
-				if(wxUser!=null){
+				/*if(wxUser!=null){
 					WeixinUser weixinUser = wxUser.getWeixinUser();
 					if(weixinUser!=null){
 						WeixinPost weixinPost = weixinPostService.findWeixinPostByType(NoticeType.LOADSUCCESS);
@@ -860,7 +860,7 @@ public class AdminWeixinOrderformController {
 								}
 							}
 						}
-					}
+					}*/
 			}
 			if(oldStatus == OrderformStatus.UNLOAN && "INVALID".equals(status)){
 				oLog.setOperContent("修改订单状态：无效订单");
@@ -878,7 +878,7 @@ public class AdminWeixinOrderformController {
 	}
 	 /**
 	  * 保存星级订单
-	  * @param user
+	  * @param
 	  * @return
 	  */
 	public boolean editActivityStarOrder(Orderform orderform){

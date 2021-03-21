@@ -40,7 +40,7 @@ import com.zzy.brd.entity.Role;
 import com.zzy.brd.entity.Role.State;
 import com.zzy.brd.entity.User;
 import com.zzy.brd.enums.Permission;
-import com.zzy.brd.mobile.util.ShiroUtil;
+//import com.zzy.brd.mobile.util.ShiroUtil;
 import com.zzy.brd.service.RoleService;
 import com.zzy.brd.service.UserOperLogService;
 import com.zzy.brd.service.UserService;
@@ -71,7 +71,7 @@ public class AdminRoleController {
 	 * 管理账户列表
 	 * 
 	 * @param pageNumber
-	 * @param name
+	 * @param
 	 * @param model
 	 * @return
 	 */
@@ -100,9 +100,9 @@ public class AdminRoleController {
 	@ResponseBody
 	public RepSimpleMessageDTO delRoles(long[] ids,HttpServletRequest request){
 		RepSimpleMessageDTO res = new RepSimpleMessageDTO();
-		long opertorid = ShiroUtil.getUserId(request);
-		User opertor = userService.findById(opertorid);
-		String content ="删除角色:";
+//		long opertorid = ShiroUtil.getUserId(request);
+//		User opertor = userService.findById(opertorid);
+//		String content ="删除角色:";
 		for(long id:ids){
 			Role role = roleService.findRoleById(id);
 			List<User> list = userService.findByRole(role);
@@ -117,13 +117,13 @@ public class AdminRoleController {
 					res.setMes("删除失败");
 					return res;
 				}else{
-					content = content+role.getRolename()+";";
+//					content = content+role.getRolename()+";";
 				}
 			}
 		}
 		res.setCode(1);
 		res.setMes("删除成功");
-		userOperlogService.addOperlog(opertor, content);		
+//		userOperlogService.addOperlog(opertor, content);
 		return res;
 	}
 	
@@ -143,7 +143,7 @@ public class AdminRoleController {
 	/**
 	 * 添加角色
 	 * 
-	 * @param admin
+	 * @param
 	 * @return
 	 */
 	@RequestMapping(value = "addRole", method = RequestMethod.POST)
@@ -166,10 +166,10 @@ public class AdminRoleController {
 		if (roleService.addRole(role)) {
 			res.setCode(0);
 			res.setMes("添加成功");
-			long opertorid =ShiroUtil.getUserId(request);
-			User opertor = userService.findById(opertorid);
-			String content = "添加角色:"+role.getRolename();
-			userOperlogService.addOperlog(opertor, content);			
+//			long opertorid =ShiroUtil.getUserId(request);
+//			User opertor = userService.findById(opertorid);
+//			String content = "添加角色:"+role.getRolename();
+//			userOperlogService.addOperlog(opertor, content);
 			return res;
 		} else {
 			res.setCode(1);
@@ -225,8 +225,8 @@ public class AdminRoleController {
 		if (roleService.editRole(role)) {
 			repdto.setCode(0);
 			repdto.setMes("成功："+"角色修改成功");
-			long opertorid =ShiroUtil.getUserId(request);
-			User opertor = userService.findById(opertorid);
+			/*long opertorid =ShiroUtil.getUserId(request);
+			User opertor = userService.findById(opertorid);*/
 			String content = "";
 			String newPer =dto.getPermissions();
 			if(newPer.equals(oldPer)){
@@ -234,7 +234,7 @@ public class AdminRoleController {
 			}else{
 				content = "修改角色"+oldname+"权限";				
 			}			
-			userOperlogService.addOperlog(opertor, content);	
+//			userOperlogService.addOperlog(opertor, content);
 			return repdto;
 		} else {
 			repdto.setCode(1);
@@ -246,7 +246,7 @@ public class AdminRoleController {
 	/**
 	 * 跳转到修改页面
 	 * 
-	 * @param adminId
+	 * @param
 	 * @param model
 	 * @return
 	 */

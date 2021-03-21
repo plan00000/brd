@@ -5,8 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 
-import com.zzy.brd.mobile.rest.common.ZzyCheckToken;
-import com.zzy.brd.mobile.rest.filter.ApiAuthenticationFilter;
+/*import com.zzy.brd.mobile.rest.common.ZzyCheckToken;
+import com.zzy.brd.mobile.rest.filter.ApiAuthenticationFilter;*/
 
 /**
  * 手机站 shiro 工具类
@@ -39,10 +39,10 @@ public class ShiroUtil {
 		if (oUserId != null && oUserId instanceof Long){
 			return (Long)oUserId;
 		}*/
-		ZzyCheckToken token = ApiAuthenticationFilter.getZzyToken(request);
+		/*ZzyCheckToken token = ApiAuthenticationFilter.getZzyToken(request);
 		if (token != null){
 			return token.getUserId();
-		}
+		}*/
 		return null;
 		
 	}

@@ -38,7 +38,7 @@ import com.zzy.brd.entity.Product.MortgageType;
 import com.zzy.brd.entity.Product.Status;
 import com.zzy.brd.entity.ProductType.BillType;
 import com.zzy.brd.enums.SmsAuthcodeSource;
-import com.zzy.brd.mobile.web.controller.product.WeixinProductController;
+//import com.zzy.brd.mobile.web.controller.product.WeixinProductController;
 import com.zzy.brd.service.FriendshipLinkService;
 import com.zzy.brd.service.OrderSerialService;
 import com.zzy.brd.service.OrderformService;
@@ -174,7 +174,7 @@ public class PcProductController {
 	}
 	/**
 	 * 提交订单
-	 * @param id
+	 * @param
 	 * @return
 	 */
 	@RequestMapping("addOrderform")

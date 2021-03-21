@@ -37,8 +37,8 @@ import com.zzy.brd.mobile.util.ShiroUtil;
 import com.zzy.brd.service.FlowWithdrawService;
 import com.zzy.brd.service.OrderOperLogService;
 import com.zzy.brd.service.UserService;
-import com.zzy.brd.service.WeixinPostService;
-import com.zzy.brd.service.WeixinTemplateService;
+/*import com.zzy.brd.service.WeixinPostService;
+import com.zzy.brd.service.WeixinTemplateService;*/
 import com.zzy.brd.util.excel.ExcelUtil;
 import com.zzy.brd.util.excel.ExcelUtil.ExcelBean;
 import com.zzy.brd.util.tld.DateUtils;
@@ -61,10 +61,10 @@ public class AdminFlowWithdrawOrderformController {
 	private UserService userService;
 	@Autowired
 	private UserInfoBothDao userInfoBothDao;
-	@Autowired
+/*	@Autowired
 	private WeixinTemplateService weixinTemplateService;
 	@Autowired
-	private WeixinPostService weixinPostService;
+	private WeixinPostService weixinPostService;*/
 	/**
 	 * 体现列表
 	 * @param pageNum
@@ -213,7 +213,7 @@ public class AdminFlowWithdrawOrderformController {
 	}
 	/**
 	 * 修改状态
-	 * @param brokerageId
+	 * @param
 	 * @param check
 	 * @param request
 	 * @return
@@ -283,7 +283,7 @@ public class AdminFlowWithdrawOrderformController {
 			
 			
 			User wxUser = flowWithdraw.getUser();
-			if(wxUser!=null){
+			/*if(wxUser!=null){
 				WeixinUser weixinUser = wxUser.getWeixinUser();
 				if(weixinUser!=null){
 					WeixinPost weixinPost = weixinPostService.findWeixinPostByType(NoticeType.WITHDRAWARRIVAL);
@@ -301,7 +301,7 @@ public class AdminFlowWithdrawOrderformController {
 							}
 						}
 					}
-				}
+				}*/
 			
 			///增加对应的个人金额
 			UserInfoBoth flowInfo = flowWithdraw.getUser().getUserInfoBoth();

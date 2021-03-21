@@ -37,8 +37,8 @@ public class WeChatService {
     @Autowired
     private SysInfoService sysInfoService;
 
-    @Autowired
-    private WeixinScanRecordService weixinScanRecordService;
+    /*@Autowired
+    private WeixinScanRecordService weixinScanRecordService;*/
 
     public String processRequest(HttpServletRequest request) {
         Map<String, String> map = WechatMessageUtil.xmlToMap(request);
@@ -150,7 +150,7 @@ public class WeChatService {
      */
     private void countScanRecord(long sceneId, boolean isSubscribe) {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        WeixinScanRecord record = weixinScanRecordService.findRecordByDate(sceneId, df.format(new Date()));
+        /*WeixinScanRecord record = weixinScanRecordService.findRecordByDate(sceneId, df.format(new Date()));
         if (record == null) {
             record = new WeixinScanRecord();
             record.setConcernNum(1);
@@ -164,6 +164,6 @@ public class WeChatService {
                 record.setConcernNum(record.getConcernNum() + 1);
             }
         }
-        weixinScanRecordService.editRecord(record);
+        weixinScanRecordService.editRecord(record);*/
     }
 }

@@ -21,7 +21,7 @@ import com.zzy.brd.entity.WeixinPost.NoticeType;
  * @author csy 2016-11-22
  *
  */
-@Service
+/*@Service
 @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 public class WeixinPostService extends BaseService {
 	private static final Logger logger = LoggerFactory.getLogger(WeixinPostService.class);
@@ -31,11 +31,11 @@ public class WeixinPostService extends BaseService {
 	public WeixinPost findWeixinPostById(long id) {
 		return weixinPostDao.findOne(id);
 	}
-	/**
+	*//**
 	 * 根据类型获得微信通知
 	 * @param noticeType
 	 * @return
-	 */
+	 *//*
 	public WeixinPost findWeixinPostByType(NoticeType noticeType) {
 		return weixinPostDao.findWeixinPostByType(noticeType);
 	}
@@ -48,4 +48,4 @@ public class WeixinPostService extends BaseService {
 		return weixinPostDao.allWeixinPost();
 	}
 	
-}
+}*/

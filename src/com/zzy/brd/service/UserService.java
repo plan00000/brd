@@ -46,7 +46,7 @@ import com.zzy.brd.entity.User.State;
 import com.zzy.brd.entity.User.UserType;
 import com.zzy.brd.entity.UserInfoBoth;
 import com.zzy.brd.entity.UserInfoSeller;
-import com.zzy.brd.mobile.web.dto.rep.apprentice.RepMyApprenticeDTO;
+//import com.zzy.brd.mobile.web.dto.rep.apprentice.RepMyApprenticeDTO;
 import com.zzy.brd.shiro.session.SessionService;
 import com.zzy.brd.util.QRcode.QRcodeUtils;
 import com.zzy.brd.util.file.FileUtil;
@@ -490,7 +490,7 @@ public class UserService extends BaseService {
 	}
 	/**
 	 * 查找未删除的user
-	 * @param type
+	 * @param
 	 * @return
 	 */
 	public List<User> findUsersNoDel(State state) {
@@ -816,9 +816,9 @@ public class UserService extends BaseService {
     	}
     }
     
-    public List<RepMyApprenticeDTO> getMyApprentices(long userId){
-    	return userDao.getMyApprentices(userId);
-    }
+//    public List<RepMyApprenticeDTO> getMyApprentices(long userId){
+//    	return userDao.getMyApprentices(userId);
+//    }
     
     public void staticsUserSonsAndGrandSons(User user){
     	//徒弟数量
