@@ -1,0 +1,100 @@
+/*-- reset --*/
+body,div,p,h1,h2,h3,h4,h5,h6,form,input,textarea,select,button,fieldset,legend,img,ul,ol,li,dl,dt,dd,th,td,pre,blockquote,div {margin: 0; padding: 0;}
+table {border-collapse: collapse; border-spacing: 0;}
+fieldset,img {border: 0;}
+a,img,input,select {vertical-align: middle;}
+address,caption,cite,code,dfn,em,th,var {font-style: normal; font-weight: normal;}
+a:active{}ul,li,ol {list-style: none;}
+q:before,q:after {content: '';}
+caption,th {text-align: left;}
+body {font-family: "Microsoft Yahei",arial,simhei; font-size: 14px; color: #555;}
+a {font-size: 14px; text-decoration: none; color: #555; font-family: "Microsoft Yahei",arial,simhei; height: 100%;} 
+a:focus {outline: none; -moz-outline: none;}
+.cf:before, .cf:after {content:""; display: table;}
+.cf:after {clear: both;}
+.cf {zoom: 1;}
+.fl {float: left; display: inline;}
+.fr {float: right; display: inline;}
+
+
+h1 {  font-size: 30px;}
+h2 {  font-size: 24px;}
+h3 {  font-size: 16px;}
+h4 {  font-size: 14px;}
+h5 {  font-size: 12px;}
+h6 {  font-size: 10px;}
+.red{ color:#f40426}
+
+
+.share_top {float: left; width: 100%; height: 580px; background: #ef2714 url(../img/share_top.png) no-repeat center top;}
+.header {margin: 70px auto 0 auto; text-align: center;}
+.header img {-moz-border-radius: 69px; -webkit-border-radius: 69px; border-radius: 69px; width: 138px; height: 138px; text-align: center;}
+.info {margin: 45px auto 0 auto; max-width: 420px; height: auto; color: #663333; font-size: 22px; line-height: 38px;}
+.info .red_txt {color: #F00; font-weight: bold; font-style: normal; padding: 0 5px;}
+
+.rank {float: left; background: #ef2714; width: 100%; height: auto; font-size: 22px; color: #fff; padding: 20px 0;}
+.rank div span {width: 100%;}
+.rank div span {margin: 0 20px; height: 40px;}
+.rank div span em {font-style: normal; font-size: 22px; color: #f9e606; font-weight: normal; padding: 0 8px 0 0;}
+.rank div span b {font-style: normal; font-size: 28px; color: #f9e606; padding: 0 4px; font-weight: normal;}
+
+.title {float: left; width: 100%; height: auto; background: #ef2714;}
+.brd_title {margin: 0 auto; text-align: center;}
+.brd_title img{max-width:100%;}
+.go_start {margin: 20px auto; text-align: center;}
+.go_start img{max-width:100%;}
+
+.reg_txt {float: left; width: 100%; height: auto; background: #ef2714;}
+.reg_code { font-size: 24px; color: #fff; margin: 0 20px;}
+.reg_code b {font-style: normal; font-size: 40px; color: #f9e606; padding: 0 4px; font-weight: normal;}
+.reg_txt p {font-size: 24px; color: #fff; margin: 15px 20px; line-height: 40px;}
+
+.share_logo {float:left; width: 100%; height: auto; background: #ef2714; text-align: center;}
+.share_logo img{max-width: 100%;}
+
+.remind {float: left; background: #ef2714; width: 100%;}
+.remind p { margin: 10px 20px; color: #f9e606; font-size: 24px; font-weight: bold; line-height: 36px;}
+
+.ewm_info {float: left; background: #fcc223; width: 100%;}
+.ewm_title {font-size: 24px; color: #972b00; line-height: 60px; border-bottom: #fe610b solid 1px; text-align: center;}
+.ewm_area {float: left; width: 100%;}
+.ewm {float: left; margin: 20px 0 0 20px;}
+.ewm img {float:left; width: 100%; }
+.img_txt {float: left; margin: 20px 0 0 15px;}
+.img_txt h1 {color: #972b00; font-size: 28px; line-height: 70px; font-weight: normal;}
+.img_txt p {color: #972b00; font-size: 18px; line-height: 30px; font-weight: normal;}
+
+.footer {float: left; width: 96%; height: 60px; background: #fe610b; margin: 20px 0; -moz-border-radius: 0 30px 30px 0; -webkit-border-radius: 0 30px 30px 0; border-radius: 0 30px 30px 0;}
+.small_logo {float: left; margin: 10px 0 0 20px; width: 90px; height: 40px; line-height: 40px; text-align: center; background:#fff; -moz-border-radius: 20px; -webkit-border-radius: 20px; border-radius: 20px; font-size: 20px; color: #fe610b;}
+.slgon {float: left; text-indent: 15px; font-size: 18px; line-height: 60px; color: #fff;}
+
+@media (max-width:440px) {
+	.info {margin: 40px auto 0 auto; padding: 0 10px;}
+	.info .red_txt {color: #F00; font-weight: bold; font-style: normal; padding: 0 5px;}
+	.ewm img {float:left; width: 150px; height: 150px;}
+	.img_txt h1 {color: #972b00; font-size: 24px; line-height: 70px; font-weight: normal;}
+	.img_txt p {color: #972b00; font-size: 18px; line-height: 30px; font-weight: normal;}
+}
+
+@media (max-width:360px) {
+	.info {margin: 40px auto 0 auto; padding: 0 10px; font-size: 20px; line-height: 34px;}
+	.info .red_txt {color: #F00; font-weight: bold; font-style: normal; padding: 0 5px;}
+	
+	
+	.rank {float: left; background: #ef2714; width: 100%; height: auto; font-size: 18px; color: #fff; padding: 20px 0;}
+	.rank div span em {font-style: normal; font-size: 18px; color: #f9e606; font-weight: normal; padding: 0 8px 0 0;}
+	.rank div span b {font-style: normal; font-size: 22px; color: #f9e606; padding: 0 4px; font-weight: normal;}
+	.reg_code {font-size: 20px;}
+	.reg_code b {font-style: normal; font-size: 30px; color: #f9e606; padding: 0 4px; font-weight: normal;}
+	.reg_txt p {font-size: 20px; color: #fff; margin: 15px 20px; line-height: 32px;}
+	
+	.remind p { margin: 10px 20px; color: #f9e606; font-size: 20px; font-weight: bold; line-height: 36px;}
+	
+	.ewm_title {font-size: 22px; color: #972b00; line-height: 60px; border-bottom: #fe610b solid 1px; text-align: center;}
+	.ewm img {float:left; width: 120px; height: 120px;}
+	.img_txt {float: left; margin: 20px 0 0 10px;}
+	.img_txt h1 {color: #972b00; font-size: 22px; line-height: 50px; font-weight: normal;}
+	.img_txt p {color: #972b00; font-size: 16px; line-height: 30px; font-weight: normal;}
+	.footer {float: left; width: 100%;}
+	.slgon {float: left; text-indent: 10px; font-size: 16px; line-height: 60px; color: #fff;}
+}
