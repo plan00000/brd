@@ -1,0 +1,51 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0; padding:0; word-wrap:break-word;}
+body{ color:#666; font:16px/1 Arial, Helvetica, sans-serif; background:url(../images/bg.gif) repeat-x top; }
+h1, h2, h3, h4, h5, h6{ font-size:100%; font-weight:normal;}
+a{ color:#666; text-decoration:none;}
+a:hover{}
+img{ border:0;}
+ul, li{ list-style:none;}
+table{ border-collapse:collapse; border-spacing:0;}
+input, button, textarea, select, optgroup, option{ font-family:inherit; font-size:inherit; font-style:inherit; font-weight:inherit;}
+input, button, textarea, select{ *font-size:100%;}
+sup{ vertical-align:baseline;}
+sub{ vertical-align:baseline;}
+.clearfloat{clear:both;height:1px; font-size:0; line-height: 0; overflow:hidden;}
+/* 禁止webkit横屏改变字体大小 */
+html{-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;}
+/* 设置HTML5元素为块 */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section{display: block;padding: 0px;margin: 0px;border: none;}
+/* 超出隐藏 */
+.overflow{overflow: hidden;}
+/* 点击去除阴影 */
+a, button, input, i{-webkit-tap-highlight-color: rgba(0,0,0,0);-moz-tap-highlight-color: rgba(0,0,0,0);-ms-tap-highlight-color: rgba(0,0,0,0);tap-highlight-color: rgba(0,0,0,0);}
+/* 图片自适应调整 并解决图片缩放的失真问题*/
+img{/* [disabled]max-width:100%;
+*/height: auto;border: none;interpolation-mode: bicubic;}
+/* 文字居中 */
+.txt-center{text-align: center;}
+.txt-justify{text-align: justify;text-justify: inter-ideograph;}
+/* 自动换行 */
+.word-auto{word-wrap: break-word;word-break: normal;}
+/* 自动居中 */
+.mg-auto{margin-left: auto;margin-right: auto;position: relative;}
+
+#page{ max-width:640px; margin:0 auto; background:#fff;}
+.top, .banner{ margin:0 auto;background-size:contain; max-width:640px;}
+.top img, .banner img{ width:100%;}
+.mianCon{ width:100%; background:#f6f6f6; padding:2% 0;height:auto!important; min-height:340px;overflow:hidden; _overflow:inherit;}
+.mianCon .txtCon{ color:#535353; line-height:1.4em; margin:0 3% 5%; width:94%;font-family:"微软雅黑",Verdana, Geneva, sans-serif; font-size:1.3em;}
+.contentBox{border-radius:15px; background:#FFF; margin:3% 3%; width:94%; }
+.contentBox .bt{ border-bottom:1px solid #f4f4f4; height:3em; line-height:3em; background:#fdfdfd; color:#9a9a9a;border-top-right-radius:15px; border-top-left-radius:15px; padding-left:0.8em; font-family:"微软雅黑",Verdana, Geneva, sans-serif; font-size:1.3em;}
+.contentBox .con{ padding:0.8em; line-height:1.4em; color:#787878;font-size:1.2em;min-height:290px;}
+.icon01{ background:url(../images/icon01.jpg) no-repeat left center;background-size:contain; display:inline-block; width:1.5em;height:1.5em; padding-right:0.3em; position:relative; top:0.2em;}
+.icon02{ background:url(../images/icon02.jpg) no-repeat left center;background-size:contain; display:inline-block; width:1.5em;height:1.5em; padding-right:0.3em;position:relative; top:0.2em;}
+.icon03{ background:url(../images/icon03.jpg) no-repeat left center;background-size:contain; display:inline-block; width:1.5em;height:1.5em; padding-right:0.3em;position:relative; top:0.2em;}
+.icon04{ background:url(../images/icon04.jpg) no-repeat left center;background-size:contain; display:inline-block; width:1.5em;height:1.5em; padding-right:0.3em;position:relative; top:0.2em;}
+.dline{ border-top:1px solid #e7e7e7;}
+
+
+a.sq_btn{ background: #ff5c48; width:94%; display:inline-block; height:2.5em; line-height:2.5em; text-align:center; font-family:"微软雅黑",Verdana, Geneva, sans-serif; font-size:18px; color:#fff; font-weight:bold;border-radius:25px; margin:5% 3% 3%;}
+a.sq_btn:hover{ text-decoration:none; color:#fff; }
