@@ -29,7 +29,7 @@ import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.zzy.brd.entity.SysInfo;
 import com.zzy.brd.entity.WeixinUser;
-import com.zzy.brd.mobile.web.dto.req.weixinpost.RepWeixinQrcodeDTO;
+//import com.zzy.brd.mobile.web.dto.req.weixinpost.RepWeixinQrcodeDTO;
 import com.zzy.brd.service.SysInfoService;
 
 /**

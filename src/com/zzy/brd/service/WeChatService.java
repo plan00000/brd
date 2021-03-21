@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.zzy.brd.controller.weixin.WeChatController;
+//import com.zzy.brd.controller.weixin.WeChatController;
 import com.zzy.brd.util.weixin.WechatMessageUtil;
 
 /**
@@ -27,7 +27,7 @@ import com.zzy.brd.util.weixin.WechatMessageUtil;
  */
 @Service
 public class WeChatService {
-    private static Logger log = LoggerFactory.getLogger(WeChatController.class);
+    private static Logger log = LoggerFactory.getLogger(WeChatService.class);
     @Autowired
     private QrcodeActivityService qrcodeActivityService;
 
