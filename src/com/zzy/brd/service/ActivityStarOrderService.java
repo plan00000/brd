@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.zzy.brd.dao.ActivityStarOrderDao;
 import com.zzy.brd.entity.ActivityStarOrder;
 import com.zzy.brd.entity.User;
-import com.zzy.brd.entity.UserInfoBoth;
 
 /***
  * 活动service

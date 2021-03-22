@@ -28,8 +28,7 @@ public class RepApprenticesRecordDTO {
 		}else{
 			this.name = user.getRealname();
 		}
-		this.orderSum = user.getUserInfoBoth().getOrderSum();
-		this.sonsSum = user.getUserInfoBoth().getSonSum();		
+
 	}
 	
 	public Date getRegisterTime() {

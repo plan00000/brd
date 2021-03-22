@@ -37,8 +37,8 @@ public interface UserDao extends BaseDao<User>{
 	@Query("select u from User u where u.mobileno=?1 and  u.userType in ?2  and u.state != 2")
 	List<User> findByMobileno2(String mobileno,List<UserType> userTypeList);
 	
-	@Query("select u from User u where u.userInfoBoth.recommendCode=?1 and u.state != 2")
-	User findByAskperson(String recommendCode);
+	/*@Query("select u from User u where u.userInfoBoth.recommendCode=?1 and u.state != 2")
+	User findByAskperson(String recommendCode);*/
 	
 	@Query("select u from User u where (u.userType='3' or u.userType='4' or u.userType='6'  ) and u.state!='2'  and  u.userInfoEmployee.department.id=?1 ")
 	List<User> findByDepartment(long departmentId);
@@ -72,8 +72,8 @@ public interface UserDao extends BaseDao<User>{
 	 *推荐码查找用户 
 	 * 
 	 */
-	@Query("select count(*) from User u where u.userInfoBoth.recommendCode=?1")
-	int findUserByRecommended(String iCode);
+	/*@Query("select count(*) from User u where u.userInfoBoth.recommendCode=?1")
+	int findUserByRecommended(String iCode);*/
 	/**
 	 * 待审核
 	 * Pending audit
@@ -81,8 +81,8 @@ public interface UserDao extends BaseDao<User>{
 	/*@Query("select count(*)  from UserRemark ur right join ur.user u where u.userType in(0,1,2,4) and ur.id=null")
 	int pendingAudit();*/
 	
-	@Query("select u from User u where u.userInfoBoth.recommendCode=?1 ")
-	User findUserByRecommended2(String iCode);
+	/*@Query("select u from User u where u.userInfoBoth.recommendCode=?1 ")
+	User findUserByRecommended2(String iCode);*/
 	
 
 	/**
@@ -125,8 +125,8 @@ public interface UserDao extends BaseDao<User>{
 	 * @param @return
 	 * @return List<User>
 	 */
-	@Query(value="select u from User u left join u.userInfoBoth uib where uib.salesman in ?1")
-	List<User> findUser(List<User> users);
+	/*@Query(value="select u from User u left join u.userInfoBoth uib where uib.salesman in ?1")
+	List<User> findUser(List<User> users);*/
 	/**
 	 *通过各个部门的用户id去查找业务员发展的对应的商家融资和融资经理
 	 * 
@@ -134,14 +134,14 @@ public interface UserDao extends BaseDao<User>{
 	 * @param @return
 	 * @return List<User>
 	 */
-	@Query(value="select u from User u left join u.userInfoBoth uib where uib.salesman in ?1 and u.userType =?2")
-	List<User> findUser(List<User> users,User.UserType userType);
+	/*@Query(value="select u from User u left join u.userInfoBoth uib where uib.salesman in ?1 and u.userType =?2")
+	List<User> findUser(List<User> users,User.UserType userType);*/
 	
 	/****
 	 * 获取指定用户组昨天注册的徒弟,返回徒弟数组
 	 */
-	@Query("select id from User u where u.userInfoBoth.parent.id in ?3 and u.createdate between ?1 and ?2  ")
-	List<Long> findSonIds(Date startTime,Date endTime,List<Long> ids);
+	/*@Query("select id from User u where u.userInfoBoth.parent.id in ?3 and u.createdate between ?1 and ?2  ")
+	List<Long> findSonIds(Date startTime,Date endTime,List<Long> ids);*/
 	
 	/**
 	 * @param mobileno 
@@ -158,8 +158,8 @@ public interface UserDao extends BaseDao<User>{
 	 * @param user
 	 *
 	 */
-	@Query("select u from User u where u.userInfoBoth.grandParent =?1  ")
-	List<User> findGrandSonsByUser(User user);
+	/*@Query("select u from User u where u.userInfoBoth.grandParent =?1  ")
+	List<User> findGrandSonsByUser(User user);*/
 	/**通过用户类型找到会员列表
 	 * @param user
 	 *
@@ -170,37 +170,37 @@ public interface UserDao extends BaseDao<User>{
 	/** 
 	 * 统计业务员有多少个融资经理，商家
 	 */
-	@Query("select count(*) from User u where u.userType = ?1 and u.userInfoBoth.parent.id = ?2 and u.state = 1")
-	int countsByUserType(UserType userType,long id);
+	/*@Query("select count(*) from User u where u.userType = ?1 and u.userInfoBoth.parent.id = ?2 and u.state = 1")
+	int countsByUserType(UserType userType,long id);*/
 	
 	
 	/**
 	 *获取收徒记录 
 	 *
 	 **/
-	@Query("select new com.zzy.brd.dto.rep.admin.user.RepApprenticesRecordDTO(u "
+	/*@Query("select new com.zzy.brd.dto.rep.admin.user.RepApprenticesRecordDTO(u "
 			+ " ) from User u where (?1 is null or u.userInfoBoth.parent = ?1) ")
 	public Page<RepApprenticesRecordDTO> pageApprenticesRecord(User user,
-			Pageable pageable);
+			Pageable pageable);*/
 	
 	
 	/***
 	 * 获取所有的徒弟
 	 */
-	@Query(" select u from User u where u.state!=2 and u.userInfoBoth.parent=?1")
-	List<User> findAllSons(User user);
+	/*@Query(" select u from User u where u.state!=2 and u.userInfoBoth.parent=?1")
+	List<User> findAllSons(User user);*/
 	/**
 	 * 获取所有的徒孙
 	 * 
 	 * */
-	@Query(" select u from User u where u.state!=2 and u.userInfoBoth.grandParent=?1")
-	 List<User> findAllGrandSon(User user);
+	/*@Query(" select u from User u where u.state!=2 and u.userInfoBoth.grandParent=?1")
+	 List<User> findAllGrandSon(User user);*/
 	 /**
 	   * 获取所有的徒孙孙
 	   * 
 	   * */
-	@Query("select u from User u where u.state!=2 and u.userInfoBoth.parent.id in (?1)")
-	 List<User> findAllGGrandSon(List<Long> ids);
+	/*@Query("select u from User u where u.state!=2 and u.userInfoBoth.parent.id in (?1)")
+	 List<User> findAllGGrandSon(List<Long> ids);*/
 	/****
 	 * 根据 号码和用户类型
 	 * 
@@ -226,15 +226,15 @@ public interface UserDao extends BaseDao<User>{
 	List<RepMyApprenticeDTO> getMyApprentices(long userId);*/
 	
 	//查询商家为某个人的全部会员
-	@Query("select u from User u where u.userInfoBoth.seller.id =?1 and u.state!='2'")
-	List<User> findUserByBussiness(long userId);
+	/*@Query("select u from User u where u.userInfoBoth.seller.id =?1 and u.state!='2'")
+	List<User> findUserByBussiness(long userId);*/
 	
-	@Query("select u from User u where u.userType = ?1 and u.userInfoBoth.parent.id = ?2 and u.state!='2' ")
-	List<User> findUserByUserTypeAndSalesmanId(UserType userType,long salesmanId);
+	/*@Query("select u from User u where u.userType = ?1 and u.userInfoBoth.parent.id = ?2 and u.state!='2' ")
+	List<User> findUserByUserTypeAndSalesmanId(UserType userType,long salesmanId);*/
 	
-	@Query("select u from User u where u.userInfoBoth.parent.id = ?1 and u.state!='2' ")
-	List<User> findSonUsers(long userId);
+	/*@Query("select u from User u where u.userInfoBoth.parent.id = ?1 and u.state!='2' ")
+	List<User> findSonUsers(long userId);*/
 	
-	@Query("select count(*) from User u where u.userInfoBoth.grandParent.id = ?1 and u.state!='2' ")
-	int countGrandSonsForBussiness(long userId);	
+	/*@Query("select count(*) from User u where u.userInfoBoth.grandParent.id = ?1 and u.state!='2' ")
+	int countGrandSonsForBussiness(long userId);	*/
 }

@@ -35,7 +35,7 @@ import com.zzy.brd.algorithm.encrypt.shiro.SHA1Encrypt;
 import com.zzy.brd.constant.ConfigSetting;
 import com.zzy.brd.constant.Constant;
 import com.zzy.brd.dao.UserDao;
-import com.zzy.brd.dao.UserInfoBothDao;
+//import com.zzy.brd.dao.UserInfoBothDao;
 import com.zzy.brd.dto.rep.admin.user.RepApprenticesRecordDTO;
 import com.zzy.brd.entity.Activity;
 import com.zzy.brd.entity.Activity.ActivitySet;
@@ -44,7 +44,7 @@ import com.zzy.brd.entity.Role;
 import com.zzy.brd.entity.User;
 import com.zzy.brd.entity.User.State;
 import com.zzy.brd.entity.User.UserType;
-import com.zzy.brd.entity.UserInfoBoth;
+//import com.zzy.brd.entity.UserInfoBoth;
 //import com.zzy.brd.entity.UserInfoSeller;
 //import com.zzy.brd.mobile.web.dto.rep.apprentice.RepMyApprenticeDTO;
 import com.zzy.brd.shiro.session.SessionService;
@@ -65,8 +65,8 @@ public class UserService extends BaseService {
 	private UserDao userDao;
 	@Autowired
 	private SessionService sessionService;
-	@Autowired
-	private UserInfoBothDao userInfoBothDao;
+//	@Autowired
+//	private UserInfoBothDao userInfoBothDao;
 	@Autowired
 	private ActivityService activityService;
 	@Autowired
@@ -88,9 +88,9 @@ public class UserService extends BaseService {
 		user.setSalt(pwdInfo.getSalt());
 		user.setPassword(pwdInfo.getPassword());
 		
-		UserInfoBoth userInfoBoth = new UserInfoBoth();
+		/*UserInfoBoth userInfoBoth = new UserInfoBoth();
 		userInfoBoth.setActivityBrokerage(BigDecimal.ZERO);
-		userInfoBoth.setBrokerageCanWithdraw(BigDecimal.ZERO);
+		userInfoBoth.setBrokerageCanWithdraw(BigDecimal.ZERO);*/
 		Activity activity = activityService.getRecommendRegisterByActivityType();
 		String activityObject = null;
 		ActivitySet activitySet =null;
@@ -106,114 +106,18 @@ public class UserService extends BaseService {
 		}
 		if(is1&&activitySet!=null&&bonus!=null){
 			if(activitySet==ActivitySet.REGISTER){
-				userInfoBoth.setActivityBrokerage(bonus);
-				userInfoBoth.setBrokerageCanWithdraw(bonus);
+//				userInfoBoth.setActivityBrokerage(bonus);
+//				userInfoBoth.setBrokerageCanWithdraw(bonus);
 			}
 		}
 		if(parentUser!=null){
 			if(is1&&activitySet!=null&&bonus!=null){
 				if(activitySet==ActivitySet.REGISTERCODE){
-					userInfoBoth.setActivityBrokerage(bonus);
-					userInfoBoth.setBrokerageCanWithdraw(bonus);
+//					userInfoBoth.setActivityBrokerage(bonus);
+//					userInfoBoth.setBrokerageCanWithdraw(bonus);
 				}
 			}
-			/** 添加师父*/
-			userInfoBoth.setParent(parentUser);
-			/** 添加徒弟数量*/
-			userInfoBothDao.updateAddSonNum(parentUser.getUserInfoBoth().getId());
-			/** 添加活动徒弟数量*/
-			Activity awardActivity = activityService.getApprenticeAwardByActivityType();
-			if(parentUser.getUserType().equals(User.UserType.MANAGER)){
-				if(awardActivity.getActivityObject()!=null){
-					if(isExit(awardActivity.getActivityObject(), "1")){
-						userInfoBothDao.updateAddActivitySonNum(parentUser.getUserInfoBoth().getId());
-					}
-				}
-			}
-			if(parentUser.getUserType().equals(User.UserType.SELLER)){
-				if(awardActivity.getActivityObject()!=null){
-					if(isExit(awardActivity.getActivityObject(), "2")){
-						userInfoBothDao.updateAddActivitySonNum(parentUser.getUserInfoBoth().getId());
-					}
-				}
-			}
-			if(parentUser.getUserType().equals(User.UserType.SALESMAN)){
-				if(awardActivity.getActivityObject()!=null){
-					if(isExit(awardActivity.getActivityObject(), "4")){
-						userInfoBothDao.updateAddActivitySonNum(parentUser.getUserInfoBoth().getId());
-					}
-				}
-			}			
-			/** 添加业务员*/
-			//师傅业务员不为空
-			if(parentUser.getUserInfoBoth().getSalesman() != null){
-				userInfoBoth.setSalesman(parentUser.getUserInfoBoth().getSalesman());
-			}else{
-				//判断师父是不是业务员
-				if(parentUser.getUserType() == UserType.SALESMAN){
-					userInfoBoth.setSalesman(parentUser);
-				}
-			}
-			/** 添加商家*/
-			if(parentUser.getUserInfoBoth().getSeller() != null){
-				userInfoBoth.setSeller(parentUser.getUserInfoBoth().getSeller());
-			}else{
-				//判断师父是不是商家
-				if(parentUser.getUserType() == UserType.SELLER){
-					userInfoBoth.setSeller(parentUser);
-				}
-				
-			}
-			/** 添加师公*/
-			if(parentUser.getUserInfoBoth().getParent() != null){
-				userInfoBoth.setGrandParent(parentUser.getUserInfoBoth().getParent());
-				//添加徒孙数量
-				userInfoBothDao.updateAddGrandSonNum(parentUser.getUserInfoBoth().getParent().getUserInfoBoth().getId());
-			}
-			/** 添加师公公的徒孙孙数量*/
-			if(parentUser.getUserInfoBoth().getGrandParent()!=null){
-				User grandParent = parentUser.getUserInfoBoth().getGrandParent();
-				userInfoBothDao.updateAddGgsonsSum(grandParent.getUserInfoBoth().getId());
-				while (grandParent.getUserInfoBoth().getParent()!=null){
-					grandParent = grandParent.getUserInfoBoth().getParent();
-					userInfoBothDao.updateAddGgsonsSum(grandParent.getUserInfoBoth().getId());
-				}				
-			}
-			/*//商家
-			if(parentUser.getUserInfoBoth().getSeller() != null){
-				if(parentUser.getUserType() != UserType.SELLER
-						&& parentUser.getUserInfoBoth().getParent().getId()!=parentUser.getUserInfoBoth().getSeller().getId()){
-					userInfoBothDao.updateAddGgsonsSum(parentUser.getUserInfoBoth().getSeller().getId());
-				}
-			}
-			//业务员
-			if(parentUser.getUserInfoBoth().getSeller() != null){
-				if(parentUser.getUserType() != UserType.SALESMAN
-						&& parentUser.getUserInfoBoth().getParent().getId()!=parentUser.getUserInfoBoth().getSalesman().getId()){
-					userInfoBothDao.updateAddGgsonsSum(parentUser.getUserInfoBoth().getSeller().getId());
-				}
-				if(parentUser.getUserType()!=UserType.SALESMAN){
-					if(parentUser.getUserInfoBoth().getParent()!=null&& parentUser.getUserInfoBoth().getSalesman()!=null ){
-						if(parentUser.getUserInfoBoth().getParent().getId()!=parentUser.getUserInfoBoth().getSalesman().getId()){
-							userInfoBothDao.updateAddGgsonsSum(parentUser.getUserInfoBoth().getSeller().getId());
-						}
-					}
-				}
-			}*/
 			
-			
-		}
-		//推荐码
-		String recommended =user.getMobileno();
-		userInfoBoth.setRecommendCode(recommended);
-		userInfoBoth.setOrderMoney(BigDecimal.ZERO);
-		
-		if(!(userInfoBothDao.save(userInfoBoth)== null ?false:true)){
-			return false;
-		}
-		user.setUserInfoBoth(userInfoBoth);
-		if(!(userDao.save(user) == null ? false:true)){
-			return false;
 		}
 		return true;
 	}
@@ -305,9 +209,9 @@ public class UserService extends BaseService {
 		return userDao.findByMobileno2(mobileno, userTypeList);
 	}
 	
-	public User findByAskperson(String recommendCode){
+	/*public User findByAskperson(String recommendCode){
 		return userDao.findByAskperson(recommendCode);
-	}
+	}*/
 	/**
 	 * 插入或修改个人图像
 	 * 
@@ -414,8 +318,6 @@ public class UserService extends BaseService {
 	public int resetWithdrawPassword(String withdrawPassword, User user) {
 		SHA1Encrypt encrypt = SHA1Encrypt.getInstance();
 		PasswordInfo withdrawPasswordInfo = encrypt.encryptPassword(withdrawPassword.toLowerCase());
-		user.getUserInfoBoth().setWithdrawSalt(withdrawPasswordInfo.getSalt());
-		user.getUserInfoBoth().setWithdrawPassword(withdrawPasswordInfo.getPassword());
 		User user2 = userDao.save(user);
 		if (user2 != null) {
 			return Constant.MOD_WITHDRAW_PWD_SUCC;
@@ -472,9 +374,9 @@ public class UserService extends BaseService {
 	/***
 	 * 推荐码查询用户数量
 	 */
-	public int findUserByRecommended(String iCode ){
+	/*public int findUserByRecommended(String iCode ){
 		return userDao.findUserByRecommended(iCode);
-	}
+	}*/
 	/***
 	 * 推荐码查询用户数量
 	 */
@@ -485,9 +387,9 @@ public class UserService extends BaseService {
 	/**
 	 *推荐码查询用户 
 	 **/
-	public User findUserByRecommended2(String code){
+	/*public User findUserByRecommended2(String code){
 		return userDao.findUserByRecommended2(code);
-	}
+	}*/
 	/**
 	 * 查找未删除的user
 	 * @param
@@ -526,173 +428,7 @@ public class UserService extends BaseService {
 		PasswordInfo pwdInfo = encrypt.encryptPassword(user.getPassword());
 		user.setSalt(pwdInfo.getSalt());
 		user.setPassword(pwdInfo.getPassword());
-		
-		UserInfoBoth userInfoBoth = new UserInfoBoth();
-		userInfoBoth.prepareForInsert();
-		userInfoBoth.setExpands(expands);
-		
-		userInfoBoth.setActivityBrokerage(BigDecimal.ZERO);
-		userInfoBoth.setBrokerageCanWithdraw(BigDecimal.ZERO);
-		UserType userType = user.getUserType();
-		if(!user.getUserType().equals(User.UserType.USER)){
-			userInfoBoth.setRecommendCode(user.getMobileno());
-		}
-		
-		//商家
-		if(address!=null && userType.equals(User.UserType.SELLER)){
-			try{
-				ReqGeocoderResolve req = new ReqGeocoderResolve();
-				req.setOutput(ReqGeocoderResolve.OutputType.JSON.getStr());
-				req.setAddress(address);
-				req.setAk(ConfigSetting.baidu_map_api_for_service);
-				RepGeocoderResolve rep = BaiduMapUtils.addressGeocoding(req);
-				//纬度
-				double latitude = rep.getResult().getLocation().getLat();
-				//经度
-				double longitude = rep.getResult().getLocation().getLng();		
-				/*UserInfoSeller infoSeller = new UserInfoSeller();
-				infoSeller.setAddress(address);
-				infoSeller.setLatitude(String.valueOf(latitude));
-				infoSeller.setLongitude(String.valueOf(longitude));
-				infoSeller.setCompany(expands);
-				if(userInfoSellerService.editUserInfoSeller(infoSeller)){
-					user.setUserInfoSeller(infoSeller);
-				}else{
-					return false;				
-				}*/
-			}catch(Exception e){
-				logger.error("商家地址获取错误:"+e.getMessage());
-				return false;
-			}
-		}
-		Activity activity = activityService.getRecommendRegisterByActivityType();
-		String activityObject = null;
-		BigDecimal bonus = null;
-		boolean isExist =false;
-		boolean is0 =false;
-		boolean is1 =false;
-		boolean is2 =false;
-		if(activity!=null){
-			 bonus =  activity.getBonusAmount();
-			 activityObject = activity.getActivityObject();
-		}
-		if(activityObject !=null){
-			is0=isExit(activityObject, "0");
-			is1=isExit(activityObject, "1");
-			is2=isExit(activityObject, "2");
-		}
-		if(userType==UserType.USER){
-			isExist = is0;
-		}
-		if(userType==UserType.MANAGER){
-			isExist = is1;
-		}
-		if(userType==UserType.SELLER){
-			isExist = is2;
-		}
-		
-		if(isExist&&bonus!=null){
-				userInfoBoth.setActivityBrokerage(bonus);
-				userInfoBoth.setBrokerageCanWithdraw(bonus);
-		}
-		
-		if(parentUser!=null){
-			/** 添加师父*/
-			userInfoBoth.setParent(parentUser);
-			/** 添加徒弟数量*/
-			userInfoBothDao.updateAddSonNum(parentUser.getUserInfoBoth().getId());
-			/** 添加活动徒弟数量*/
-			//收徒奖励活动
-			Activity awardActivity = activityService.getApprenticeAwardByActivityType();
-			if(parentUser.getUserType().equals(User.UserType.MANAGER)){
-				if(awardActivity.getActivityObject()!=null){
-					if(isExit(awardActivity.getActivityObject(), "1")){
-						userInfoBothDao.updateAddActivitySonNum(parentUser.getUserInfoBoth().getId());
-					}
-				}
-			}
-			if(parentUser.getUserType().equals(User.UserType.SELLER)){
-				if(awardActivity.getActivityObject()!=null){
-					if(isExit(awardActivity.getActivityObject(), "2")){
-						userInfoBothDao.updateAddActivitySonNum(parentUser.getUserInfoBoth().getId());
-					}
-				}
-			}
-			if(parentUser.getUserType().equals(User.UserType.SALESMAN)){
-				if(awardActivity.getActivityObject()!=null){
-					if(isExit(awardActivity.getActivityObject(), "4")){
-						userInfoBothDao.updateAddActivitySonNum(parentUser.getUserInfoBoth().getId());
-					}
-				}
-			}
-			
-			/** 添加业务员*/
-			//师傅业务员不为空
-			if(parentUser.getUserInfoBoth().getSalesman() != null){
-				userInfoBoth.setSalesman(parentUser.getUserInfoBoth().getSalesman());
-			}else{
-				//判断师父是不是业务员
-				if(parentUser.getUserType() == UserType.SALESMAN){
-					userInfoBoth.setSalesman(parentUser);
-				}
-			}
-			/** 添加商家*/
-			if(parentUser.getUserInfoBoth().getSeller() != null){
-				userInfoBoth.setSeller(parentUser.getUserInfoBoth().getSeller());
-			}else{
-				//判断师父是不是商家
-				if(parentUser.getUserType() == UserType.SELLER){
-					userInfoBoth.setSeller(parentUser);
-				}
-				
-			}
-			/** 添加师公*/
-			if(parentUser.getUserInfoBoth().getParent() != null){
-				userInfoBoth.setGrandParent(parentUser.getUserInfoBoth().getParent());
-				//添加徒孙数量
-				userInfoBothDao.updateAddGrandSonNum(parentUser.getUserInfoBoth().getParent().getUserInfoBoth().getId());
-			}
-			/** 添加师公公的徒孙孙数量*/
-			if(parentUser.getUserInfoBoth().getGrandParent()!=null){
-				User grandParent = parentUser.getUserInfoBoth().getGrandParent();
-				userInfoBothDao.updateAddGgsonsSum(grandParent.getUserInfoBoth().getId());
-				while (grandParent.getUserInfoBoth().getParent()!=null){
-					grandParent = grandParent.getUserInfoBoth().getParent();
-					userInfoBothDao.updateAddGgsonsSum(grandParent.getUserInfoBoth().getId());
-				}				
-			}		
-			/*//商家
-			if(parentUser.getUserInfoBoth().getSeller() != null){
-				if(parentUser.getUserType() != UserType.SELLER
-						&& parentUser.getUserInfoBoth().getParent().getId()!=parentUser.getUserInfoBoth().getSeller().getId()){
-					userInfoBothDao.updateAddGgsonsSum(parentUser.getUserInfoBoth().getSeller().getId());
-				}
-			}
-			//业务员
-			if(parentUser.getUserInfoBoth().getSeller() != null){
-				if(parentUser.getUserType()!=UserType.SALESMAN){
-					if(parentUser.getUserInfoBoth().getParent()!=null&& parentUser.getUserInfoBoth().getSalesman()!=null ){
-						if(parentUser.getUserInfoBoth().getParent().getId()!=parentUser.getUserInfoBoth().getSalesman().getId()){
-							userInfoBothDao.updateAddGgsonsSum(parentUser.getUserInfoBoth().getSeller().getId());
-						}
-					}
-				}
-				
-				
-			}*/
-		}
-		//推荐码
-		if(user.getUserType().equals(User.UserType.MANAGER) || user.getUserType().equals(User.UserType.SALESMAN) ||user.getUserType().equals(User.UserType.SELLER)){
-			String recommended =user.getMobileno();
-			userInfoBoth.setRecommendCode(recommended);
-		}
-		if(!(userInfoBothDao.save(userInfoBoth)== null ?false:true)){
-			return false;
-		}
-		user.setUserInfoBoth(userInfoBoth);
-		if(!(userDao.save(user) == null ? false:true)){
-			return false;
-		}
+
 		return true;
 	}
 	/**
@@ -729,16 +465,16 @@ public class UserService extends BaseService {
 	/****
 	 * 获取指定用户组昨天注册的徒弟,返回徒弟数组
 	 */
-	public List<Long> findSonsId(Date startTime,Date endTime,List<Long> ids ){
+	/*public List<Long> findSonsId(Date startTime,Date endTime,List<Long> ids ){
 		return userDao.findSonIds(startTime,endTime,ids);
-	}
+	}*/
 	
 	/**
 	 * 获取所有的徒弟的实体 
 	 **/
-	public List<User> findGrandSonsByUser(User user){
+	/*public List<User> findGrandSonsByUser(User user){
 		return userDao.findGrandSonsByUser(user);
-	}
+	}*/
 	
 	/**通过用户类型找到会员列表
 	 * @param
@@ -750,46 +486,46 @@ public class UserService extends BaseService {
 	
 	/** 统计业务员有多少个融资经理，商家*/
 	
-	public int countsByUserType(UserType userType,long id){
+	/*public int countsByUserType(UserType userType,long id){
 		return userDao.countsByUserType(userType,id);
 	}
-	
+	*/
 	/***
 	 *分页查询获取徒弟记录 
 	 */
-	public Page<RepApprenticesRecordDTO> listApprenticesRecord(User user,int pageNumber){
+	/*public Page<RepApprenticesRecordDTO> listApprenticesRecord(User user,int pageNumber){
 		Order order = new Order(Direction.DESC, "id");
 		Sort sort2 = new Sort(order);
 		PageRequest pageRequest = new PageRequest(pageNumber-1, Constant.PAGE_SIZE,sort2);
 		return userDao.pageApprenticesRecord(user, pageRequest);
-	}
+	}*/
 
 
-	public int AddActivityBrokerageAndBrokerageCanWithdraw(long id,BigDecimal bonusAmount){
-		return userInfoBothDao.AddActivityBrokerageAndBrokerageCanWithdraw(id,bonusAmount);
-	}
+//	public int AddActivityBrokerageAndBrokerageCanWithdraw(long id,BigDecimal bonusAmount){
+////		return userInfoBothDao.AddActivityBrokerageAndBrokerageCanWithdraw(id,bonusAmount);
+//	}
 	
 	/***
 	 * 获取所有的徒弟
 	 */
-	public List<User> findAllSons(User user){
+	/*public List<User> findAllSons(User user){
 		return userDao.findAllSons(user);
-	}
+	}*/
 	/**
 	 * 获取所有的徒孙
 	 * 
 	 * */
-	 public List<User> findAllGrandSon(User user){
+	 /*public List<User> findAllGrandSon(User user){
 		 return userDao.findAllGrandSon(user);
-	 }
+	 }*/
 	 /**
 	   * 获取所有的徒徒弟
 	   * 
 	   * */
-	 public  List<User> findAllGGrandSon(List<Long> ids){
+	 /*public  List<User> findAllGGrandSon(List<Long> ids){
 		 return userDao.findAllGGrandSon(ids);
 	 }
-	 
+	 */
 	 public User findByMobileAndUserType(String mobile,List<UserType> typeList){
 		 return userDao.findByMobileAndUerType(mobile, typeList);
 	 }
@@ -821,53 +557,24 @@ public class UserService extends BaseService {
 //    }
     
     public void staticsUserSonsAndGrandSons(User user){
-    	//徒弟数量
-    	List<User> sonsList = this.findAllSons(user);    	
-    	user.getUserInfoBoth().setSonSum(sonsList.size());
-    	//徒孙数量
-    	List<User> grandSonsList = this.findAllGrandSon(user);
-    	user.getUserInfoBoth().setGrandsonSum(grandSonsList.size()); 
-    	//徒孙孙数量 徒孙数量徒弟	
-    	HashSet<Long> ids = new HashSet<Long>();
-    	List<Long> idss = Lists.transform(grandSonsList,new Function<User,Long>(){
-			@Override
-			public Long apply(User user) {
-				// TODO Auto-generated method stub
-				return user.getId();
-			}
-    	});
-    	while(idss.size()>0){
-    		grandSonsList = this.findAllGGrandSon(idss);
-    		idss = Lists.transform(grandSonsList,new Function<User,Long>(){
-    			@Override
-    			public Long apply(User user) {
-    				// TODO Auto-generated method stub
-    				return user.getId();
-    			}
-        	});
-    		ids.addAll(idss);
-    	}  
-    	
-    	user.getUserInfoBoth().setGgsonsSum(ids.size());
-    	
-    	userInfoBothDao.save(user.getUserInfoBoth());
+
     }
     
     //查询商家下的全部会员
-    public List<User> findUserByBussiness(long userId){
+    /*public List<User> findUserByBussiness(long userId){
     	return  userDao.findUserByBussiness(userId);
     }
     //查询某业务员下的所有所有商家和融资经理
     public List<User> findUserByUserTypeAndSalesmanId(UserType userType,long salesmanId){
     	return userDao.findUserByUserTypeAndSalesmanId(userType,salesmanId);
-    }
+    }*/
     //查询师父为某商家的所有徒弟
-    public List<User> findSonUsers(long userId){
+    /*public List<User> findSonUsers(long userId){
     	return userDao.findSonUsers(userId);
     }
     //查询师公为某商家的所有徒孙
     public int countGrandSonsForBussiness(long userId){
     	return userDao.countGrandSonsForBussiness(userId);
     }
-    
+    */
 }

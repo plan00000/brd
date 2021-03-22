@@ -61,19 +61,20 @@ public class BrokerageStatisticsService extends BaseService {
 	}
 	/**
 	 * 获得用户佣金统计列表
-	 * @param pageNumber
-	 * @param size
+	 * @param
+	 * @param
 	 * @return
 	 */
 	public Page<RepStatisticBrokerageDTO> pageBrokerageStatisctic(List<User.UserType> userTypes){
 		PageRequest pageRequest = createPageRequest(1, Constant.PAGE_SIZE, "id", false);
-		Page<RepStatisticBrokerageDTO> result= userCommonStatisticsDao.pageBrokerageStatisctic(userTypes,pageRequest);
+//		Page<RepStatisticBrokerageDTO> result= userCommonStatisticsDao.pageBrokerageStatisctic(userTypes,pageRequest);
+		Page<RepStatisticBrokerageDTO> result= null;
 		return result;
 	}
 	/**
 	 * 获得用户佣金统计列表
-	 * @param pageNumber
-	 * @param size
+	 * @param
+	 * @param
 	 * @return
 	 */
 	public Page<RepStatisticBrokerageDTO> pageBrokerageApply(){

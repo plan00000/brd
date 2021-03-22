@@ -22,7 +22,7 @@ public interface EmployeeDao extends BaseDao<User> {
 	/**
 	 *查询员工发展的会员 包括商家 
 	 **/
-	@Query("select u from User u where  u.userInfoBoth.salesman=?1")
-	List<User> findSalesman(User user);
+//	@Query("select u from User u where  u.userInfoBoth.salesman=?1")
+//	List<User> findSalesman(User user);
 	
 }

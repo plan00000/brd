@@ -26,117 +26,117 @@ import com.zzy.brd.entity.interfaces.IdEntity;
  * @author lzh 2016-9-23
  *
  */
-@Entity
+/*@Entity
 @Table(name = "user_info_both")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @DynamicUpdate(value = true)
 public class UserInfoBoth extends IdEntity implements java.io.Serializable{
 
-	/**
+	*//**
 	 * 
-	 */
+	 *//*
 	private static final long serialVersionUID = -6343961425778317819L;
 	public enum StarOrderAwardFlag {
-		/** 未发放*/
+		*//** 未发放*//*
 		NO,
-		/** 已发放*/
+		*//** 已发放*//*
 		YES;
 	}
 	public enum ApprenticeAwardFlag {
-		/** 未发放*/
+		*//** 未发放*//*
 		NO,
-		/** 已发放*/
+		*//** 已发放*//*
 		YES;
 	}
-	/** 提现密码*/
+	*//** 提现密码*//*
 	public String withdrawPassword = "";
-	/** 提现密码的盐*/
+	*//** 提现密码的盐*//*
 	public String withdrawSalt = "";
-	/** 活动收徒弟数量*/
+	*//** 活动收徒弟数量*//*
 	public int acitivitySonSum;
-	/** 徒弟数量*/
+	*//** 徒弟数量*//*
 	public int sonSum;
-	/** 徒孙数量*/
+	*//** 徒孙数量*//*
 	public int grandsonSum;
-	/** 徒孙孙数量*/
+	*//** 徒孙孙数量*//*
 	public int ggsonsSum;
 	
-	/** 订单提成佣金）*/
+	*//** 订单提成佣金）*//*
 	public BigDecimal orderBrokerage;
-	/** 活动奖励佣金）*/
+	*//** 活动奖励佣金）*//*
 	public BigDecimal activityBrokerage;
-	/** 收徒奖励佣金*/
+	*//** 收徒奖励佣金*//*
 	public BigDecimal apprenticeAwareBrokerage;
-	/** 佣金（已提取）*/
+	*//** 佣金（已提取）*//*
 	public BigDecimal brokerageHaveWithdraw;
-	/** 佣金（可提现）*/
+	*//** 佣金（可提现）*//*
 	public BigDecimal brokerageCanWithdraw ;
-	/** 佣金（提现中）*/
+	*//** 佣金（提现中）*//*
 	public BigDecimal brokerageWithdrawing ;
-	/** 订单总数*/
+	*//** 订单总数*//*
 	public int orderSum;
-	/** 徒弟订单总数*/
+	*//** 徒弟订单总数*//*
 	public int sonsOrderSum;
-	/** 徒孙订单总数*/
+	*//** 徒孙订单总数*//*
 	public int gsonsOrderSum;
-	/** 徒孙孙订单总数*/
+	*//** 徒孙孙订单总数*//*
 	public int ggsonsOrderSum;
-	/** 订单成功总数*/
+	*//** 订单成功总数*//*
 	public int orderSuccessSum;
-	/** 徒弟订单总额*/
+	*//** 徒弟订单总额*//*
 	public BigDecimal sonsOrderMoney;
-	/** 徒孙订单总额*/
+	*//** 徒孙订单总额*//*
 	public BigDecimal gsonsOrderMoney;
-	/** 徒孙孙订单总额*/
+	*//** 徒孙孙订单总额*//*
 	public BigDecimal ggsonsOrderMoney;
-	/** 我的订单总额*/
+	*//** 我的订单总额*//*
 	public BigDecimal orderMoney;	
-	/** 当前登录设备的类型 */
+	*//** 当前登录设备的类型 *//*
 	private AppType loginDeviceApptype;
-	/** 当前登录设备的推送码 */
+	*//** 当前登录设备的推送码 *//*
 	private String loginDeviceSeq;
-	/** 登录状态 */
+	*//** 登录状态 *//*
 	private AppLoginStatus appLoginStatus;
 	
-	/** 星级订单奖励发放标志*/
+	*//** 星级订单奖励发放标志*//*
 	public StarOrderAwardFlag starOrderAwardFlag;
-	/** 收徒奖励发放标志, 0-未发放，1-已发放*/
+	*//** 收徒奖励发放标志, 0-未发放，1-已发放*//*
 	public ApprenticeAwardFlag apprenticeAwardFlag;
 	
-	/** 师公*/
+	*//** 师公*//*
 	@ManyToOne(targetEntity = User.class,fetch=FetchType.LAZY)
 	@JoinColumn(name = "grand_parentid",referencedColumnName = "id")
 	private User grandParent;
 	
-	/** 师傅*/
+	*//** 师傅*//*
 	@ManyToOne(targetEntity = User.class,fetch=FetchType.LAZY)
 	@JoinColumn(name = "parentid",referencedColumnName = "id")
 	private User parent;
 	
-	/** 商家*/
+	*//** 商家*//*
 	@ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "sellerid",referencedColumnName = "id")
 	private User seller;
 	
-	/** 业务员*/
+	*//** 业务员*//*
 	@ManyToOne(targetEntity = User.class , fetch = FetchType.LAZY)
 	@JoinColumn(name = "salesmanid", referencedColumnName="id")
 	private User salesman;
 	
-	/** 原业务员id */
+	*//** 原业务员id *//*
 	@ManyToOne(targetEntity = User.class , fetch = FetchType.LAZY)
 	@JoinColumn(name = "past_salesmanid", referencedColumnName="id")
 	private User pastSalesman;
 	
-	/**二维码*/
+	*//**二维码*//*
 	@Column(name="qr_code")
 	private String qrCode;
 	
-	/**推荐码*/
+	*//**推荐码*//*
 	@Column(name="recommend_code")
 	private String recommendCode;
 	
-	/**身份证*/
+	*//**身份证*//*
 	@Column(name="expands")
 	private String expands;
 	
@@ -363,4 +363,4 @@ public class UserInfoBoth extends IdEntity implements java.io.Serializable{
 		this.apprenticeAwareBrokerage = apprenticeAwareBrokerage;
 	}
 	
-}
+}*/

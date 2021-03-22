@@ -12,10 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.zzy.brd.constant.ConfigSetting;
 import com.zzy.brd.constant.ConfigSetting.PathType;
-import com.zzy.brd.dao.UserInfoBothDao;
+//import com.zzy.brd.dao.UserInfoBothDao;
 import com.zzy.brd.entity.SysInfo;
 import com.zzy.brd.entity.User;
-import com.zzy.brd.entity.UserInfoBoth;
+//import com.zzy.brd.entity.UserInfoBoth;
 import com.zzy.brd.util.QRcode.QRcodeUtils;
 import com.zzy.brd.util.file.FileUtil;
 
@@ -24,7 +24,7 @@ import com.zzy.brd.util.file.FileUtil;
  * @author lzh 2016-9-26
  *
  */
-@Service
+/*@Service
 @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 public class UserInfoBothService extends BaseService{
 	private static final Logger logger = LoggerFactory.getLogger(UserInfoBothService.class);
@@ -35,18 +35,12 @@ public class UserInfoBothService extends BaseService{
 	@Autowired
 	private SysInfoService sysInfoService;
 	
-	/**
-	 * @param 修改信息
-	 * @return
-	 */
-	public boolean editUserInfoBoth(UserInfoBoth userInfoBoth) {
-		return userInfoBothDao.save(userInfoBoth) == null ? false : true;
-	}
+
 	
-	/**
+	*//**
 	 * 生成新的二维码图片 删除旧的二维码图片
 	 * 
-	 * */
+	 * *//*
 	public void createQrcodeImg(User user ){
 		UserInfoBoth userInfoBoth = user.getUserInfoBoth();
 		String recommended ="";
@@ -93,4 +87,4 @@ public class UserInfoBothService extends BaseService{
 		userInfoBothDao.save(userInfoBoth);
 	}
 	
-}
+}*/

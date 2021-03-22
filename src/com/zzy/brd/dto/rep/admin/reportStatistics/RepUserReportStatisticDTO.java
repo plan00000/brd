@@ -28,10 +28,7 @@ public class RepUserReportStatisticDTO {
 	private long loginTimes;
 	
 	public RepUserReportStatisticDTO(User user,long sonSum,long grandSonSum,long ggrandSonSum,long orderSum,long orderSuccessSum,long loginTimes) {
-		this.user = user;	
-		this.parent = user.getUserInfoBoth().getParent();
-		this.seller = user.getUserInfoBoth().getSeller();
-		this.salesman = user.getUserInfoBoth().getSalesman();
+		this.user = user;
 		this.sonsSum = sonSum;
 		this.grandSonsSum  =grandSonSum;
 		this.ggrandSonsSum = ggrandSonSum;

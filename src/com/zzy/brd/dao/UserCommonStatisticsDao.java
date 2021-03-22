@@ -100,11 +100,12 @@ public interface UserCommonStatisticsDao extends BaseDao<UserCommonStatistics>{
 	 * @param pageable
 	 * @return
 	 */
-	@Query(value = "select new com.zzy.brd.dto.rep.admin.reportStatistics.RepStatisticBrokerageDTO(u,"
+	/*@Query(value = "select new com.zzy.brd.dto.rep.admin.reportStatistics.RepStatisticBrokerageDTO(u,"
 			+ "uib.brokerageHaveWithdraw + uib.brokerageCanWithdraw + uib.brokerageWithdrawing) "
 			+ "from  User u  left join u.userInfoBoth uib where u.userType in ?1 "
 			+ " order by uib.brokerageHaveWithdraw + uib.brokerageCanWithdraw + uib.brokerageWithdrawing desc")
 	Page<RepStatisticBrokerageDTO> pageBrokerageStatisctic(List<User.UserType> userTypes,Pageable pageable);
+	*/
 	/**
 	 * 获得佣金发放列表并排序
 	 * @param pageable

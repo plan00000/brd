@@ -85,9 +85,9 @@ public class EmployeeService extends BaseService {
 	 * @param user
 	 * 
 	 */
-	public List<User> findSalesman(User user){
-		return employeeDao.findSalesman(user);
-	}
+//	public List<User> findSalesman(User user){
+//		return employeeDao.findSalesman(user);
+//	}
 	
 	/***
 	 * 改变状态

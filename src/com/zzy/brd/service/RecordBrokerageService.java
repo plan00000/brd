@@ -21,7 +21,6 @@ import com.zzy.brd.dto.rep.recordBrokerage.RecordBrokerageDTO;
 import com.zzy.brd.entity.BrokerageApply;
 import com.zzy.brd.entity.RecordBrokerage;
 import com.zzy.brd.entity.User;
-import com.zzy.brd.entity.UserInfoBoth;
 import com.zzy.brd.entity.RecordBrokerage.RelationType;
 
 /***
@@ -56,7 +55,7 @@ public class RecordBrokerageService extends BaseService {
 	}
 	/***
 	 * 添加收佣记录
-	 * @param recordBrokerage
+	 * @param
 	 * @return
 	 */
 	public boolean addRecordBrokerage(User user,User selfUser,RelationType relationType,BrokerageApply brokerageApply,int witchBrokerage){
@@ -64,7 +63,6 @@ public class RecordBrokerageService extends BaseService {
 		RecordBrokerage recordBrokerage = new RecordBrokerage();
 		recordBrokerage.setUser(user);
 		recordBrokerage.setGainUser(selfUser);
-		recordBrokerage.setGainUserInfoBoth(selfUser.getUserInfoBoth());
 		recordBrokerage.setConfirmName(selfUser.getUsername());
 		recordBrokerage.setRelate(relationType);
 		recordBrokerage.setOrder(brokerageApply.getOrderform());

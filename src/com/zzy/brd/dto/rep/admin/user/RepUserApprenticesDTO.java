@@ -59,24 +59,7 @@ public class RepUserApprenticesDTO {
 		}
 		this.realname = HtmlUtils.htmlEscape(user.getRealname()).toString();
 		this.phone = user.getMobileno().toString();
-		if(!user.getUserType().equals(User.UserType.SELLER)){
-			this.idcard = user.getUserInfoBoth().getExpands();
 		}
-		if(user.getUserInfoBoth().getRecommendCode()!=null){		
-			this.recommend = user.getUserInfoBoth().getRecommendCode().toString();
-		}
-		this.orderSum = user.getUserInfoBoth().getOrderSuccessSum();
-		this.orderMoney = PriceUtils.tenThousandPrice(user.getUserInfoBoth().getOrderMoney())+"万".toString();
-		this.sonSum =user.getUserInfoBoth().getSonSum();
-		this.sonOrderMoney = PriceUtils.tenThousandPrice(user.getUserInfoBoth().getSonsOrderMoney())+"万".toString();
-		this.sonOrderSum=user.getUserInfoBoth().getSonsOrderSum();
-		this.grandSonsSum  = user.getUserInfoBoth().getGrandsonSum();
-		this.grandSonOrderMoney =PriceUtils.tenThousandPrice(user.getUserInfoBoth().getGsonsOrderMoney())+"万".toString();
-		this.grandSonOrderSum = user.getUserInfoBoth().getGgsonsOrderSum();
-		this.ggrandSonsSum = user.getUserInfoBoth().getGgsonsSum();
-		this.ggrandSonOrderSum = user.getUserInfoBoth().getGgsonsOrderSum();
-		this.ggrandSonOrderMoney = PriceUtils.tenThousandPrice(user.getUserInfoBoth().getGgsonsOrderMoney())+"万".toString();
-	}	
 	
 	
 	public String getRealname() {

@@ -278,9 +278,12 @@ public class DepartmentService extends BaseService{
 		List<User> users = userDao.findByDepartmentlistAndStates(depart.getId(), states);//通过部门查询用户信息
 		//通过各个部门的用户id去查找对应的商家融资 和融资经理
 		if(null != users && users.size() >0 ){
-			List<User> users1 = userDao.findUser(users);
+			/*List<User> users1 = userDao.findUser(users);
 			List<User> managers = userDao.findUser(users,User.UserType.MANAGER);
-			List<User> sellers= userDao.findUser(users,User.UserType.SELLER);
+			List<User> sellers= userDao.findUser(users,User.UserType.SELLER);*/
+			List<User> users1 = new ArrayList<>();
+			List<User> managers = new ArrayList<>();
+			List<User> sellers= new ArrayList<>();
 			List<Long> ids1 = this.findAllUser(users1);//用户id
 			if(ids1.size() > 0){
 				dto = this.statisticsDepartUsers(ids1,managers,sellers);

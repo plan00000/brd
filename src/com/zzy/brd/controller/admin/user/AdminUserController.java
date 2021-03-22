@@ -42,7 +42,6 @@ import com.zzy.brd.algorithm.encrypt.shiro.SHA1Encrypt;
 import com.zzy.brd.constant.ConfigSetting;
 import com.zzy.brd.constant.Constant;
 import com.zzy.brd.dao.UserDao;
-import com.zzy.brd.dao.UserInfoBothDao;
 import com.zzy.brd.dto.rep.RepSimpleMessageDTO;
 import com.zzy.brd.dto.rep.admin.user.RepApprenticesRecordDTO;
 import com.zzy.brd.dto.rep.admin.user.RepUserApprenticesDTO;
@@ -53,7 +52,6 @@ import com.zzy.brd.entity.RecordBrokerage;
 import com.zzy.brd.entity.User;
 import com.zzy.brd.entity.User.State;
 import com.zzy.brd.entity.UserBankinfo;
-import com.zzy.brd.entity.UserInfoBoth;
 //import com.zzy.brd.entity.UserInfoSeller;
 //import com.zzy.brd.entity.UserRemark;
 import com.zzy.brd.entity.WeixinUser;
@@ -64,7 +62,7 @@ import com.zzy.brd.service.LoginlogService;
 import com.zzy.brd.service.RecordBrokerageService;
 import com.zzy.brd.service.RoleService;
 import com.zzy.brd.service.UserBankinfoService;
-import com.zzy.brd.service.UserInfoBothService;
+//import com.zzy.brd.service.UserInfoBothService;
 import com.zzy.brd.service.UserInfoSellerService;
 import com.zzy.brd.service.UserOperLogService;
 import com.zzy.brd.service.UserRemarkService;
@@ -107,8 +105,7 @@ public class AdminUserController {
 	private @Autowired UserRemarkService userRemarkService;
 	private @Autowired UserDao userDao;
 	private @Autowired UserOperLogService userOperlogService;
-	private @Autowired UserInfoBothDao userInfoBothDao;
-	private @Autowired UserInfoBothService userInfoBothService;
+//	private @Autowired UserInfoBothService userInfoBothService;
 	private @Autowired UserInfoSellerService userInfoSellerService;
 	@RequestMapping(value = "list")
 	public String list(
@@ -263,7 +260,8 @@ public class AdminUserController {
 			}
 			if (getType.equals("getGGrandSons")) {
 				User user = userService.findById(userId);
-				List<User> grandSons =userService.findAllGrandSon(user);
+//				List<User> grandSons =userService.findAllGrandSon(user);
+				List<User> grandSons = new ArrayList<>();
 				if(grandSons.size()>0){
 					List<Long> ids = Lists.transform(grandSons, new Function<User,Long>(){
 						@Override
@@ -272,7 +270,8 @@ public class AdminUserController {
 							return user.getId();
 						}
 					});				
-					List<User> ggrandSonsList = userService.findAllGGrandSon(ids);
+//					List<User> ggrandSonsList = userService.findAllGGrandSon(ids);
+					List<User> ggrandSonsList = new ArrayList<>();
 					List<Long> idss = new ArrayList<Long>();
 					idss.addAll(ids);
 					while(ggrandSonsList.size()>0){
@@ -284,7 +283,7 @@ public class AdminUserController {
 							}
 						});
 						idss.addAll(idsss);
-						ggrandSonsList = userService.findAllGGrandSon(idsss);
+//						ggrandSonsList = userService.findAllGGrandSon(idsss);
 					}
 					searchParams.put("IN_userInfoBoth.parent.id",idss);
 				} else{
@@ -392,12 +391,12 @@ public class AdminUserController {
 		String expands= "";
 		User parent =null;
 		if(!StringUtil.isNullString(recommonedPhone) ){
-			parent = userService.findByAskperson(recommonedPhone);
+			/*parent = userService.findByAskperson(recommonedPhone);
 			if (parent == null) {
 				res.setCode(1);
 				res.setMes("推荐人不存在");
 				return res;
-			}
+			}*/
 			if (parent == user) {
 				res.setCode(1);
 				res.setMes("推荐码不能为自己");
@@ -481,8 +480,9 @@ public class AdminUserController {
 			model.addAttribute("page", page);
 		} else if (type.equals("apprentice")) {
 			// 获取收徒记录
-			Page<RepApprenticesRecordDTO> page = userService
-					.listApprenticesRecord(user, pageNumber);
+//			Page<RepApprenticesRecordDTO> page = userService
+//					.listApprenticesRecord(user, pageNumber);
+			Page<RepApprenticesRecordDTO> page = null;
 			model.addAttribute("page", page);
 		} else if (type.equals("loginlog")) {
 			// 获取登录日志
@@ -499,11 +499,10 @@ public class AdminUserController {
 				.getUserBankByUser(user);
 
 		// 佣金总额
-		BigDecimal total = user.getUserInfoBoth().getBrokerageCanWithdraw().add(user.getUserInfoBoth().getBrokerageHaveWithdraw()).add(user.getUserInfoBoth().getBrokerageWithdrawing());
-
+		BigDecimal total = new BigDecimal(0);
 		//生成二维码图片
 		if(!user.getUserType().equals(User.UserType.USER)){
-			userInfoBothService.createQrcodeImg(user);
+//			userInfoBothService.createQrcodeImg(user);
 		}
 		model.addAttribute("total", total);
 		model.addAttribute("bankinfoList", userBankinfoList);
@@ -692,7 +691,8 @@ public class AdminUserController {
 			}
 			if (getType.equals("getGGrandSons")) {
 				User user = userService.findById(userId);
-				List<User> grandSons =userService.findAllGrandSon(user);
+//				List<User> grandSons =userService.findAllGrandSon(user);
+				List<User> grandSons = new ArrayList<>();
 				if(grandSons.size()>0){
 					List<Long> ids = Lists.transform(grandSons, new Function<User,Long>(){
 						@Override
@@ -701,7 +701,8 @@ public class AdminUserController {
 							return user.getId();
 						}
 					});				
-					List<User> ggrandSonsList = userService.findAllGGrandSon(ids);
+//					List<User> ggrandSonsList = userService.findAllGGrandSon(ids);
+					List<User> ggrandSonsList = new ArrayList<>();
 					List<Long> idss = new ArrayList<Long>();
 					idss.addAll(ids);
 					while(ggrandSonsList.size()>0){
@@ -713,7 +714,7 @@ public class AdminUserController {
 							}
 						});
 						idss.addAll(idsss);
-						ggrandSonsList = userService.findAllGGrandSon(idsss);
+//						ggrandSonsList = userService.findAllGGrandSon(idsss);
 					}
 					searchParams.put("IN_userInfoBoth.parent.id",idss);
 				} else{
@@ -781,26 +782,14 @@ public class AdminUserController {
 		String name = user.getUsername();
 		String userType = user.getUserType().getStr();
 		String parent = "无";
-		if (user.getUserInfoBoth().getParent() != null) {
-			parent = user.getUserInfoBoth().getParent().getUsername();
-		}
 		String seller = "无";
-		if (user.getUserInfoBoth().getSeller() != null) {
-			seller = user.getUserInfoBoth().getSeller().getUsername();
-		}
 		String salesman = "无";
-		if (user.getUserInfoBoth().getSalesman() != null) {
-			salesman = user.getUserInfoBoth().getSalesman().getUsername();
-		}
-		String sonSum = String.valueOf(user.getUserInfoBoth().getSonSum());
-		String grandSonSum = String.valueOf(user.getUserInfoBoth()
-				.getGrandsonSum());
-		String ggrandSonSum = String.valueOf(user.getUserInfoBoth()
-				.getGgsonsSum());
+		String sonSum = "0";
+		String grandSonSum = "0";
+		String ggrandSonSum = "0";
 		String loginTimes = String.valueOf(user.getLoginTimes());
-		String orderSum = String.valueOf(user.getUserInfoBoth().getOrderSum());
-		String orderSuccess = String.valueOf(user.getUserInfoBoth()
-				.getOrderSuccessSum());
+		String orderSum = "0";
+		String orderSuccess = "0";
 		String data[] = { name, userType, parent, seller, salesman, sonSum,
 				grandSonSum, ggrandSonSum,loginTimes,orderSum, orderSuccess };
 
@@ -846,7 +835,6 @@ public class AdminUserController {
 			}	
 			String oldMobileno = user.getMobileno();
 			user.setMobileno(phone.trim());
-			user.getUserInfoBoth().setRecommendCode(phone.trim());
 			if(userService.editUser(user)){
 				res.setCode(0);
 				res.setMes("修改成功");
@@ -902,17 +890,7 @@ public class AdminUserController {
 		RepSimpleMessageDTO res = new RepSimpleMessageDTO();
 		User user = userService.findById(userId);
 		User.UserType oldUserType = user.getUserType();
-		user.setUserType(userType);		
-		user.getUserInfoBoth().setRecommendCode(user.getMobileno());
-		userInfoBothDao.save(user.getUserInfoBoth());
-		if(oldUserType.equals(User.UserType.USER)&& userType.equals(User.UserType.MANAGER)){
-			user.getUserInfoBoth().setExpands(idcard);
-			user.getUserInfoBoth().setRecommendCode(user.getMobileno());
-			userInfoBothDao.save(user.getUserInfoBoth());
-			userService.editUser(user);
-			res.setCode(0);
-			res.setMes("修改成功");
-		} 
+		user.setUserType(userType);
 		///	
 		/*UserInfoSeller infoSeller = new UserInfoSeller();
 		if(address!=null && userType.equals(User.UserType.SELLER) ){
@@ -1045,7 +1023,7 @@ public class AdminUserController {
 			res.setMes("修改成功");
 		}	*/
 		if(companyname!=null && userType.equals(User.UserType.SELLER)){
-			user.getUserInfoBoth().setExpands(companyname);			
+//			user.getUserInfoBoth().setExpands(companyname);
 		}
 		//添加进日志:
 		long opertorId = ShiroUtil.getUserId(request);
@@ -1068,7 +1046,7 @@ public class AdminUserController {
 		User user = userService.findById(id);
 		List<User> userList = new ArrayList<User>();
 		if(getType.equals("getSons")){
-			userList = userService.findAllSons(user);
+//			userList = userService.findAllSons(user);
 			rep =Lists.transform(userList, new Function<User,RepUserApprenticesDTO>(){
 				@Override
 				public RepUserApprenticesDTO apply(User user) {
@@ -1077,7 +1055,7 @@ public class AdminUserController {
 				}
 			});
 		} else if (getType.equals("getGrandSons")){
-			userList = userService.findAllGrandSon(user);
+//			userList = userService.findAllGrandSon(user);
 			rep =Lists.transform(userList, new Function<User,RepUserApprenticesDTO>(){
 				@Override
 				public RepUserApprenticesDTO apply(User user) {
@@ -1086,7 +1064,7 @@ public class AdminUserController {
 				}
 			});
 		} else if ( getType.equals("getGgrandSons")) {
-			  userList = userService.findAllGrandSon(user);
+//			  userList = userService.findAllGrandSon(user);
 			  List<Long> ids = Lists.transform(userList,new Function<User,Long>(){
 					@Override
 					public Long apply(User user) {
@@ -1094,7 +1072,7 @@ public class AdminUserController {
 						return user.getId();
 					}			
 			 });
-			 userList = userService.findAllGGrandSon(ids);
+//			 userList = userService.findAllGGrandSon(ids);
 			 List<User> repUser = new ArrayList<User>();
  			 while(userList.size()>0){
 				 repUser.addAll(userList);
@@ -1105,7 +1083,7 @@ public class AdminUserController {
 							return user.getId();
 						}			
 				});
-				userList = userService.findAllGGrandSon(ids);
+//				userList = userService.findAllGGrandSon(ids);
 			 }
 			 rep =  Lists.transform(repUser,new Function<User,RepUserApprenticesDTO>(){
 				@Override
@@ -1156,55 +1134,9 @@ public class AdminUserController {
 			return rep;
 		}		
 		User bussinessUser = userService.findById(userId);
-		
-		UserInfoBoth bussinessUserInfoBoth = bussinessUser.getUserInfoBoth();
-		if(bussinessUserInfoBoth.getSalesman()!=null){
-			rep.setCode(0);
-			rep.setMes("该商家已有业务员");
-			return rep;
-		}
-		bussinessUserInfoBoth.setSalesman(salesmanUser);
-		//商家的师父变成该业务员
-		bussinessUserInfoBoth.setParent(salesmanUser);
-		if(userInfoBothService.editUserInfoBoth(bussinessUserInfoBoth)){
-			//商家底下所有的会员的业务员改成该业务员
-			List<User> apprenticeUsers = userService.findUserByBussiness(userId);
-			//所有数量
-			int appenticeUsersNum = apprenticeUsers.size();
-			for(User user:apprenticeUsers){
-				UserInfoBoth userInfoBoth = user.getUserInfoBoth();
-				userInfoBoth.setSalesman(salesmanUser);
-				userInfoBothService.editUserInfoBoth(userInfoBoth);
-			}
-			//师父为商家的会员，其师公改为该业务员
-			List<User> sonUsers = userService.findSonUsers(userId);
-			//个数
-			int sonUsersNum = sonUsers.size();
-			for(User user:sonUsers){
-				UserInfoBoth userInfoBoth = user.getUserInfoBoth();
-				userInfoBoth.setGrandParent(salesmanUser);
-				userInfoBothService.editUserInfoBoth(userInfoBoth);
-			}
-			/*//师公为商家的会员，
-			int grandSonUsersNum = userService.countGrandSonsForBussiness(userId);*/
-			//修改该业务员的徒弟，徒孙，徒孙孙的数量
-			UserInfoBoth salesmanUserInfoBoth = salesmanUser.getUserInfoBoth();
-			salesmanUserInfoBoth.setSonSum(salesmanUserInfoBoth.getSonSum()+1);
-			salesmanUserInfoBoth.setGrandsonSum(salesmanUserInfoBoth.getGrandsonSum()+sonUsersNum);
 			
-			salesmanUserInfoBoth.setGgsonsSum(salesmanUserInfoBoth.getGgsonsSum()+appenticeUsersNum-sonUsersNum);
-			userInfoBothService.editUserInfoBoth(salesmanUserInfoBoth);
-			
-			rep.setCode(1);
-			rep.setMes("success");
-			
-			long opertorid = ShiroUtil.getUserId(request);
-			User opertor = userService.findById(opertorid);
-			String content = bussinessUser.getRealname()+"分配业务员为"+salesmanUser.getRealname();	
-			userOperlogService.addOperlog(opertor, content);
-			
-			return rep;
-		}
+
+
 		rep.setCode(0);
 		rep.setMes("修改失败");
 		return rep;
@@ -1281,8 +1213,9 @@ public class AdminUserController {
 		/*String strUrl= ConfigSetting.appfileProUrlByFilePath(coupons.getCouponCode());
 		String filePath = strUrl;*/
 		String prodir = ConfigSetting.proDir();
-		String filePath = (prodir+user.getUserInfoBoth().getQrCode()).replace(File.separator, "/");
-		
+//		String filePath = (prodir+user.getUserInfoBoth().getQrCode()).replace(File.separator, "/");
+
+		String filePath ="";
 		log.info("二维码下载地址："+filePath);
 		
 		String showName = user.getUsername()+".png";

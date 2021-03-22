@@ -1,6 +1,7 @@
 package com.zzy.brd.service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -60,14 +61,16 @@ public class UserDailyStatisticsService extends BaseService {
 				List<Long> ggrandSons = Lists.newArrayList();
 				List<Long> orderSums = Lists.newArrayList();
 				///获取昨天注册的徒弟的数量
-				List<Long> sons = userService.findSonsId(startTime, endTime, Lists.newArrayList(user.getId())); 		
+//				List<Long> sons = userService.findSonsId(startTime, endTime, Lists.newArrayList(user.getId()));
+				List<Long> sons = new ArrayList<>();
 				///获取昨天注册的徒孙数量
 				if(sons!=null && sons.size()>0){
-					grandSons = userService.findSonsId(startTime, endTime, sons);
+//					grandSons = userService.findSonsId(startTime, endTime, sons);
+//					grandSons = new ArrayList<>()
 				}								
 				///获取昨天注册的徒孙孙数量
 				if(grandSons!=null && grandSons.size()>0){
-					ggrandSons = userService.findSonsId(startTime, endTime, grandSons);
+//					ggrandSons = userService.findSonsId(startTime, endTime, grandSons);
 				}
 				///获取昨天订单数量
 				orderSums = orderformService.findOrderByTimeAndUser(startTime, endTime, user.getId());

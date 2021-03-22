@@ -68,10 +68,7 @@ public class RecordBrokerage extends IdEntity {
 	@ManyToOne(targetEntity = User.class,fetch = FetchType.LAZY)
 	@JoinColumn(name="gain_user_id",referencedColumnName = "id")
 	private User gainUser;
-	
-	@ManyToOne(targetEntity = UserInfoBoth.class,fetch = FetchType.LAZY)
-	@JoinColumn(name="gain_infoboth_id",referencedColumnName = "id")
-	private UserInfoBoth gainUserInfoBoth;
+
 	/** 订单*/
 	@ManyToOne(targetEntity=Orderform.class,fetch=FetchType.LAZY)
 	@JoinColumn(name="order_id",referencedColumnName="id")
@@ -154,11 +151,4 @@ public class RecordBrokerage extends IdEntity {
 		this.sendBrokerage = sendBrokerage;
 	}
 
-	public UserInfoBoth getGainUserInfoBoth() {
-		return gainUserInfoBoth;
 	}
-
-	public void setGainUserInfoBoth(UserInfoBoth gainUserInfoBoth) {
-		this.gainUserInfoBoth = gainUserInfoBoth;
-	}
-}
