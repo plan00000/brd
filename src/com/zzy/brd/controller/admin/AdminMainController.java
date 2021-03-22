@@ -65,25 +65,41 @@ public class AdminMainController {
 		model.addAttribute("name", user.getUsername());
 		model.addAttribute("logintime",user.getLogindate());
 		//贷款订单
-		int countSelfhelploanNum = orderformService.countLoanUncheckNum(BillType.SELFHELPLOAN, OrderformStatus.UNCHECKED,OrderSource.WECHAT);
+		/*int countSelfhelploanNum = orderformService.countLoanUncheckNum(BillType.SELFHELPLOAN, OrderformStatus.UNCHECKED,OrderSource.WECHAT);
 		int countEarndifferenceNum = orderformService.countLoanUncheckNum(BillType.EARNDIFFERENCE, OrderformStatus.UNCHECKED,OrderSource.WECHAT);
 		int countEarncommissionNum = orderformService.countLoanUncheckNum(BillType.EARNCOMMISSION, OrderformStatus.UNCHECKED,OrderSource.WECHAT);
 		int countUncheckNum = countSelfhelploanNum +countEarndifferenceNum + countEarncommissionNum;
-		
+		*/
+		int countSelfhelploanNum = 0;
+		int countEarndifferenceNum = 0;
+		int countEarncommissionNum = 0;
+		int countUncheckNum = countSelfhelploanNum +countEarndifferenceNum + countEarncommissionNum;
+
 		//官网订单
-		int countPcUncheckNum = orderformService.countPcOrderNum(OrderformStatus.UNCHECKED, OrderSource.PC);
-		int countPcUnloanNum = orderformService.countPcOrderNum(OrderformStatus.UNLOAN, OrderSource.PC);
+//		int countPcUncheckNum = orderformService.countPcOrderNum(OrderformStatus.UNCHECKED, OrderSource.PC);
+//		int countPcUnloanNum = orderformService.countPcOrderNum(OrderformStatus.UNLOAN, OrderSource.PC);
+		int countPcUncheckNum = 0;
+		int countPcUnloanNum = 0;
+
 		int countPcNum = countPcUncheckNum + countPcUnloanNum ;
 		//体现订单
-		int countFlowWithdrawUncheckNum = flowWithdrawService.countFlowWithdrawByStatusNum(WithdrawStatus.NOCHECK);
-		int countFlowWithdrawUnloadNum = flowWithdrawService.countFlowWithdrawByStatusNum(WithdrawStatus.NOLENDING);
+//		int countFlowWithdrawUncheckNum = flowWithdrawService.countFlowWithdrawByStatusNum(WithdrawStatus.NOCHECK);
+//		int countFlowWithdrawUnloadNum = flowWithdrawService.countFlowWithdrawByStatusNum(WithdrawStatus.NOLENDING);
+		int countFlowWithdrawUncheckNum = 0;
+		int countFlowWithdrawUnloadNum = 0;
+
 		int countFlowNum = countFlowWithdrawUncheckNum + countFlowWithdrawUnloadNum;
 		//佣金订单
 		int countBrokerageUncheckNum = 0;
-		int countBrokerageUnenteringNum = brokerageApplyService.countBrokerageNum(BrokerageApplyStatus.UNENTERING);//待入佣金
-		int countBrokerageRiskUncheckNum = brokerageApplyService.countBrokerageNum(BrokerageApplyStatus.RISKCHECK);//风控审核
-		int countBrokerageCeoUncheckNum = brokerageApplyService.countBrokerageNum(BrokerageApplyStatus.CEOCHECK);//ceo审核
-		int countBrokerageCeoPassNum = brokerageApplyService.countBrokerageNum(BrokerageApplyStatus.CEOPASS);//ceo确定
+//		int countBrokerageUnenteringNum = brokerageApplyService.countBrokerageNum(BrokerageApplyStatus.UNENTERING);//待入佣金
+//		int countBrokerageRiskUncheckNum = brokerageApplyService.countBrokerageNum(BrokerageApplyStatus.RISKCHECK);//风控审核
+//		int countBrokerageCeoUncheckNum = brokerageApplyService.countBrokerageNum(BrokerageApplyStatus.CEOCHECK);//ceo审核
+//		int countBrokerageCeoPassNum = brokerageApplyService.countBrokerageNum(BrokerageApplyStatus.CEOPASS);//ceo确定
+		int countBrokerageUnenteringNum = 0;
+		int countBrokerageRiskUncheckNum = 0;
+		int countBrokerageCeoUncheckNum = 0;
+		int countBrokerageCeoPassNum = 0;
+
 		if("Admin".equals(rolename)){
 			countBrokerageUncheckNum = countBrokerageCeoUncheckNum;
 		}
@@ -93,8 +109,8 @@ public class AdminMainController {
 		if("风控经理".equals(rolename)){
 			countBrokerageUncheckNum =countBrokerageRiskUncheckNum;
 		}
-		int countBrokerageFinanceNum = brokerageApplyService.countBrokerageNum(BrokerageApplyStatus.FINANCESEND);
-		
+//		int countBrokerageFinanceNum = brokerageApplyService.countBrokerageNum(BrokerageApplyStatus.FINANCESEND);
+		int countBrokerageFinanceNum= 0;
 		int countBrokerageNum = 0;
 		if("Admin".equals(rolename)){
 			countBrokerageNum = countBrokerageUncheckNum + countBrokerageFinanceNum + countBrokerageCeoPassNum;
