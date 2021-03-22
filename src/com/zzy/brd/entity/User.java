@@ -134,41 +134,10 @@ public class User extends IdEntity implements java.io.Serializable, IUser {
 	/** 最后一次登录时间 */
 	private Date lastlogindate;
 	
-	/** 用户信息 -员工的*/
-	@OneToOne(targetEntity = UserInfoEmployee.class,cascade=CascadeType.ALL,fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_info_employee_id",referencedColumnName = "id",unique = true)
-	private UserInfoEmployee userInfoEmployee;
-	
-	/** 用户信息-会员、商家、融资经理、业务员共有*/
-	/*@OneToOne(targetEntity = UserInfoBoth.class,cascade=CascadeType.ALL,fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_info_both_id", referencedColumnName = "id",unique = true)
-	private UserInfoBoth userInfoBoth;*/
-	
-	/**用户信息-商家信息*/
-	/*@OneToOne(targetEntity = UserInfoSeller.class,cascade=CascadeType.ALL,fetch = FetchType.LAZY)
-	@JoinColumn(name="user_info_seller_id",referencedColumnName="id",unique=true)
-	private UserInfoSeller userInfoSeller;*/
-	
-	/** 微信用户信息表*/
-	/*@OneToOne(targetEntity = WeixinUser.class, fetch = FetchType.LAZY,cascade= CascadeType.ALL)
-	@JoinColumn(name = "weixin_user_id", referencedColumnName = "id",unique = true)
-	private WeixinUser weixinUser;*/
-	
 	/** 角色 */
 	@ManyToOne(targetEntity = Role.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "role_id", referencedColumnName = "id")
 	private Role role;
-	
-	/**备注*/
-	/*@OneToMany(targetEntity=UserRemark.class,mappedBy="user",fetch=FetchType.LAZY)
-	private List<UserRemark> remarks = new ArrayList<>();*/
-	
-	/** 徒弟赚佣*/
-
-	/*@Formula(value = "(select ifnull(sum(r.have_brokerage),0) from record_brokerage r left join user u "
-			+ "on r.gain_user_id = u.id left join user_info_both uib on r.gain_infoboth_id = uib.id where r.relate =1 and u.id = id and uib.parentid = r.user_id group by r.gain_user_id)")
-	@Basic(fetch = FetchType.LAZY)
-	private BigDecimal brokerage;*/
 	
 	/**
 	 * @param id
@@ -279,30 +248,6 @@ public class User extends IdEntity implements java.io.Serializable, IUser {
 		this.mobileno = mobileno;
 	}
 
-	public UserInfoEmployee getUserInfoEmployee() {
-		return userInfoEmployee;
-	}
-
-	public void setUserInfoEmployee(UserInfoEmployee userInfoEmployee) {
-		this.userInfoEmployee = userInfoEmployee;
-	}
-
-	/*public UserInfoBoth getUserInfoBoth() {
-		return userInfoBoth;
-	}
-
-	public void setUserInfoBoth(UserInfoBoth userInfoBoth) {
-		this.userInfoBoth = userInfoBoth;
-	}*/
-
-	/*public WeixinUser getWeixinUser() {
-		return weixinUser;
-	}
-
-	public void setWeixinUser(WeixinUser weixinUser) {
-		this.weixinUser = weixinUser;
-	}*/
-
 	public Role getRole() {
 		return role;
 	}
@@ -340,28 +285,5 @@ public class User extends IdEntity implements java.io.Serializable, IUser {
 		this.lastlogindate = lastlogindate;
 	}
 
-	/*public List<UserRemark> getRemarks() {
-		return remarks;
-	}
-
-	public void setRemarks(List<UserRemark> remarks) {
-		this.remarks = remarks;
-	}*/
-
-	/*public BigDecimal getBrokerage() {
-		return brokerage;
-	}
-
-	public void setBrokerage(BigDecimal brokerage) {
-		this.brokerage = brokerage;
-	}*/
-
-	/*public UserInfoSeller getUserInfoSeller() {
-		return userInfoSeller;
-	}
-
-	public void setUserInfoSeller(UserInfoSeller userInfoSeller) {
-		this.userInfoSeller = userInfoSeller;
-	}*/
 	
 }

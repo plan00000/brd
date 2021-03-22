@@ -20,42 +20,42 @@ import com.zzy.brd.entity.interfaces.IdEntity;
  * @author lzh 2016-9-23
  *
  */
-@Entity
+/*@Entity
 @Table(name = "user_info_employee")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @DynamicUpdate(value = true)
 public class UserInfoEmployee extends IdEntity implements java.io.Serializable{
 
-	/**
+	*//**
 	 * 
-	 */
+	 *//*
 	private static final long serialVersionUID = -7916030969257864695L;
 	
 	public enum AppType {
 		ANDROID, IOS;
 	}
 	public enum AppLoginStatus{
-		/** 注销、未登录状态 */
+		*//** 注销、未登录状态 *//*
 		NOT_LOGIN,
-		/** 登录状态 */
+		*//** 登录状态 *//*
 		IS_LOGIN;
 	}
-	/** 用户编号 */
+	*//** 用户编号 *//*
 	private String userno = "";
 
-	/** 登录ip */
+	*//** 登录ip *//*
 	private String loginIp = "";
-	/** 本次登录地点*/
+	*//** 本次登录地点*//*
 	private String loginCity = "";
-	/** 上一次登录ip */
+	*//** 上一次登录ip *//*
 	private String lastloginIp = "";
-	/** 上一次登录IP所在地区 */
+	*//** 上一次登录IP所在地区 *//*
 	private String lastloginCity = "";
 	
 	@OneToOne(targetEntity=User.class,mappedBy="userInfoEmployee")
 	private User user;
 	
-	/** 所属部门 */
+	*//** 所属部门 *//*
 	@ManyToOne(targetEntity = Department.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "depart_id", referencedColumnName = "id")
 	private Department department;
@@ -103,4 +103,4 @@ public class UserInfoEmployee extends IdEntity implements java.io.Serializable{
 	public void setUser(User user) {
 		this.user = user;
 	}
-}
+}*/

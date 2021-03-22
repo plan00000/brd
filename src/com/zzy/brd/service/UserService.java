@@ -293,9 +293,9 @@ public class UserService extends BaseService {
 	/**
 	 *根据部门查找员工 
 	 **/
-	public List<User> findByDepartment(Department department){
+	/*public List<User> findByDepartment(Department department){
 		return userDao.findByDepartment(department.getId());
-	}
+	}*/
 	
 	
 	/**

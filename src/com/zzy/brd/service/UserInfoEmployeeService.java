@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.zzy.brd.dao.UserInfoEmployeeDao;
+//import com.zzy.brd.dao.UserInfoEmployeeDao;
 import com.zzy.brd.entity.User;
-import com.zzy.brd.entity.UserInfoEmployee;
+//import com.zzy.brd.entity.UserInfoEmployee;
 import com.zzy.brd.util.ip.AddressUtils;
 import com.zzy.brd.util.ip.IpUtils;
 
@@ -22,17 +22,17 @@ import com.zzy.brd.util.ip.IpUtils;
  * @author lzh 2016-9-25
  *
  */
-@Service
+/*@Service
 @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 public class UserInfoEmployeeService extends BaseService{
 	@Autowired
 	private UserInfoEmployeeDao userInfoPublicDao;
-	/**
+	*//**
 	 * 后台登录-更新登录信息
 	 * @param user
 	 * @param request
 	 * @return
-	 */
+	 *//*
 	public boolean updateLoginInfo(User user,HttpServletRequest request){
 		if(user.getUserInfoEmployee()!=null){
 			UserInfoEmployee userInfoPublic = user.getUserInfoEmployee();
@@ -58,4 +58,4 @@ public class UserInfoEmployeeService extends BaseService{
 		}
 		return true;
 	}
-}
+}*/

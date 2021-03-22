@@ -283,12 +283,12 @@ public class AdminDepartmentController {
 			res.setMes("该部门下有子部门存在");
 			return res;
 		}
-		List<User> list = userService.findByDepartment(department);
+		/*List<User> list = userService.findByDepartment(department);
 		if (list.size() > 0) {
 			res.setCode(1);
 			res.setMes("该部门下有员工存在");
 			return res;
-		}
+		}*/
 		String name = department.getName();
 		department.setState(Department.State.DEL);
 		department.setParent(null);
@@ -319,14 +319,14 @@ public class AdminDepartmentController {
 		List<Department> delDepartment = new ArrayList<Department>();
 		for (long id : ids) {
 			Department department = departmentService.getDepartmentById(id);
-			List<User> list = userService.findByDepartment(department);
+//			List<User> list = userService.findByDepartment(department);
 			if (department.getSons().size() > 0) {
 				res.setCode(1);
 				res.setMes("部门:" + HtmlEscapse.htmlEscape(department.getName())
 						+ "存在子部门,无法删除");
 				return res;
 			}
-			if (list.size() > 0) {
+			/*if (list.size() > 0) {
 				res.setCode(1);
 				res.setMes("部门:" + department.getName() + "下存在员工,无法删除");
 				return res;
@@ -334,7 +334,7 @@ public class AdminDepartmentController {
 				content = content + department.getName() + ";";
 				department.setState(Department.State.DEL);
 				delDepartment.add(department);
-			}
+			}*/
 		}
 		departmentDao.save(delDepartment);
 		res.setCode(0);

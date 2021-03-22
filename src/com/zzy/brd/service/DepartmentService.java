@@ -275,7 +275,8 @@ public class DepartmentService extends BaseService{
 		List<State> states = new ArrayList<State>();
 		states.add(State.ON);
 		states.add(State.OFF);
-		List<User> users = userDao.findByDepartmentlistAndStates(depart.getId(), states);//通过部门查询用户信息
+//		List<User> users = userDao.findByDepartmentlistAndStates(depart.getId(), states);//通过部门查询用户信息
+		List<User> users = new ArrayList<>();
 		//通过各个部门的用户id去查找对应的商家融资 和融资经理
 		if(null != users && users.size() >0 ){
 			/*List<User> users1 = userDao.findUser(users);

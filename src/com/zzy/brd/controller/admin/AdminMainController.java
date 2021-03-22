@@ -121,8 +121,8 @@ public class AdminMainController {
 		model.addAttribute("countBrokerageNum",countBrokerageNum);
 //		model.addAttribute("pendingAudit",pendingAudit);
 		
-		model.addAttribute("loginIp",user.getUserInfoEmployee().getLastloginIp());
-		model.addAttribute("city", user.getUserInfoEmployee().getLoginCity());
+		/*model.addAttribute("loginIp",user.getUserInfoEmployee().getLastloginIp());
+		model.addAttribute("city", user.getUserInfoEmployee().getLoginCity());*/
 		model.addAttribute("timename", DateUtil.getTimeName());
 		
 		
@@ -194,10 +194,10 @@ public class AdminMainController {
 		if (user == null) {
 			return "error/404";
 		}
-		Department threeD = user.getUserInfoEmployee().getDepartment();
+		Department threeD = null;
 		Department secondD = null;
 		Department firstD = null;
-		if(threeD != null){
+		/*if(threeD != null){
 			if(threeD.getParent()!=null){
 				secondD = threeD.getParent();
 				if(secondD != null){
@@ -206,7 +206,7 @@ public class AdminMainController {
 					}
 				}
 			}
-		}
+		}*/
 		model.addAttribute("firstD", firstD);
 		model.addAttribute("secondD", secondD);
 		model.addAttribute("threeD", threeD);

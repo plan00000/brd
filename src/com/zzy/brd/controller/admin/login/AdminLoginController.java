@@ -19,7 +19,7 @@ import com.zzy.brd.constant.Constant;
 import com.zzy.brd.constant.GlobalData;
 import com.zzy.brd.entity.User;
 import com.zzy.brd.service.LoginlogService;
-import com.zzy.brd.service.UserInfoEmployeeService;
+//import com.zzy.brd.service.UserInfoEmployeeService;
 import com.zzy.brd.service.UserService;
 import com.zzy.brd.shiro.principal.ShiroUser;
 
@@ -35,8 +35,8 @@ public class AdminLoginController {
 
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private UserInfoEmployeeService userInfoPublicService;
+/*	@Autowired
+	private UserInfoEmployeeService userInfoPublicService;*/
 	@Autowired
 	private LoginlogService loginlogService;
 	
@@ -118,7 +118,7 @@ public class AdminLoginController {
 		SecurityUtils.getSubject().getSession().setAttribute(Constant.SYS_ERROR_LOGIN_TIMES, 0);		
 		SecurityUtils.getSubject().getSession().setAttribute(Constant.SESSION_CURUSER_USERTYPE, user.getUserType());
 //		userService.updateLoginInfo(user, request);
-		userInfoPublicService.updateLoginInfo(user, request);
+//		userInfoPublicService.updateLoginInfo(user, request);
 		//添加登录日志
 		/*syslogService.addLoginLog(user, request.getRemoteAddr());*/
 		if(!user.getUserType().equals(User.UserType.ADMIN)){

@@ -33,9 +33,9 @@ public class RepStatisticBrokerageDTO {
 		this.addBrokerage = addBrokerage;
 		User.UserType usertype = user.getUserType();
 		this.userType = usertype.getStr();
-		if(usertype==User.UserType.SALESMAN){
+		/*if(usertype==User.UserType.SALESMAN){
 			this.departname = user.getUserInfoEmployee().getDepartment().getName();
-		}
+		}*/
 	}
 	public RepStatisticBrokerageDTO(BrokerageApply brokerageApply,BigDecimal addBrokerage) {
 		this.addBrokerage = addBrokerage;

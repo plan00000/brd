@@ -40,8 +40,8 @@ public interface UserDao extends BaseDao<User>{
 	/*@Query("select u from User u where u.userInfoBoth.recommendCode=?1 and u.state != 2")
 	User findByAskperson(String recommendCode);*/
 	
-	@Query("select u from User u where (u.userType='3' or u.userType='4' or u.userType='6'  ) and u.state!='2'  and  u.userInfoEmployee.department.id=?1 ")
-	List<User> findByDepartment(long departmentId);
+	/*@Query("select u from User u where (u.userType='3' or u.userType='4' or u.userType='6'  ) and u.state!='2'  and  u.userInfoEmployee.department.id=?1 ")
+	List<User> findByDepartment(long departmentId);*/
 	
 	@Query("select u from User u where (u.userType='0' or u.userType='1' or u.userType='2' or u.userType='4' ) and u.state !='2' ")
 	List<User> findStatisticsUser();
@@ -115,8 +115,8 @@ public interface UserDao extends BaseDao<User>{
 	 * @param @return
 	 * @return List<User>
 	 */
-	@Query(value="select u from User u left join u.userInfoEmployee uie left join uie.department d where d.id=?1 and u.state in ?2")
-	List<User> findByDepartmentlistAndStates(Long departmentid,List<State> states);
+	/*@Query(value="select u from User u left join u.userInfoEmployee uie left join uie.department d where d.id=?1 and u.state in ?2")
+	List<User> findByDepartmentlistAndStates(Long departmentid,List<State> states);*/
 	
 	/**
 	 *通过各个部门的用户id去查找业务员发展的对应的商家融资和融资经理
