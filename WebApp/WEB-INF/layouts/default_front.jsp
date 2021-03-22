@@ -29,7 +29,7 @@
 		
 		var title = '${sysInfo.seoTitle}';
 		if(title==null){
-			title="帮人贷官网";			
+			title="城际车官网";
 		}
 		document.title=title;
 		

@@ -169,7 +169,7 @@
 								<li><a href="${ctx}/admin/login/logout">安全退出</a></li>
 							</ul>
 						</div>
-						<div class="logo-element">帮人贷</div>
+						<div class="logo-element">城际车</div>
 					</li>
  					<li id="na_li0"><a href="${ctx}/admin/main"><i class="fa fa-table"></i> <span
 								class="nav-label">首页</span></a>
@@ -376,7 +376,7 @@
             </form>-->
 					</div>
 					<ul class="nav navbar-top-links navbar-right">
-						<li><span class="m-r-sm text-muted welcome-message">欢迎使用帮人贷管理系统！</span>
+						<li><span class="m-r-sm text-muted welcome-message">欢迎使用城际车管理系统！</span>
 						</li>
 						<li><a href="${ctx}/admin/login/logout"> <i
 								class="fa fa-sign-out"></i> 安全退出

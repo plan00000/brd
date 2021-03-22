@@ -147,7 +147,7 @@ var isYzm = false;
 <body style="background:#f9f9f9;">
 	<div class="login_in">
         <div class="login">
-            <p>车际车后台管理系统</p>
+            <p>城际车后台管理系统</p>
         </div>
         </div>
         <div class="login_admin">
