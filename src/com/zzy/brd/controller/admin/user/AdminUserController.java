@@ -55,7 +55,7 @@ import com.zzy.brd.entity.User.State;
 import com.zzy.brd.entity.UserBankinfo;
 import com.zzy.brd.entity.UserInfoBoth;
 import com.zzy.brd.entity.UserInfoSeller;
-import com.zzy.brd.entity.UserRemark;
+//import com.zzy.brd.entity.UserRemark;
 import com.zzy.brd.entity.WeixinUser;
 import com.zzy.brd.mobile.util.ShiroUtil;
 import com.zzy.brd.service.DepartmentService;
@@ -493,7 +493,7 @@ public class AdminUserController {
 
 		}
 		// 获取备注列表
-		List<UserRemark> userRemarkList = userRemarkService.findByUser(user);
+//		List<UserRemark> userRemarkList = userRemarkService.findByUser(user);
 		// 绑定银行卡
 		List<UserBankinfo> userBankinfoList = bankinfoService
 				.getUserBankByUser(user);
@@ -507,7 +507,7 @@ public class AdminUserController {
 		}
 		model.addAttribute("total", total);
 		model.addAttribute("bankinfoList", userBankinfoList);
-		model.addAttribute("remarkList", userRemarkList);
+//		model.addAttribute("remarkList", userRemarkList);
 		model.addAttribute("userId", userId);
 		model.addAttribute("type", type);
 		model.addAttribute("users", user);
@@ -875,12 +875,12 @@ public class AdminUserController {
 		RepSimpleMessageDTO res = new RepSimpleMessageDTO();
 		long opertorId = ShiroUtil.getUserId(request);
 		User user = userService.findById(userId);
-		UserRemark userRemark = new UserRemark();
+		/*UserRemark userRemark = new UserRemark();
 		userRemark.setCreateTime(new Date());
 		userRemark.setOpertor(userService.findById(opertorId));
 		userRemark.setUser(user);
-		userRemark.setRemark(remark);
-		userRemarkService.editRemark(userRemark);
+		userRemark.setRemark(remark);*/
+//		userRemarkService.editRemark(userRemark);
 		String content =user.getRealname()+"添加备注:"+remark;
 		userOperlogService.addOperlog(userService.findById(opertorId), content);
 		res.setCode(0);

@@ -160,8 +160,8 @@ public class User extends IdEntity implements java.io.Serializable, IUser {
 	private Role role;
 	
 	/**备注*/
-	@OneToMany(targetEntity=UserRemark.class,mappedBy="user",fetch=FetchType.LAZY)
-	private List<UserRemark> remarks = new ArrayList<>();
+	/*@OneToMany(targetEntity=UserRemark.class,mappedBy="user",fetch=FetchType.LAZY)
+	private List<UserRemark> remarks = new ArrayList<>();*/
 	
 	/** 徒弟赚佣*/
 
@@ -340,13 +340,13 @@ public class User extends IdEntity implements java.io.Serializable, IUser {
 		this.lastlogindate = lastlogindate;
 	}
 
-	public List<UserRemark> getRemarks() {
+	/*public List<UserRemark> getRemarks() {
 		return remarks;
 	}
 
 	public void setRemarks(List<UserRemark> remarks) {
 		this.remarks = remarks;
-	}
+	}*/
 
 	/*public BigDecimal getBrokerage() {
 		return brokerage;

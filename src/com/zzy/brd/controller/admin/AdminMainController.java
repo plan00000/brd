@@ -103,7 +103,7 @@ public class AdminMainController {
 		}
 		
 		//会员管理
-		int pendingAudit = userService.pendingAudit();
+//		int pendingAudit = userService.pendingAudit();
 		model.addAttribute("rolename",rolename);
 		model.addAttribute("countSelfhelploanNum",countSelfhelploanNum);
 		model.addAttribute("countEarndifferenceNum",countEarndifferenceNum);
@@ -119,7 +119,7 @@ public class AdminMainController {
 		model.addAttribute("countBrokerageCeoPassNum",countBrokerageCeoPassNum);
 		model.addAttribute("countBrokerageFinanceNum",countBrokerageFinanceNum);
 		model.addAttribute("countBrokerageNum",countBrokerageNum);
-		model.addAttribute("pendingAudit",pendingAudit);
+//		model.addAttribute("pendingAudit",pendingAudit);
 		
 		model.addAttribute("loginIp",user.getUserInfoEmployee().getLastloginIp());
 		model.addAttribute("city", user.getUserInfoEmployee().getLoginCity());

@@ -478,9 +478,9 @@ public class UserService extends BaseService {
 	/***
 	 * 推荐码查询用户数量
 	 */
-	public int pendingAudit(){
-		return userDao.pendingAudit();
-	}
+//	public int pendingAudit(){
+//		return userDao.pendingAudit();
+//	}
 	
 	/**
 	 *推荐码查询用户 

@@ -78,8 +78,8 @@ public interface UserDao extends BaseDao<User>{
 	 * 待审核
 	 * Pending audit
 	 */                 
-	@Query("select count(*)  from UserRemark ur right join ur.user u where u.userType in(0,1,2,4) and ur.id=null")
-	int pendingAudit();
+	/*@Query("select count(*)  from UserRemark ur right join ur.user u where u.userType in(0,1,2,4) and ur.id=null")
+	int pendingAudit();*/
 	
 	@Query("select u from User u where u.userInfoBoth.recommendCode=?1 ")
 	User findUserByRecommended2(String iCode);

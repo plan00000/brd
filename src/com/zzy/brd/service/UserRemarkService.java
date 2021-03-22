@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.zzy.brd.dao.UserRemarkDao;
+//import com.zzy.brd.dao.UserRemarkDao;
 import com.zzy.brd.entity.User;
-import com.zzy.brd.entity.UserRemark;
+//import com.zzy.brd.entity.UserRemark;
 
 /**
  * @author:xpk
@@ -19,16 +19,16 @@ import com.zzy.brd.entity.UserRemark;
 @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 public class UserRemarkService extends BaseService {
 	
-	@Autowired
-	private UserRemarkDao userRemarkDao;
+//	@Autowired
+//	private UserRemarkDao userRemarkDao;
 	
-	public boolean editRemark(UserRemark userRemark){
-		return 	userRemarkDao.save(userRemark)==null?false:true;	
-	}
+//	public boolean editRemark(UserRemark userRemark){
+//		return 	userRemarkDao.save(userRemark)==null?false:true;
+//	}
 	
-	public List<UserRemark> findByUser(User user){
+	/*public List<UserRemark> findByUser(User user){
 		return userRemarkDao.findByUser(user);
-	}
+	}*/
 	
 	
 	
