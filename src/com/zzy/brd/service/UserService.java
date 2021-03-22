@@ -50,12 +50,6 @@ public class UserService extends BaseService {
 	private UserDao userDao;
 	@Autowired
 	private SessionService sessionService;
-//	@Autowired
-//	private UserInfoBothDao userInfoBothDao;
-//	@Autowired
-//	private ActivityService activityService;
-//	@Autowired
-//	private UserInfoSellerService userInfoSellerService;
 	
 	public User getUser(String username) {
 		return userDao.findByUsername(username);
@@ -72,38 +66,9 @@ public class UserService extends BaseService {
 		PasswordInfo pwdInfo = encrypt.encryptPassword(user.getPassword());
 		user.setSalt(pwdInfo.getSalt());
 		user.setPassword(pwdInfo.getPassword());
-		
-		/*UserInfoBoth userInfoBoth = new UserInfoBoth();
-		userInfoBoth.setActivityBrokerage(BigDecimal.ZERO);
-		userInfoBoth.setBrokerageCanWithdraw(BigDecimal.ZERO);*/
-//		Activity activity = activityService.getRecommendRegisterByActivityType();
-//		String activityObject = null;
-//		ActivitySet activitySet =null;
+
 		BigDecimal bonus = null;
 		boolean is1 =false;
-		/*if(activity!=null){
-			 activitySet = activity.getActivitySet();
-			 bonus =  activity.getBonusAmount();
-			 activityObject = activity.getActivityObject();
-		}
-		if(activityObject !=null){
-			is1=isExit(activityObject, "0");
-		}
-		if(is1&&activitySet!=null&&bonus!=null){
-			if(activitySet==ActivitySet.REGISTER){
-//				userInfoBoth.setActivityBrokerage(bonus);
-//				userInfoBoth.setBrokerageCanWithdraw(bonus);
-			}
-		}
-		if(parentUser!=null){
-			if(is1&&activitySet!=null&&bonus!=null){
-				if(activitySet==ActivitySet.REGISTERCODE){
-//					userInfoBoth.setActivityBrokerage(bonus);
-//					userInfoBoth.setBrokerageCanWithdraw(bonus);
-				}
-			}
-			
-		}*/
 		return true;
 	}
 
@@ -129,16 +94,10 @@ public class UserService extends BaseService {
 		if (isExist) {// 用户名已经注册
 			return Constant.REGISTER_TYPE_USERNAME_EXIST;
 		}
-		//isExist = userDao.findByUserno(user.getUserInfoEmployee().getUserno()) == null ? false : true;
 
 		if (isExist) {// 用户编号存在
 			return Constant.REGISTER_USERNO_EXIST;
 		}
-
-		// 设置用户类型
-		/*user.setUserType(UserType.STAFF);*/
-		// 设置父类员工
-		/*user.setParent(null);*/
 		// 加密密码
 		SHA1Encrypt encrypt = SHA1Encrypt.getInstance();
 		PasswordInfo pwdInfo = encrypt.encryptPassword(user.getPassword());
@@ -193,10 +152,7 @@ public class UserService extends BaseService {
 	public List<User> findByMobileno2(String mobileno,List<UserType> userTypeList ){
 		return userDao.findByMobileno2(mobileno, userTypeList);
 	}
-	
-	/*public User findByAskperson(String recommendCode){
-		return userDao.findByAskperson(recommendCode);
-	}*/
+
 	/**
 	 * 插入或修改个人图像
 	 * 
@@ -274,15 +230,6 @@ public class UserService extends BaseService {
 	public List<User> findByRole(Role role) {
 		return userDao.findByRole(role);
 	}
-	
-	/**
-	 *根据部门查找员工 
-	 **/
-	/*public List<User> findByDepartment(Department department){
-		return userDao.findByDepartment(department.getId());
-	}*/
-	
-	
 	/**
 	 *根据 id 获取用户
 	 *@param userId
@@ -291,25 +238,7 @@ public class UserService extends BaseService {
 	public User findById(long userId){
 		return userDao.findOne(userId);
 	}
-	
-	
-	/**
-	 * 修改提现密码
-	 * 
-	 * @param withdrawPassword
-	 * @param user
-	 * @return
-	 */
-	public int resetWithdrawPassword(String withdrawPassword, User user) {
-		SHA1Encrypt encrypt = SHA1Encrypt.getInstance();
-		PasswordInfo withdrawPasswordInfo = encrypt.encryptPassword(withdrawPassword.toLowerCase());
-		User user2 = userDao.save(user);
-		if (user2 != null) {
-			return Constant.MOD_WITHDRAW_PWD_SUCC;
-		} else {
-			return Constant.MOD_WITHDRAW_PWD_ERROR;
-		}
-	}
+
 	
 	/**
 	 * 获取会员列表
@@ -355,26 +284,7 @@ public class UserService extends BaseService {
 		Page<User> result = userDao.findAll(spec, pageRequest);
 		return result;
 	}
-	
-	/***
-	 * 推荐码查询用户数量
-	 */
-	/*public int findUserByRecommended(String iCode ){
-		return userDao.findUserByRecommended(iCode);
-	}*/
-	/***
-	 * 推荐码查询用户数量
-	 */
-//	public int pendingAudit(){
-//		return userDao.pendingAudit();
-//	}
-	
-	/**
-	 *推荐码查询用户 
-	 **/
-	/*public User findUserByRecommended2(String code){
-		return userDao.findUserByRecommended2(code);
-	}*/
+
 	/**
 	 * 查找未删除的user
 	 * @param
@@ -446,20 +356,7 @@ public class UserService extends BaseService {
 	public List<User> findStatisticsUser(){
 		return userDao.findStatisticsUser();
 	}
-	
-	/****
-	 * 获取指定用户组昨天注册的徒弟,返回徒弟数组
-	 */
-	/*public List<Long> findSonsId(Date startTime,Date endTime,List<Long> ids ){
-		return userDao.findSonIds(startTime,endTime,ids);
-	}*/
-	
-	/**
-	 * 获取所有的徒弟的实体 
-	 **/
-	/*public List<User> findGrandSonsByUser(User user){
-		return userDao.findGrandSonsByUser(user);
-	}*/
+
 	
 	/**通过用户类型找到会员列表
 	 * @param
@@ -468,59 +365,9 @@ public class UserService extends BaseService {
 	public List<User> findUserByUsertype(UserType userType){
 		return userDao.findUserByUsertype(userType);
 	}
-	
-	/** 统计业务员有多少个融资经理，商家*/
-	
-	/*public int countsByUserType(UserType userType,long id){
-		return userDao.countsByUserType(userType,id);
-	}
-	*/
-	/***
-	 *分页查询获取徒弟记录 
-	 */
-	/*public Page<RepApprenticesRecordDTO> listApprenticesRecord(User user,int pageNumber){
-		Order order = new Order(Direction.DESC, "id");
-		Sort sort2 = new Sort(order);
-		PageRequest pageRequest = new PageRequest(pageNumber-1, Constant.PAGE_SIZE,sort2);
-		return userDao.pageApprenticesRecord(user, pageRequest);
-	}*/
 
-
-//	public int AddActivityBrokerageAndBrokerageCanWithdraw(long id,BigDecimal bonusAmount){
-////		return userInfoBothDao.AddActivityBrokerageAndBrokerageCanWithdraw(id,bonusAmount);
-//	}
-	
-	/***
-	 * 获取所有的徒弟
-	 */
-	/*public List<User> findAllSons(User user){
-		return userDao.findAllSons(user);
-	}*/
-	/**
-	 * 获取所有的徒孙
-	 * 
-	 * */
-	 /*public List<User> findAllGrandSon(User user){
-		 return userDao.findAllGrandSon(user);
-	 }*/
-	 /**
-	   * 获取所有的徒徒弟
-	   * 
-	   * */
-	 /*public  List<User> findAllGGrandSon(List<Long> ids){
-		 return userDao.findAllGGrandSon(ids);
-	 }
-	 */
 	 public User findByMobileAndUserType(String mobile,List<UserType> typeList){
 		 return userDao.findByMobileAndUerType(mobile, typeList);
-	 }
-	 public User findByUserNameAndUserType(String username){
-		 List<User.UserType> typeList = new ArrayList<User.UserType>();
-		 typeList.add(User.UserType.ADMIN);
-		 typeList.add(User.UserType.EMPLOYEE);
-		 typeList.add(User.UserType.CONTROLMANAGER);
-		 typeList.add(User.UserType.SALESMAN);
-		 return userDao.findByUserNameAndUserType(username,typeList);
 	 }
 	 
     /**
@@ -536,30 +383,5 @@ public class UserService extends BaseService {
     		return false;
     	}
     }
-    
-//    public List<RepMyApprenticeDTO> getMyApprentices(long userId){
-//    	return userDao.getMyApprentices(userId);
-//    }
-    
-    public void staticsUserSonsAndGrandSons(User user){
 
-    }
-    
-    //查询商家下的全部会员
-    /*public List<User> findUserByBussiness(long userId){
-    	return  userDao.findUserByBussiness(userId);
-    }
-    //查询某业务员下的所有所有商家和融资经理
-    public List<User> findUserByUserTypeAndSalesmanId(UserType userType,long salesmanId){
-    	return userDao.findUserByUserTypeAndSalesmanId(userType,salesmanId);
-    }*/
-    //查询师父为某商家的所有徒弟
-    /*public List<User> findSonUsers(long userId){
-    	return userDao.findSonUsers(userId);
-    }
-    //查询师公为某商家的所有徒孙
-    public int countGrandSonsForBussiness(long userId){
-    	return userDao.countGrandSonsForBussiness(userId);
-    }
-    */
 }

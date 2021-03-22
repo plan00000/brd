@@ -33,10 +33,6 @@ public class AdminLoginController {
 
 	@Autowired
 	private UserService userService;
-/*	@Autowired
-	private UserInfoEmployeeService userInfoPublicService;*/
-//	@Autowired
-//	private LoginlogService loginlogService;
 	
 	/****
 	 * 至后台登录界面
@@ -115,13 +111,6 @@ public class AdminLoginController {
 		SecurityUtils.getSubject().getSession().setAttribute(Constant.SESSION_CURUSER_UUID, GlobalData.getCurrentUser().getId());
 		SecurityUtils.getSubject().getSession().setAttribute(Constant.SYS_ERROR_LOGIN_TIMES, 0);		
 		SecurityUtils.getSubject().getSession().setAttribute(Constant.SESSION_CURUSER_USERTYPE, user.getUserType());
-//		userService.updateLoginInfo(user, request);
-//		userInfoPublicService.updateLoginInfo(user, request);
-		//添加登录日志
-		/*syslogService.addLoginLog(user, request.getRemoteAddr());*/
-//		if(!user.getUserType().equals(User.UserType.ADMIN)){
-//			loginlogService.addLoginlog(user, request);
-//		}
 		return "redirect:/admin/main";
 	}
 

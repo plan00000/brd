@@ -37,14 +37,6 @@ import com.zzy.brd.util.file.FileUtil;
 public class AdminMainController {
 	@Autowired
 	private UserService userService;
-//	@Autowired
-//	private OrderformService orderformService;
-//	@Autowired
-//	private FlowWithdrawService flowWithdrawService;
-//	@Autowired
-//	private BrokerageApplyService brokerageApplyService;
-//	@Autowired
-//	private DepartmentService departmentService;
 
 	@RequestMapping
 	public String main(Model model){
@@ -128,10 +120,6 @@ public class AdminMainController {
 		model.addAttribute("countBrokerageCeoPassNum",countBrokerageCeoPassNum);
 		model.addAttribute("countBrokerageFinanceNum",countBrokerageFinanceNum);
 		model.addAttribute("countBrokerageNum",countBrokerageNum);
-//		model.addAttribute("pendingAudit",pendingAudit);
-		
-		/*model.addAttribute("loginIp",user.getUserInfoEmployee().getLastloginIp());
-		model.addAttribute("city", user.getUserInfoEmployee().getLoginCity());*/
 		model.addAttribute("timename", DateUtil.getTimeName());
 		
 		
@@ -203,16 +191,6 @@ public class AdminMainController {
 		if (user == null) {
 			return "error/404";
 		}
-		/*if(threeD != null){
-			if(threeD.getParent()!=null){
-				secondD = threeD.getParent();
-				if(secondD != null){
-					if(secondD.getParent()!=null){
-						firstD = secondD.getParent();
-					}
-				}
-			}
-		}*/
 		model.addAttribute("userdesc", user);
 	return "admin/base/baseInfo";
 	}

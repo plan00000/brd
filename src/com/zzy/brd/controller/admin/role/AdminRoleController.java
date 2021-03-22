@@ -50,13 +50,10 @@ public class AdminRoleController {
 			.getLogger(AdminRoleController.class);
 
 	@Autowired
-	private SessionService sessionService;
-	@Autowired
 	private RoleService roleService;
 	@Autowired
 	private UserService userService;
-	
-//	private @Autowired UserOperLogService userOperlogService;
+
 	
 	/**
 	 * 管理账户列表
@@ -91,9 +88,6 @@ public class AdminRoleController {
 	@ResponseBody
 	public RepSimpleMessageDTO delRoles(long[] ids,HttpServletRequest request){
 		RepSimpleMessageDTO res = new RepSimpleMessageDTO();
-//		long opertorid = ShiroUtil.getUserId(request);
-//		User opertor = userService.findById(opertorid);
-//		String content ="删除角色:";
 		for(long id:ids){
 			Role role = roleService.findRoleById(id);
 			List<User> list = userService.findByRole(role);

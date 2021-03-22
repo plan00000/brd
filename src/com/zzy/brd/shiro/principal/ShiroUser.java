@@ -34,15 +34,6 @@ public class ShiroUser implements Serializable,IShiroPrincipal {
 		this.id = user.getId();
 		this.name = user.getUsername();
 		this.headUrl = user.getHeadimgurl();
-		/*if(user.getUsertype() == UserType.ADMIN){
-			this.position = "超级管理员";
-		}else {
-//			if(user.getRole() != null){
-//				this.position = user.getRole().getRolename() + user.getPosition().getStr();
-//			}else {
-//				this.position = user.getPosition().getStr();
-//			}
-		}*/
 	}
 	public ShiroUser(Long id, UserType userType, String username, String headUrl) {
 		this.id = id;
