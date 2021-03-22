@@ -14,27 +14,27 @@ import com.zzy.brd.entity.interfaces.IdEntity;
  * @author:xpk
  *    2016年11月25日-下午5:27:24
  **/
-@Entity
+/*@Entity
 @Table(name = "user_info_seller")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @DynamicUpdate(value = true)
 public class UserInfoSeller extends IdEntity {
 
-	/**
+	*//**
 	 * 
-	 */
+	 *//*
 	private static final long serialVersionUID = 8993631231179127871L;
 	
-	/**经度**/
+	*//**经度**//*
 	private String longitude;
-	/**纬度*/
+	*//**纬度*//*
 	private String latitude;
-	/***详细地址*/
+	*//***详细地址*//*
 	private String address;
-	/**百度的百度地图的id**/
+	*//**百度的百度地图的id**//*
 	@Column(name="baidu_map_id")
 	private Integer baiduMapId;
-	/**公司名*/
+	*//**公司名*//*
 	private String company;	
 	
 	public String getLongitude() {
@@ -68,4 +68,4 @@ public class UserInfoSeller extends IdEntity {
 		this.company = company;
 	}
 	
-}
+}*/

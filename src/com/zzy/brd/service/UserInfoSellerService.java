@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.zzy.brd.dao.UserInfoSellerDao;
+//import com.zzy.brd.dao.UserInfoSellerDao;
 import com.zzy.brd.dto.rep.admin.reportStatistics.RepSellerStatisticAddressDTO;
-import com.zzy.brd.entity.UserInfoSeller;
+//import com.zzy.brd.entity.UserInfoSeller;
 
 /**
  * @author:xpk
@@ -19,16 +19,16 @@ import com.zzy.brd.entity.UserInfoSeller;
 @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 public class UserInfoSellerService extends BaseService {
 	
-	@Autowired
-	private UserInfoSellerDao userInfoSellerDao;
+//	@Autowired
+//	private UserInfoSellerDao userInfoSellerDao;
 	
-	public boolean editUserInfoSeller(UserInfoSeller userInfoSeller){
+	/*public boolean editUserInfoSeller(UserInfoSeller userInfoSeller){
 		return userInfoSellerDao.save(userInfoSeller) ==null ? false :true;
-	}
+	}*/
 	
-	public List<RepSellerStatisticAddressDTO> listSeller() {
+	/*public List<RepSellerStatisticAddressDTO> listSeller() {
 		return userInfoSellerDao.listSeller();
-	}
+	}*/
 	
 	
 }

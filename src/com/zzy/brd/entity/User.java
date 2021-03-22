@@ -145,9 +145,9 @@ public class User extends IdEntity implements java.io.Serializable, IUser {
 	private UserInfoBoth userInfoBoth;
 	
 	/**用户信息-商家信息*/
-	@OneToOne(targetEntity = UserInfoSeller.class,cascade=CascadeType.ALL,fetch = FetchType.LAZY)
+	/*@OneToOne(targetEntity = UserInfoSeller.class,cascade=CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name="user_info_seller_id",referencedColumnName="id",unique=true)
-	private UserInfoSeller userInfoSeller;
+	private UserInfoSeller userInfoSeller;*/
 	
 	/** 微信用户信息表*/
 	/*@OneToOne(targetEntity = WeixinUser.class, fetch = FetchType.LAZY,cascade= CascadeType.ALL)
@@ -356,12 +356,12 @@ public class User extends IdEntity implements java.io.Serializable, IUser {
 		this.brokerage = brokerage;
 	}*/
 
-	public UserInfoSeller getUserInfoSeller() {
+	/*public UserInfoSeller getUserInfoSeller() {
 		return userInfoSeller;
 	}
 
 	public void setUserInfoSeller(UserInfoSeller userInfoSeller) {
 		this.userInfoSeller = userInfoSeller;
-	}
+	}*/
 	
 }

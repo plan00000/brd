@@ -19,13 +19,13 @@ public class RepSellerStatisticAddressDTO {
 	private String company;
 	
 	public RepSellerStatisticAddressDTO(User user){
-		if(user.getUserInfoSeller()!=null){
+		/*if(user.getUserInfoSeller()!=null){
 			this.userId = user.getId();
 			this.latitude = user.getUserInfoSeller().getLatitude();
 			this.longitude = user.getUserInfoSeller().getLongitude();
 			this.address = user.getUserInfoSeller().getAddress();
 			this.company = user.getUserInfoSeller().getCompany();
-		}
+		}*/
 	}
 	
 	public long getUserId() {

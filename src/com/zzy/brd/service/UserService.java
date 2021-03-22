@@ -45,7 +45,7 @@ import com.zzy.brd.entity.User;
 import com.zzy.brd.entity.User.State;
 import com.zzy.brd.entity.User.UserType;
 import com.zzy.brd.entity.UserInfoBoth;
-import com.zzy.brd.entity.UserInfoSeller;
+//import com.zzy.brd.entity.UserInfoSeller;
 //import com.zzy.brd.mobile.web.dto.rep.apprentice.RepMyApprenticeDTO;
 import com.zzy.brd.shiro.session.SessionService;
 import com.zzy.brd.util.QRcode.QRcodeUtils;
@@ -550,7 +550,7 @@ public class UserService extends BaseService {
 				double latitude = rep.getResult().getLocation().getLat();
 				//经度
 				double longitude = rep.getResult().getLocation().getLng();		
-				UserInfoSeller infoSeller = new UserInfoSeller();
+				/*UserInfoSeller infoSeller = new UserInfoSeller();
 				infoSeller.setAddress(address);
 				infoSeller.setLatitude(String.valueOf(latitude));
 				infoSeller.setLongitude(String.valueOf(longitude));
@@ -559,7 +559,7 @@ public class UserService extends BaseService {
 					user.setUserInfoSeller(infoSeller);
 				}else{
 					return false;				
-				}
+				}*/
 			}catch(Exception e){
 				logger.error("商家地址获取错误:"+e.getMessage());
 				return false;

@@ -54,7 +54,7 @@ import com.zzy.brd.entity.User;
 import com.zzy.brd.entity.User.State;
 import com.zzy.brd.entity.UserBankinfo;
 import com.zzy.brd.entity.UserInfoBoth;
-import com.zzy.brd.entity.UserInfoSeller;
+//import com.zzy.brd.entity.UserInfoSeller;
 //import com.zzy.brd.entity.UserRemark;
 import com.zzy.brd.entity.WeixinUser;
 import com.zzy.brd.mobile.util.ShiroUtil;
@@ -914,7 +914,7 @@ public class AdminUserController {
 			res.setMes("修改成功");
 		} 
 		///	
-		UserInfoSeller infoSeller = new UserInfoSeller();
+		/*UserInfoSeller infoSeller = new UserInfoSeller();
 		if(address!=null && userType.equals(User.UserType.SELLER) ){
 			try{
 				ReqGeocoderResolve req = new ReqGeocoderResolve();
@@ -936,8 +936,8 @@ public class AdminUserController {
 				res.setMes("请输入正确的地址");
 				return res;
 			}		
-		}
-		if(oldUserType.equals(User.UserType.USER)&& userType.equals(User.UserType.SELLER)){
+		}*/
+		/*if(oldUserType.equals(User.UserType.USER)&& userType.equals(User.UserType.SELLER)){
 			List<User> editUser = new ArrayList<User>();
 			User parent = user.getUserInfoBoth().getParent();
 			user.setUserInfoSeller(infoSeller);
@@ -964,8 +964,8 @@ public class AdminUserController {
 			userInfoBothDao.save(user.getUserInfoBoth());
 			res.setCode(0);
 			res.setMes("修改成功");
-		}
-		if(oldUserType.equals(User.UserType.MANAGER)&& userType.equals(User.UserType.SELLER)){
+		}*/
+		/*if(oldUserType.equals(User.UserType.MANAGER)&& userType.equals(User.UserType.SELLER)){
 			user.setUserInfoSeller(infoSeller);
 			UserInfoBoth infoBoth = user.getUserInfoBoth();
 			User parent = infoBoth.getParent();
@@ -1043,7 +1043,7 @@ public class AdminUserController {
 			}
 			res.setCode(0);
 			res.setMes("修改成功");
-		}	
+		}	*/
 		if(companyname!=null && userType.equals(User.UserType.SELLER)){
 			user.getUserInfoBoth().setExpands(companyname);			
 		}
@@ -1217,7 +1217,7 @@ public class AdminUserController {
 	public RepSimpleMessageDTO modifyAddress(String address,long userId,HttpServletRequest request){
 		RepSimpleMessageDTO res = new RepSimpleMessageDTO();
 		User user =userService.findById(userId);
-		UserInfoSeller infoSeller = user.getUserInfoSeller();
+//		UserInfoSeller infoSeller = user.getUserInfoSeller();
 		try{
 			ReqGeocoderResolve req = new ReqGeocoderResolve();
 			req.setOutput(ReqGeocoderResolve.OutputType.JSON.getStr());
@@ -1228,7 +1228,7 @@ public class AdminUserController {
 			double latitude = rep.getResult().getLocation().getLat();
 			//经度
 			double longitude = rep.getResult().getLocation().getLng();
-			infoSeller.setAddress(address);
+			/*infoSeller.setAddress(address);
 			infoSeller.setLatitude(String.valueOf(latitude));
 			infoSeller.setLongitude(String.valueOf(longitude));
 			if(userInfoSellerService.editUserInfoSeller(infoSeller)){
@@ -1236,13 +1236,13 @@ public class AdminUserController {
 				res.setMes("修改成功");
 				long opertorid = ShiroUtil.getUserId(request);
 				User opertor = userService.findById(opertorid);
-				String content = "修改"+user.getRealname()+"商家地址为:"+address;	
+				String content = "修改"+user.getRealname()+"商家地址为:"+address;
 				userOperlogService.addOperlog(opertor, content);
-				
+
 			}else{
 				res.setCode(1);
 				res.setMes("修改失败");
-			}
+			}*/
 		}catch(Exception e){
 			res.setCode(1);
 			res.setMes("请输入详细地址");
