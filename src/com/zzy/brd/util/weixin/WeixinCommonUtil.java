@@ -1,18 +1,13 @@
 package com.zzy.brd.util.weixin;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.ConnectException;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -20,17 +15,13 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.servlet.http.HttpServletRequest;
 
-import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
-import com.zzy.brd.entity.SysInfo;
-import com.zzy.brd.entity.WeixinUser;
 //import com.zzy.brd.mobile.web.dto.req.weixinpost.RepWeixinQrcodeDTO;
-import com.zzy.brd.service.SysInfoService;
+
 
 /**
  * 通用工具类
@@ -228,33 +219,33 @@ public class WeixinCommonUtil {
      * 根据openId 和access_token 获取用户信息。
      * 
      * */
-    public static void getPersonInformation(String openId,String appid,String srcret,WeixinUser weixinUser){
-    	Token token = getToken(appid,srcret);
-    	String access_token = token.getToken();
-    	String url = info_url.replace("ACCESS_TOKEN", access_token).replace("OPENID", openId);
-    	JSONObject jsonObject = httpsRequest(url, "GET", null);
-    	if(null!=jsonObject) {
-    		try{
-    			weixinUser.setNickname(jsonObject.getString("nickname"));
-    			int sex = jsonObject.getIntValue("sex");
-    			if(sex==0){
-    				weixinUser.setSex(WeixinUser.SexType.UNKONWN);
-    			} else if(sex==1){
-    				weixinUser.setSex(WeixinUser.SexType.MALE);
-    			} else{
-    				weixinUser.setSex(WeixinUser.SexType.FEMALE);
-    			}
-    			weixinUser.setCity(jsonObject.getString("city"));
-    			weixinUser.setCountry(jsonObject.getString("country"));
-    			weixinUser.setProvince(jsonObject.getString("province"));
-    			weixinUser.setLanguage(jsonObject.getString("language"));
-    			weixinUser.setHeadimgurl(jsonObject.getString("headimgurl"));
-    			weixinUser.setGroupid(jsonObject.getIntValue("groupid"));                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-    		} catch (JSONException e) {
-    			log.error("获取失败 errcode:{} errmsg:{}", jsonObject.getInteger("errcode"), jsonObject.getString("errmsg"));
-    		}
-    	}
-    }
+//    public static void getPersonInformation(String openId,String appid,String srcret,WeixinUser weixinUser){
+//    	Token token = getToken(appid,srcret);
+//    	String access_token = token.getToken();
+//    	String url = info_url.replace("ACCESS_TOKEN", access_token).replace("OPENID", openId);
+//    	JSONObject jsonObject = httpsRequest(url, "GET", null);
+//    	if(null!=jsonObject) {
+//    		try{
+//    			weixinUser.setNickname(jsonObject.getString("nickname"));
+//    			int sex = jsonObject.getIntValue("sex");
+//    			if(sex==0){
+//    				weixinUser.setSex(WeixinUser.SexType.UNKONWN);
+//    			} else if(sex==1){
+//    				weixinUser.setSex(WeixinUser.SexType.MALE);
+//    			} else{
+//    				weixinUser.setSex(WeixinUser.SexType.FEMALE);
+//    			}
+//    			weixinUser.setCity(jsonObject.getString("city"));
+//    			weixinUser.setCountry(jsonObject.getString("country"));
+//    			weixinUser.setProvince(jsonObject.getString("province"));
+//    			weixinUser.setLanguage(jsonObject.getString("language"));
+//    			weixinUser.setHeadimgurl(jsonObject.getString("headimgurl"));
+//    			weixinUser.setGroupid(jsonObject.getIntValue("groupid"));
+//    		} catch (JSONException e) {
+//    			log.error("获取失败 errcode:{} errmsg:{}", jsonObject.getInteger("errcode"), jsonObject.getString("errmsg"));
+//    		}
+//    	}
+//    }
    
 
 //    public static void main(String[] argv) throws InterruptedException {

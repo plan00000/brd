@@ -1,6 +1,5 @@
 package com.zzy.brd.controller.admin.login;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.zzy.brd.constant.Constant;
 import com.zzy.brd.constant.GlobalData;
 import com.zzy.brd.entity.User;
-import com.zzy.brd.service.LoginlogService;
 //import com.zzy.brd.service.UserInfoEmployeeService;
 import com.zzy.brd.service.UserService;
 import com.zzy.brd.shiro.principal.ShiroUser;
@@ -37,8 +35,8 @@ public class AdminLoginController {
 	private UserService userService;
 /*	@Autowired
 	private UserInfoEmployeeService userInfoPublicService;*/
-	@Autowired
-	private LoginlogService loginlogService;
+//	@Autowired
+//	private LoginlogService loginlogService;
 	
 	/****
 	 * 至后台登录界面
@@ -121,9 +119,9 @@ public class AdminLoginController {
 //		userInfoPublicService.updateLoginInfo(user, request);
 		//添加登录日志
 		/*syslogService.addLoginLog(user, request.getRemoteAddr());*/
-		if(!user.getUserType().equals(User.UserType.ADMIN)){
-			loginlogService.addLoginlog(user, request);
-		}		
+//		if(!user.getUserType().equals(User.UserType.ADMIN)){
+//			loginlogService.addLoginlog(user, request);
+//		}
 		return "redirect:/admin/main";
 	}
 

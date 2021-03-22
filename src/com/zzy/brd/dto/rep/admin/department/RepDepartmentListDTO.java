@@ -3,8 +3,6 @@ package com.zzy.brd.dto.rep.admin.department;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zzy.brd.entity.Department;
-
 /**
  * @author:xpk
  *    2016年10月13日-下午4:29:00

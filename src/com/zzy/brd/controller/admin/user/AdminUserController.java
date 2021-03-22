@@ -46,26 +46,13 @@ import com.zzy.brd.dto.rep.RepSimpleMessageDTO;
 import com.zzy.brd.dto.rep.admin.user.RepApprenticesRecordDTO;
 import com.zzy.brd.dto.rep.admin.user.RepUserApprenticesDTO;
 import com.zzy.brd.dto.req.admin.user.ReqUsernidyfyImgDTO;
-import com.zzy.brd.entity.FlowWithdraw;
-import com.zzy.brd.entity.Loginlog;
-import com.zzy.brd.entity.RecordBrokerage;
 import com.zzy.brd.entity.User;
 import com.zzy.brd.entity.User.State;
-import com.zzy.brd.entity.UserBankinfo;
 //import com.zzy.brd.entity.UserInfoSeller;
 //import com.zzy.brd.entity.UserRemark;
-import com.zzy.brd.entity.WeixinUser;
 import com.zzy.brd.mobile.util.ShiroUtil;
-import com.zzy.brd.service.DepartmentService;
-import com.zzy.brd.service.FlowWithdrawService;
-import com.zzy.brd.service.LoginlogService;
-import com.zzy.brd.service.RecordBrokerageService;
 import com.zzy.brd.service.RoleService;
-import com.zzy.brd.service.UserBankinfoService;
 //import com.zzy.brd.service.UserInfoBothService;
-import com.zzy.brd.service.UserInfoSellerService;
-import com.zzy.brd.service.UserOperLogService;
-import com.zzy.brd.service.UserRemarkService;
 import com.zzy.brd.service.UserService;
 import com.zzy.brd.shiro.session.SessionService;
 import com.zzy.brd.util.date.DateUtil;
@@ -89,24 +76,24 @@ import com.zzy.brd.util.string.StringUtil;
 public class AdminUserController {
 
 	private static final Logger log = LoggerFactory.getLogger(AdminUserController.class);
-	@Autowired
-	private DepartmentService departmentService;
+//	@Autowired
+//	private DepartmentService departmentService;
 	@Autowired
 	private UserService userService;
 	@Autowired
 	private RoleService roleService;
 	@Autowired
 	private SessionService sessionService;
-	@Autowired
-	private UserBankinfoService bankinfoService;
-	private @Autowired LoginlogService loginlogService;
-	private @Autowired FlowWithdrawService withdrawService;
-	private @Autowired RecordBrokerageService recordService;
-	private @Autowired UserRemarkService userRemarkService;
+//	@Autowired
+//	private UserBankinfoService bankinfoService;
+//	private @Autowired LoginlogService loginlogService;
+//	private @Autowired FlowWithdrawService withdrawService;
+//	private @Autowired RecordBrokerageService recordService;
+//	private @Autowired UserRemarkService userRemarkService;
 	private @Autowired UserDao userDao;
-	private @Autowired UserOperLogService userOperlogService;
+//	private @Autowired UserOperLogService userOperlogService;
 //	private @Autowired UserInfoBothService userInfoBothService;
-	private @Autowired UserInfoSellerService userInfoSellerService;
+//	private @Autowired UserInfoSellerService userInfoSellerService;
 	@RequestMapping(value = "list")
 	public String list(
 			@RequestParam(value = "page", required = true, defaultValue = "1") int pageNumber,
@@ -445,7 +432,7 @@ public class AdminUserController {
 			} else {
 				content = content + user.getRealname();
 			}			
-			userOperlogService.addOperlog(opertor, content);
+//			userOperlogService.addOperlog(opertor, content);
 			
 			return res;
 		} else {
@@ -462,22 +449,22 @@ public class AdminUserController {
 			@PathVariable long userId, Model model) {
 		User user = userService.findById(userId);
 
-		List<UserBankinfo> bankInfo = bankinfoService.getUserBankByUser(user);
+//		List<UserBankinfo> bankInfo = bankinfoService.getUserBankByUser(user);
 		Map<String, Object> searchParams = new HashMap<String, Object>();
 		// /下方的列表日志
 		if (type.equals("brokerage")) {
 			// 获取佣金记录
 			searchParams.put("EQ_user", user);
-			Page<RecordBrokerage> page = recordService.listRecordBrokerage(
-					searchParams, pageNumber);
-			model.addAttribute("page", page);
+//			Page<RecordBrokerage> page = recordService.listRecordBrokerage(
+//					searchParams, pageNumber);
+//			model.addAttribute("page", page);
 		} else if (type.equals("withdraw")) {
 			// 获取提现记录
 			searchParams.put("EQ_user", user);
-			searchParams.put("EQ_status",FlowWithdraw.WithdrawStatus.ALEARDYLOAN);
-			Page<FlowWithdraw> page = withdrawService.getFlowWithdraw(
-					searchParams, false, pageNumber, Constant.PAGE_SIZE,"");
-			model.addAttribute("page", page);
+//			searchParams.put("EQ_status",FlowWithdraw.WithdrawStatus.ALEARDYLOAN);
+//			Page<FlowWithdraw> page = withdrawService.getFlowWithdraw(
+//					searchParams, false, pageNumber, Constant.PAGE_SIZE,"");
+//			model.addAttribute("page", page);
 		} else if (type.equals("apprentice")) {
 			// 获取收徒记录
 //			Page<RepApprenticesRecordDTO> page = userService
@@ -487,16 +474,16 @@ public class AdminUserController {
 		} else if (type.equals("loginlog")) {
 			// 获取登录日志
 			searchParams.put("EQ_user", user);
-			Page<Loginlog> page = loginlogService.listLoginlog(searchParams,
-					pageNumber);
-			model.addAttribute("page", page);
+//			Page<Loginlog> page = loginlogService.listLoginlog(searchParams,
+//					pageNumber);
+//			model.addAttribute("page", page);
 
 		}
 		// 获取备注列表
 //		List<UserRemark> userRemarkList = userRemarkService.findByUser(user);
 		// 绑定银行卡
-		List<UserBankinfo> userBankinfoList = bankinfoService
-				.getUserBankByUser(user);
+//		List<UserBankinfo> userBankinfoList = bankinfoService
+//				.getUserBankByUser(user);
 
 		// 佣金总额
 		BigDecimal total = new BigDecimal(0);
@@ -505,12 +492,12 @@ public class AdminUserController {
 //			userInfoBothService.createQrcodeImg(user);
 		}
 		model.addAttribute("total", total);
-		model.addAttribute("bankinfoList", userBankinfoList);
+//		model.addAttribute("bankinfoList", userBankinfoList);
 //		model.addAttribute("remarkList", userRemarkList);
 		model.addAttribute("userId", userId);
 		model.addAttribute("type", type);
 		model.addAttribute("users", user);
-		model.addAttribute("userBank", bankInfo);
+//		model.addAttribute("userBank", bankInfo);
 		return "admin/user/editUser";
 	}
 
@@ -841,7 +828,7 @@ public class AdminUserController {
 				//加入日志
 				long opertorId = ShiroUtil.getUserId(request);
 				String content ="将"+user.getRealname()+"手机号码由:"+oldMobileno+"改为:"+ phone;
-				userOperlogService.addOperlog(userService.findById(opertorId), content);
+//				userOperlogService.addOperlog(userService.findById(opertorId), content);
 				return res;
 			}else{
 				res.setCode(1);
@@ -870,7 +857,7 @@ public class AdminUserController {
 		userRemark.setRemark(remark);*/
 //		userRemarkService.editRemark(userRemark);
 		String content =user.getRealname()+"添加备注:"+remark;
-		userOperlogService.addOperlog(userService.findById(opertorId), content);
+//		userOperlogService.addOperlog(userService.findById(opertorId), content);
 		res.setCode(0);
 		res.setMes("添加成功");
 		return res;
@@ -1028,7 +1015,7 @@ public class AdminUserController {
 		//添加进日志:
 		long opertorId = ShiroUtil.getUserId(request);
 		String content ="提升"+user.getRealname()+"为"+userType.getStr();
-		userOperlogService.addOperlog(userService.findById(opertorId), content);
+//		userOperlogService.addOperlog(userService.findById(opertorId), content);
 		return res;
 	}
 	
@@ -1105,7 +1092,7 @@ public class AdminUserController {
 			long opertorid = ShiroUtil.getUserId(request);
 			User opertor = userService.findById(opertorid);
 			String content = state.getStr()+"会员:"+user.getRealname();
-			userOperlogService.addOperlog(opertor, content);
+//			userOperlogService.addOperlog(opertor, content);
 			return "0";
 		}
 		return "-1";

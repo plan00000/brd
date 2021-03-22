@@ -5,14 +5,11 @@
  *******************************************************************************/
 package com.zzy.brd.controller.admin.role;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpUtils;
 import javax.validation.Valid;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -29,23 +26,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.HtmlUtils;
-import org.springside.modules.mapper.BeanMapper;
 
-import com.google.common.collect.Lists;
 import com.zzy.brd.constant.Constant;
 import com.zzy.brd.dto.rep.RepSimpleMessageDTO;
 import com.zzy.brd.dto.req.admin.role.ReqRoleDTO;
 import com.zzy.brd.dto.req.admin.role.ReqRoleEditDTO;
 import com.zzy.brd.entity.Role;
-import com.zzy.brd.entity.Role.State;
 import com.zzy.brd.entity.User;
-import com.zzy.brd.enums.Permission;
 //import com.zzy.brd.mobile.util.ShiroUtil;
 import com.zzy.brd.service.RoleService;
-import com.zzy.brd.service.UserOperLogService;
 import com.zzy.brd.service.UserService;
 import com.zzy.brd.shiro.session.SessionService;
-import com.zzy.brd.util.string.StringUtil;
 
 /**
  * 角色管理
@@ -65,7 +56,7 @@ public class AdminRoleController {
 	@Autowired
 	private UserService userService;
 	
-	private @Autowired UserOperLogService userOperlogService;
+//	private @Autowired UserOperLogService userOperlogService;
 	
 	/**
 	 * 管理账户列表

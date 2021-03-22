@@ -24,6 +24,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.zzy.brd.entity.Image;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -45,7 +46,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
 import com.zzy.brd.constant.ConfigSetting;
 import com.zzy.brd.constant.ConfigSetting.PathType;
-import com.zzy.brd.entity.Image;
 import com.zzy.brd.util.file.FileUtil;
 import com.zzy.brd.util.image.ImageUtil;
 import com.zzy.brd.util.image.ImageUtil2;

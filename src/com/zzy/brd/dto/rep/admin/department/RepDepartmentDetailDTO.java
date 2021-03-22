@@ -1,7 +1,5 @@
 package com.zzy.brd.dto.rep.admin.department;
 
-import com.zzy.brd.entity.Department;
-
 /**
  * @author:xpk
  *    2016年10月13日-下午5:04:20
@@ -14,11 +12,6 @@ public class RepDepartmentDetailDTO {
 	
 	public RepDepartmentDetailDTO(){
 		
-	}
-	
-	public RepDepartmentDetailDTO(Department department){
-		this.id = department.getId();
-		this.name = department.getName();		
 	}
 
 	public long getId() {

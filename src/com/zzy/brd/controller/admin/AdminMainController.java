@@ -14,24 +14,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.zzy.brd.algorithm.encrypt.shiro.SHA1Encrypt;
 import com.zzy.brd.constant.GlobalData;
 import com.zzy.brd.dto.rep.RepSimpleMessageDTO;
-import com.zzy.brd.entity.BrokerageApply.BrokerageApplyStatus;
-import com.zzy.brd.entity.Department;
-import com.zzy.brd.entity.FlowWithdraw.WithdrawStatus;
-import com.zzy.brd.entity.Orderform.OrderSource;
-import com.zzy.brd.entity.Orderform.OrderformStatus;
-import com.zzy.brd.entity.ProductType.BillType;
+//import com.zzy.brd.entity.BrokerageApply.BrokerageApplyStatus;
+//import com.zzy.brd.entity.FlowWithdraw.WithdrawStatus;
+//import com.zzy.brd.entity.Orderform.OrderSource;
+//import com.zzy.brd.entity.Orderform.OrderformStatus;
+//import com.zzy.brd.entity.ProductType.BillType;
 import com.zzy.brd.entity.Role;
 import com.zzy.brd.entity.User;
-import com.zzy.brd.entity.User.UserType;
 import com.zzy.brd.mobile.util.ShiroUtil;
-import com.zzy.brd.service.BrokerageApplyService;
-import com.zzy.brd.service.DepartmentService;
-import com.zzy.brd.service.FlowWithdrawService;
-import com.zzy.brd.service.OrderformService;
 import com.zzy.brd.service.UserService;
 import com.zzy.brd.shiro.principal.ShiroUser;
 import com.zzy.brd.util.date.DateUtil;
-import com.zzy.brd.util.encrypt.shiro.PasswordInfo;
 import com.zzy.brd.util.file.FileUtil;
 
 /***
@@ -44,14 +37,14 @@ import com.zzy.brd.util.file.FileUtil;
 public class AdminMainController {
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private OrderformService orderformService;
-	@Autowired
-	private FlowWithdrawService flowWithdrawService;
-	@Autowired
-	private BrokerageApplyService brokerageApplyService;
-	@Autowired
-	private DepartmentService departmentService;
+//	@Autowired
+//	private OrderformService orderformService;
+//	@Autowired
+//	private FlowWithdrawService flowWithdrawService;
+//	@Autowired
+//	private BrokerageApplyService brokerageApplyService;
+//	@Autowired
+//	private DepartmentService departmentService;
 
 	@RequestMapping
 	public String main(Model model){
@@ -210,9 +203,6 @@ public class AdminMainController {
 		if (user == null) {
 			return "error/404";
 		}
-		Department threeD = null;
-		Department secondD = null;
-		Department firstD = null;
 		/*if(threeD != null){
 			if(threeD.getParent()!=null){
 				secondD = threeD.getParent();
@@ -223,9 +213,6 @@ public class AdminMainController {
 				}
 			}
 		}*/
-		model.addAttribute("firstD", firstD);
-		model.addAttribute("secondD", secondD);
-		model.addAttribute("threeD", threeD);
 		model.addAttribute("userdesc", user);
 	return "admin/base/baseInfo";
 	}

@@ -3,8 +3,6 @@ package com.zzy.brd.service;
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -19,27 +17,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
 import com.zzy.brd.algorithm.encrypt.shiro.PasswordInfo;
 import com.zzy.brd.algorithm.encrypt.shiro.SHA1Encrypt;
 import com.zzy.brd.constant.ConfigSetting;
 import com.zzy.brd.constant.Constant;
 import com.zzy.brd.dao.UserDao;
 //import com.zzy.brd.dao.UserInfoBothDao;
-import com.zzy.brd.dto.rep.admin.user.RepApprenticesRecordDTO;
-import com.zzy.brd.entity.Activity;
-import com.zzy.brd.entity.Activity.ActivitySet;
-import com.zzy.brd.entity.Department;
+//import com.zzy.brd.entity.Activity.ActivitySet;
 import com.zzy.brd.entity.Role;
 import com.zzy.brd.entity.User;
 import com.zzy.brd.entity.User.State;
@@ -48,12 +38,7 @@ import com.zzy.brd.entity.User.UserType;
 //import com.zzy.brd.entity.UserInfoSeller;
 //import com.zzy.brd.mobile.web.dto.rep.apprentice.RepMyApprenticeDTO;
 import com.zzy.brd.shiro.session.SessionService;
-import com.zzy.brd.util.QRcode.QRcodeUtils;
 import com.zzy.brd.util.file.FileUtil;
-import com.zzy.brd.util.map.BaiduMapUtils;
-import com.zzy.brd.util.map.baidu.dto.rep.geocoder.RepGeocoderResolve;
-import com.zzy.brd.util.map.baidu.req.geocoder.ReqGeocoderResolve;
-import com.zzy.brd.util.random.InvitationCodeUtil;
 import com.zzy.brd.util.string.StringUtil;
 
 @Service
@@ -67,10 +52,10 @@ public class UserService extends BaseService {
 	private SessionService sessionService;
 //	@Autowired
 //	private UserInfoBothDao userInfoBothDao;
-	@Autowired
-	private ActivityService activityService;
-	@Autowired
-	private UserInfoSellerService userInfoSellerService;
+//	@Autowired
+//	private ActivityService activityService;
+//	@Autowired
+//	private UserInfoSellerService userInfoSellerService;
 	
 	public User getUser(String username) {
 		return userDao.findByUsername(username);
@@ -91,12 +76,12 @@ public class UserService extends BaseService {
 		/*UserInfoBoth userInfoBoth = new UserInfoBoth();
 		userInfoBoth.setActivityBrokerage(BigDecimal.ZERO);
 		userInfoBoth.setBrokerageCanWithdraw(BigDecimal.ZERO);*/
-		Activity activity = activityService.getRecommendRegisterByActivityType();
-		String activityObject = null;
-		ActivitySet activitySet =null;
+//		Activity activity = activityService.getRecommendRegisterByActivityType();
+//		String activityObject = null;
+//		ActivitySet activitySet =null;
 		BigDecimal bonus = null;
 		boolean is1 =false;
-		if(activity!=null){
+		/*if(activity!=null){
 			 activitySet = activity.getActivitySet();
 			 bonus =  activity.getBonusAmount();
 			 activityObject = activity.getActivityObject();
@@ -118,7 +103,7 @@ public class UserService extends BaseService {
 				}
 			}
 			
-		}
+		}*/
 		return true;
 	}
 
