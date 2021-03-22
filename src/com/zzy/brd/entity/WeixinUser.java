@@ -52,9 +52,9 @@ public class WeixinUser extends IdEntity{
 	 */
 	private static final long serialVersionUID = -8057567895213711918L;
 
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	/*@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@OneToOne(targetEntity=User.class,mappedBy="weixinUser")
-	private User user;
+	private User user;*/
 	
 	
 	private SubscribeType subscribe;
@@ -93,14 +93,14 @@ public class WeixinUser extends IdEntity{
 		this.sceneids = sceneids;
 	}
 
-	public User getUser() {
+	/*public User getUser() {
 		return user;
 	}
 
 
 	public void setUser(User user) {
 		this.user = user;
-	}
+	}*/
 
 
 	public SubscribeType getSubscribe() {

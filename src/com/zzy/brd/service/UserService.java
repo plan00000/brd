@@ -741,7 +741,7 @@ public class UserService extends BaseService {
 	}
 	
 	/**通过用户类型找到会员列表
-	 * @param user
+	 * @param
 	 *
 	 */
 	public List<User> findUserByUsertype(UserType userType){

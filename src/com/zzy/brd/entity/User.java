@@ -150,9 +150,9 @@ public class User extends IdEntity implements java.io.Serializable, IUser {
 	private UserInfoSeller userInfoSeller;
 	
 	/** 微信用户信息表*/
-	@OneToOne(targetEntity = WeixinUser.class, fetch = FetchType.LAZY,cascade= CascadeType.ALL)
+	/*@OneToOne(targetEntity = WeixinUser.class, fetch = FetchType.LAZY,cascade= CascadeType.ALL)
 	@JoinColumn(name = "weixin_user_id", referencedColumnName = "id",unique = true)
-	private WeixinUser weixinUser;
+	private WeixinUser weixinUser;*/
 	
 	/** 角色 */
 	@ManyToOne(targetEntity = Role.class, fetch = FetchType.LAZY)
@@ -165,10 +165,10 @@ public class User extends IdEntity implements java.io.Serializable, IUser {
 	
 	/** 徒弟赚佣*/
 
-	@Formula(value = "(select ifnull(sum(r.have_brokerage),0) from record_brokerage r left join user u "
+	/*@Formula(value = "(select ifnull(sum(r.have_brokerage),0) from record_brokerage r left join user u "
 			+ "on r.gain_user_id = u.id left join user_info_both uib on r.gain_infoboth_id = uib.id where r.relate =1 and u.id = id and uib.parentid = r.user_id group by r.gain_user_id)")
 	@Basic(fetch = FetchType.LAZY)
-	private BigDecimal brokerage;
+	private BigDecimal brokerage;*/
 	
 	/**
 	 * @param id
@@ -295,13 +295,13 @@ public class User extends IdEntity implements java.io.Serializable, IUser {
 		this.userInfoBoth = userInfoBoth;
 	}
 
-	public WeixinUser getWeixinUser() {
+	/*public WeixinUser getWeixinUser() {
 		return weixinUser;
 	}
 
 	public void setWeixinUser(WeixinUser weixinUser) {
 		this.weixinUser = weixinUser;
-	}
+	}*/
 
 	public Role getRole() {
 		return role;
@@ -348,13 +348,13 @@ public class User extends IdEntity implements java.io.Serializable, IUser {
 		this.remarks = remarks;
 	}
 
-	public BigDecimal getBrokerage() {
+	/*public BigDecimal getBrokerage() {
 		return brokerage;
 	}
 
 	public void setBrokerage(BigDecimal brokerage) {
 		this.brokerage = brokerage;
-	}
+	}*/
 
 	public UserInfoSeller getUserInfoSeller() {
 		return userInfoSeller;
