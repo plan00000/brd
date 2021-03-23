@@ -177,7 +177,7 @@
  					
  					<shiro:hasAnyPermissions name="ORGANIZATION_MANAGER_DEPART,ORGANIZATION_MANAGER_USER,ORGANIZATION_MANAGER_ROLE">
 					<li id="na_li1"><a href="#"><i class="fa fa-edit"></i> <span
-							class="nav-label">企业管理</span><span class="fa arrow"></span></a>
+							class="nav-label">会员管理</span><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level collapse">
 							<shiro:hasPermission name="ORGANIZATION_MANAGER_DEPART"><li id="na_li1_1" >
 							<a href="${ctx}/admin/department/list">部门管理</a></li></shiro:hasPermission>
@@ -198,7 +198,7 @@
 							class="nav-label">订单管理</span><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level collapse">
 							<shiro:hasPermission name="ORDER_MANAGER">
-								<li id="na_li3_1" ><a href="${ctx}/admin/orderform/weixin/list">贷款订单</a></li>
+								<li id="na_li3_1" ><a href="${ctx}/admin/orderform/list">订单列表</a></li>
 							</shiro:hasPermission>
 							
 							<shiro:hasPermission name="ORDER_MANAGER_PC">

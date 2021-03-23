@@ -42,8 +42,8 @@ import com.zzy.brd.util.sms.SMSUtil;
 public class BaseService {
 	private static final Logger logger = LoggerFactory.getLogger(BaseService.class);
 	
-	@Autowired
-	private SmsAuthcodeDao smsAuthcodeDao;
+	/*@Autowired
+	private SmsAuthcodeDao smsAuthcodeDao;*/
 	
 	static {
 		DozerBeanMapper mapper = (DozerBeanMapper) Reflections.getFieldValue(
@@ -59,7 +59,7 @@ public class BaseService {
 	 * 
 	 * @return boolean 是否成功
 	 */
-	public boolean sendAuthcode(String teleno, SmsAuthcodeSource source) {
+	/*public boolean sendAuthcode(String teleno, SmsAuthcodeSource source) {
 		// 获取校验码
 		String smscode = SMSUtil.getSmscode();
 		// 组织短信内容
@@ -88,7 +88,7 @@ public class BaseService {
 			logger.error("发送短信验证码失败:\n" + e.getMessage());
 		}
 		return true;
-	}
+	}*/
 	
 	/**
 	 * 验证短信校验码
@@ -99,7 +99,7 @@ public class BaseService {
 	 *            输入的校验码
 	 * @return 返回类型: 0成功 1-数据库中不存在 2-输入的校验码错误 3-输入的校验码已过期
 	 */
-	public int validateSmsAuthcode(String teleno, String smsauthcode,
+	/*public int validateSmsAuthcode(String teleno, String smsauthcode,
 			SmsAuthcodeSource source) {
 		// 校验手机短信校验码
 		SmsAuthcode smsAuthcode = smsAuthcodeDao.findByTelenoAndSource(teleno,
@@ -122,7 +122,7 @@ public class BaseService {
 		smsAuthcode.setSendDate(cal.getTime());
 		smsAuthcodeDao.save(smsAuthcode);
 		return 0;
-	}
+	}*/
 
 	/**
 	 * 验证短信校验码(没修改发送时间 即用一次就失效)
@@ -133,7 +133,7 @@ public class BaseService {
 	 *            输入的校验码
 	 * @return 返回类型: 0成功 1-数据库中不存在 2-输入的校验码错误 3-输入的校验码已过期
 	 */
-	public int validateSmsAuthcode2(String teleno, String smsauthcode,
+	/*public int validateSmsAuthcode2(String teleno, String smsauthcode,
 			SmsAuthcodeSource source) {
 		// 校验手机短信校验码
 		SmsAuthcode smsAuthcode = smsAuthcodeDao.findByTelenoAndSource(teleno,
@@ -151,7 +151,7 @@ public class BaseService {
 		}
 		// 校验成功后则吧发送时间设置到超时前
 		return 0;
-	}
+	}*/
 	
 	/**
 	 * 创建分页请求.

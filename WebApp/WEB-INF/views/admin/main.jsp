@@ -86,35 +86,34 @@ $(function() {
               <div class="username-text animated fadeInRight">
               	<shiro:hasPermission name="ORDER_MANAGER">
                     <div class="username-01">
-                    	<p>贷款订单</p>
+                    	<p>订单</p>
                         <samp>进行中的 ${countUncheckNum}条</samp>
                         <div class="username-02">
-                            <span>待审核：</span>
+                            <span>订单：</span>
                             <ul>
-                                <li id="countEarncommissionNum">赚提成<font>${ countEarncommissionNum}</font></li>
-                                <li id="countEarndifferenceNum">赚差价<font>${ countEarndifferenceNum}</font></li>
-                                <li id="countSelfhelploanNum">自助贷<font>${countSelfhelploanNum}</font></li>
+                                <li id="countEarncommissionNum">包车单<font>${ countEarncommissionNum}</font></li>
+                                <li id="countEarndifferenceNum">拼车单<font>${ countEarndifferenceNum}</font></li>
                             </ul>
                         </div>
                     </div>
                     </shiro:hasPermission>
                     <shiro:hasPermission name="ORDER_MANAGER_PC">
                     <div class="username-01">
-                    	<p>官网订单</p>
-                        <samp>进行中的 ${countPcNum}条</samp>
+                    	<p>司机</p>
+                        <samp>执行中的 ${countPcNum}条</samp>
                         <div class="username-02">
-                            <span>待操作：</span>
+                            <span>实时状态：</span>
                             <ul>
-                                <li id="countPcUncheckNum">待审核<font>${ countPcUncheckNum}</font></li>
-                                <li id="countPcUnloanNum">待放款<font>${ countPcUnloanNum}</font></li> 
+                                <li id="countPcUncheckNum">接单中<font>${ countPcUncheckNum}</font></li>
+                                <li id="countPcUnloanNum">休息中<font>${ countPcUnloanNum}</font></li>
                             </ul>
                         </div>
                     </div>
                     </shiro:hasPermission>
                     <shiro:hasPermission name="ORDER_MANAGER_WITHDRAW">
                     <div class="username-01">
-                    	<p>提现订单</p>
-                        <samp>进行中的 ${countFlowNum}条</samp>
+                    	<p>乘客</p>
+                        <samp>共 ${countFlowNum}个会员</samp>
                         <div class="username-02">
                             <span>待操作：</span>
                             <ul>
@@ -126,33 +125,17 @@ $(function() {
                     </shiro:hasPermission>
                     <shiro:hasPermission name="ORDER_MANAGER_BROKERAGE">
                     <div class="username-01">
-                    	<p>佣金订单</p>
-                        <samp>进行中的 ${countBrokerageNum}条</samp>
+                    	<p>线路</p>
+                        <samp>共 ${countBrokerageNum}条</samp>
                         <div class="username-02">
-                            <span>待操作：</span>
+                            <span>最热门线路：</span>
                             <ul>
-                               
-                                <c:if test="${rolename=='Admin'}"> <li id="countBrokerageUncheckNum">CEO审核<font>${countBrokerageUncheckNum }</font></li></c:if>
-                                <c:if test="${rolename=='财务'}"> <li id="countBrokerageUncheckNum">待录佣金<font>${countBrokerageUncheckNum }</font></li></c:if>
-                                <c:if test="${rolename=='风控经理'}"> <li id="countBrokerageUncheckNum">风控审核<font>${countBrokerageUncheckNum }</font></li></c:if>
-                                	
-                                <li id="countBrokerageFinanceNum">财务发放<font>${ countBrokerageFinanceNum}</font></li>
-                                <c:if test = "${rolename == 'Admin' }"><li id = "countBrokerageCeoPass">CEO确定<font>${ countBrokerageCeoPassNum}</font></li></c:if>
+                                <li id="oneLine">最热线路<font>${countFlowWithdrawUncheckNum }</font></li>
+                                <li id="twoLin">第二热线路<font>${ countFlowWithdrawUnloadNum}</font></li>
                             </ul>
                         </div>
                     </div>
                   </shiro:hasPermission>
-                  <shiro:hasPermission name="USER_MANAGER">
-                    <div class="username-01">
-                    	<p>会员管理</p>
-                        <samp>进行中的${pendingAudit }条</samp>
-                        <div class="username-02">
-                            <ul>
-                                <li id="pendingAudit">待联系<font>${pendingAudit }</font></li>
-                            </ul>
-                        </div>
-                    </div> 
-                 </shiro:hasPermission>
         </div>
 <div style="height:50px;"></div>
 </body>

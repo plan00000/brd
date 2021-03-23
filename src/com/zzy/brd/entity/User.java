@@ -38,9 +38,6 @@ import com.zzy.brd.entity.interfaces.IdEntity;
 @DynamicUpdate(value = true)
 public class User extends IdEntity implements java.io.Serializable, IUser {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5344363857919063737L;
 
 	/** 状态 */
