@@ -16,35 +16,11 @@ $(function(){
 	$("#sortcreateTime").click(function(){
 		var id=$(this).data('id');
 		if(id == 1){
-			$("#ipt_sortName").val("createTime");
+			$("#ipt_sortName").val("orderTime");
 			$("#ipt_sortType").val("asc");
 			requestLoad();
 		}else{
-			$("#ipt_sortName").val("createTime");
-			$("#ipt_sortType").val("desc");
-			requestLoad();
-		}
-	});
-	$("#sortmoney").click(function(){
-		var id=$(this).data('id');
-		if(id == 1){
-			$("#ipt_sortName").val("money");
-			$("#ipt_sortType").val("asc");
-			requestLoad();
-		}else{
-			$("#ipt_sortName").val("money");
-			$("#ipt_sortType").val("desc");
-			requestLoad();
-		}
-	});
-	$("#sortactualMoney").click(function(){
-		var id=$(this).data('id');
-		if(id == 1){
-			$("#ipt_sortName").val("actualMoney");
-			$("#ipt_sortType").val("asc");
-			requestLoad();
-		}else{
-			$("#ipt_sortName").val("actualMoney");
+			$("#ipt_sortName").val("orderTime");
 			$("#ipt_sortType").val("desc");
 			requestLoad();
 		}
@@ -111,9 +87,8 @@ function requestLoad(){
        	 <dt>订单查询：</dt>
          <dd>
          	<select id = "selectorder" class="e_inpt" style="margin:0 10px 0 0;">
-            	<option value ="productName" >订单名称</option>
-                <option value ="orderNo">订单号码</option>
-                <option value ="comtractNum">合同编号</option>
+            	<option value ="passengerName" >乘客姓名</option>
+                <option value ="driverName">司机姓名</option>
             </select>
             <script type="text/javascript">
 				$("#selectorder option").each(function(){
@@ -129,7 +104,7 @@ function requestLoad(){
        </dl>
        <shiro:hasPermission name="USER_EXPORT">
        <dl>
-       	 <dt>操作：</dt>
+       	 <dt></dt>
          <dd>
             <%--<samp id = "btn_excel">导出EXCEL</samp>--%><span class="e_loy">共<b>${totalcount }</b>条订单记录</span>
          </dd>
@@ -172,6 +147,7 @@ function requestLoad(){
                     <td><strong>司机</strong></td>
                     <td><strong>车牌号</strong></td>
                     <td><strong>订单类型</strong></td>
+                     <td><strong>操作</strong></td>
                  </tr>
                  <c:forEach items = "${orderforms.content }" var ="orderform">
                  	<tr>

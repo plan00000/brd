@@ -53,6 +53,18 @@ public class OrderController {
                 searchParams.put("EQ_orderStatus", "5");
             }
         }
+        if(!StringUtils.isBlank(searchName)){
+            if("passengerName".equals(searchName)){
+                String search = "LIKE_tbPassenger.userName";
+                searchParams.put(search, searchValue);
+            }
+            if("driverName".equals(searchName)){
+                String search = "LIKE_tbDriver.userName";
+                searchParams.put(search, searchValue);
+            }
+
+        }
+
         Page<TbOrder> orderforms = orderService.adminOrderformList(searchParams, sortName, sortType, pageNum, Constant.PAGE_SIZE);
         model.addAttribute("orderforms", orderforms);
         model.addAttribute("status", status);
