@@ -17,10 +17,45 @@ import java.util.Date;
 public class TbDriver extends IdEntity implements java.io.Serializable {
     private static final long serialVersionUID = 1820717433366616044L;
 
+    public enum Sex {
+        /** wu */
+        wu,
+        /** 下班*/
+        ns,
+        ns1;
+        public String getDes() {
+            if (this == wu) {
+                return "无";
+            }
+            if (this == ns) {
+                return "男生";
+            }
+            if (this == ns1) {
+                return "女生";
+            }
+            return "";
+        }
+    };
+    public enum DriverStatus {
+        /** 上班 */
+        xb,
+        /** 下班*/
+        sb;
+        public String getDes() {
+            if (this == xb) {
+                return "下班";
+            }
+            if (this == sb) {
+                return "上班";
+            }
+            return "";
+        }
+    };
+
     /**
      * 性别：1-男生，2-女生，对应表字段为：tb_driver.sex
      */
-    private String sex;
+    private Sex sex;
 
     /**
      * 年龄，对应表字段为：tb_driver.age
@@ -58,7 +93,7 @@ public class TbDriver extends IdEntity implements java.io.Serializable {
      * 司机状态（0-下班，1-上班），对应表字段为：tb_driver.driver_status
      */
     @Column(name="driver_status")
-    private String driverStatus;
+    private DriverStatus driverStatus;
 
     /**
      * 用户目前位置，对应表字段为：tb_driver.location
@@ -123,18 +158,20 @@ public class TbDriver extends IdEntity implements java.io.Serializable {
     @Column(name="update_time")
     private Date updateTime;
 
+    public Sex getSex() {
+        return sex;
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
+    }
+
     /** 评价 */
     /*@OneToMany(targetEntity = TbEvaluate.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "driver_id", referencedColumnName = "id")
     private TbDriver tbDriver;*/
 
-    public String getSex() {
-        return sex;
-    }
 
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
 
     public String getAge() {
         return age;
@@ -184,11 +221,11 @@ public class TbDriver extends IdEntity implements java.io.Serializable {
         this.state = state;
     }
 
-    public String getDriverStatus() {
+    public DriverStatus getDriverStatus() {
         return driverStatus;
     }
 
-    public void setDriverStatus(String driverStatus) {
+    public void setDriverStatus(DriverStatus driverStatus) {
         this.driverStatus = driverStatus;
     }
 

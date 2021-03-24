@@ -23,49 +23,49 @@ public class TbLine extends IdEntity implements java.io.Serializable{
     /**
      * 起点，对应表字段为：tb_line.start_address
      */
-    @Column(name="")
+    @Column(name="start_address")
     private String startAddress;
 
     /**
      * 终点，对应表字段为：tb_line.end_address
      */
-    @Column(name="")
+    @Column(name="end_address")
     private String endAddress;
 
     /**
      * 起点经度，对应表字段为：tb_line.start_lon
      */
-    @Column(name="")
+    @Column(name="start_lon")
     private String startLon;
 
     /**
      * 起点纬度，对应表字段为：tb_line.start_lat
      */
-    @Column(name="")
+    @Column(name="start_lat")
     private String startLat;
 
     /**
      * 终点经度，对应表字段为：tb_line.end_lon
      */
-    @Column(name="")
+    @Column(name="end_lon")
     private String endLon;
 
     /**
      * 终点纬度，对应表字段为：tb_line.end_lat
      */
-    @Column(name="")
+    @Column(name="end_lat")
     private String endLat;
 
     /**
      * 创建时间，对应表字段为：tb_line.create_time
      */
-    @Column(name="")
+    @Column(name="create_time")
     private Date createTime;
 
     /**
      * 更新时间，对应表字段为：tb_line.update_time
      */
-    @Column(name="")
+    @Column(name="update_time")
     private Date updateTime;
 
 

@@ -1,8 +1,9 @@
-package com.zzy.brd.controller.admin.order;
+package com.zzy.brd.controller.admin.user;
 
 import com.zzy.brd.constant.Constant;
 import com.zzy.brd.entity.TbOrder;
-import com.zzy.brd.service.OrderService;
+import com.zzy.brd.entity.TbPassenger;
+import com.zzy.brd.service.PassengerService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,13 +17,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by wpr on 2021/3/23 0023.
+ * Created by wpr on 2021/3/24 0024.
  */
 @Controller
-@RequestMapping("admin/orderform")
-public class OrderController {
+@RequestMapping("admin/passenger")
+public class PassengerController {
+
     @Autowired
-    private OrderService orderService;
+    private PassengerService passengerService;
 
     @RequestMapping("list")
     public String list(@RequestParam(value = "page",required = true,defaultValue = "1") int pageNum
@@ -65,8 +67,8 @@ public class OrderController {
 
         }
 
-        Page<TbOrder> orderforms = orderService.adminOrderformList(searchParams, sortName, sortType, pageNum, Constant.PAGE_SIZE);
-        model.addAttribute("orderforms", orderforms);
+        Page<TbPassenger> passengerforms = passengerService.adminPassengerformList(searchParams, sortName, sortType, pageNum, Constant.PAGE_SIZE);
+        model.addAttribute("passengerforms", passengerforms);
         model.addAttribute("status", status);
         model.addAttribute("sortName", sortName);
         model.addAttribute("sortType", sortType);
@@ -74,7 +76,7 @@ public class OrderController {
         model.addAttribute("searchValue", searchValue);
         model.addAttribute("page", pageNum);
         model.addAttribute("queryStr", request.getQueryString());
-        model.addAttribute("totalcount", orderforms.getTotalElements());
-        return "admin/order/orderlist";
+        model.addAttribute("totalcount", passengerforms.getTotalElements());
+        return "admin/passenger/passengerlist";
     }
 }

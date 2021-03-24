@@ -20,10 +20,50 @@ import java.util.Date;
 public class TbPassenger extends IdEntity implements java.io.Serializable{
     private static final long serialVersionUID = 1820717433366616047L;
 
+    public enum Sex {
+        /** wu */
+        wu,
+        /** 下班*/
+        ns,
+        ns1;
+        public String getDes() {
+            if (this == wu) {
+                return "无";
+            }
+            if (this == ns) {
+                return "男生";
+            }
+            if (this == ns1) {
+                return "女生";
+            }
+            return "";
+        }
+    };
+    public enum State {
+        /** 禁用 */
+        jy,
+        /** 正常*/
+        zc,
+        /** 注销*/
+        zx;
+        public String getDes() {
+            if (this == jy) {
+                return "禁用";
+            }
+            if (this == zc) {
+                return "正常";
+            }
+            if (this == zx) {
+                return "注销";
+            }
+            return "";
+        }
+    };
+
     /**
      * 性别sex：1-男生，2-女生，对应表字段为：tb_passenger.sex
      */
-    private String sex;
+    private Sex sex;
 
     /**
      * 用户名称，对应表字段为：tb_passenger.user_name
@@ -39,7 +79,7 @@ public class TbPassenger extends IdEntity implements java.io.Serializable{
     /**
      * 用户状态state： 0-禁用,1-启用,2-删除，对应表字段为：tb_passenger.state
      */
-    private String state;
+    private State state;
 
     /**
      * 用户目前位置，对应表字段为：tb_passenger.location
@@ -79,11 +119,11 @@ public class TbPassenger extends IdEntity implements java.io.Serializable{
      */
     private String remark;
 
-    public String getSex() {
+    public Sex getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(Sex sex) {
         this.sex = sex;
     }
 
@@ -103,11 +143,11 @@ public class TbPassenger extends IdEntity implements java.io.Serializable{
         this.mobileno = mobileno;
     }
 
-    public String getState() {
+    public State getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(State state) {
         this.state = state;
     }
 

@@ -174,190 +174,28 @@
  					<li id="na_li0"><a href="${ctx}/admin/main"><i class="fa fa-table"></i> <span
 								class="nav-label">首页</span></a>
 					</li>
- 					
- 					<shiro:hasAnyPermissions name="ORGANIZATION_MANAGER_DEPART,ORGANIZATION_MANAGER_USER,ORGANIZATION_MANAGER_ROLE">
-					<li id="na_li1"><a href="#"><i class="fa fa-edit"></i> <span
-							class="nav-label">会员管理</span><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level collapse">
-							<shiro:hasPermission name="ORGANIZATION_MANAGER_DEPART"><li id="na_li1_1" >
-							<a href="${ctx}/admin/department/list">部门管理</a></li></shiro:hasPermission>
-							<shiro:hasPermission name="ORGANIZATION_MANAGER_ROLE"><li id="na_li1_2">
-							<a href="${ctx}/admin/role/list">角色管理</a></li></shiro:hasPermission>
-							<shiro:hasPermission name="ORGANIZATION_MANAGER_USER"><li id="na_li1_3">
-							<a href="${ctx}/admin/employee/list">员工管理</a></li>	</shiro:hasPermission>
-						</ul></li>
-					</shiro:hasAnyPermissions>
 
 					<shiro:hasPermission name="USER_MANAGER">
 						<li id="na_li2"><a href="${ctx}/admin/user/list"><i class="fa fa-user"></i> <span
-								class="nav-label">会员管理</span></a>
+								class="nav-label">后台用户管理</span></a>
 						</li>
 					</shiro:hasPermission>
-				 <shiro:hasAnyPermissions name="ORDER_MANAGER,ORDER_MANAGER_PC,ORDER_MANAGER_BROKERAGE,ORDER_MANAGER_WITHDRAW">
-					<li id="na_li3"><a href="#"><i class="fa fa-table"></i> <span
-							class="nav-label">订单管理</span><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level collapse">
-							<shiro:hasPermission name="ORDER_MANAGER">
-								<li id="na_li3_1" ><a href="${ctx}/admin/orderform/list">订单列表</a></li>
-							</shiro:hasPermission>
-							
-							<shiro:hasPermission name="ORDER_MANAGER_PC">
-								<li id="na_li3_2"><a href="${ctx}/admin/orderform/pc/list">官网订单</a></li>		
-							</shiro:hasPermission>
-							
-							<shiro:hasPermission name="ORDER_MANAGER_BROKERAGE">
-								<li id="na_li3_3"><a href="${ctx}/admin/orderform/brokerage/list">佣金订单</a></li>
-							</shiro:hasPermission> 
-							
-							<shiro:hasPermission name="ORDER_MANAGER_WITHDRAW">
-								<li id="na_li3_4"><a href="${ctx}/admin/orderform/flowwithdraw/list">提现订单</a></li>
-							</shiro:hasPermission>
-						</ul></li>
- 
-					</shiro:hasAnyPermissions>
-					<shiro:hasAnyPermissions name="PRODUCT_MANAGER_TYPE,PRODUCT_MANAGER">
-					<li id="na_li4"><a href="#"><i class="fa fa-table"></i> <span
-							class="nav-label">产品管理</span><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level collapse">
-							<shiro:hasPermission name="PRODUCT_MANAGER_TYPE">
-								<li id="na_li4_1" ><a href="${ctx}/admin/product/productType/list">产品类型</a></li>
-							</shiro:hasPermission>
-							
-							<shiro:hasPermission name="PRODUCT_MANAGER">
-								<li id="na_li4_2"><a href="${ctx}/admin/product/productlist">产品管理</a></li>		
-							</shiro:hasPermission>
-							
-						</ul></li>
- 
-					</shiro:hasAnyPermissions>  
-					 <shiro:hasAnyPermissions name="ACTIVITY_MANAGER_STAR,ACTIVITY_MANAGER_APPRENTICE,ACTIVITY_MANAGER_REGISTER,ACTIVITY_MANAGER_QRCODE">
-						<li id="na_li5"><a href="#"><i class="fa fa-edit"></i> <span
-								class="nav-label">活动管理</span><span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level collapse">
-								<shiro:hasPermission name="ACTIVITY_MANAGER_STAR">
-									<li id="na_li5_1"><a href="<c:url value='/admin/activity/starOrderList'/>">星级订单</a></li>
-								</shiro:hasPermission>
-								<shiro:hasPermission name="ACTIVITY_MANAGER_APPRENTICE">
-									<li id="na_li5_2"><a href="<c:url value='/admin/activity/apprenticeReward'/>">收徒奖励</a></li>
-								</shiro:hasPermission>
-								<shiro:hasPermission name="ACTIVITY_MANAGER_REGISTER">
-									<li id="na_li5_3"><a href="<c:url value='/admin/activity/recommendRegister'/>">推荐注册</a></li>
-								</shiro:hasPermission>
-								<shiro:hasPermission name="ACTIVITY_MANAGER_QRCODE">
-									<li id="na_li5_4"><a href="<c:url value='/admin/qrCodeActivity/list'/>">二维码活动</a></li>
-								</shiro:hasPermission>
-							</ul>
-						</li>
-					</shiro:hasAnyPermissions>
-					
-					<shiro:hasAnyPermissions name="TEXT_MANAGER_ACTIVITY,TEXT_MANAGER_HELP">
-						<li id="na_li6"><a href="#"><i class="fa fa-file-o"></i> <span
-								class="nav-label">微信文章</span><span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level collapse">
-								<shiro:hasPermission name="TEXT_MANAGER_ACTIVITY">
-									<li id="na_li6_1"><a href="${ctx}/admin/information/activity/list">活动资讯</a></li>	
-								</shiro:hasPermission>
-								<shiro:hasPermission name="TEXT_MANAGER_ACTIVITY">
-									<li id="na_li6_2"><a href="${ctx}/admin/information/help/list">帮助中心</a></li>	
-								</shiro:hasPermission>
-							</ul>
-						</li>
-					</shiro:hasAnyPermissions>
-					
-					<shiro:hasAnyPermissions name="TEXT_MANGER_PC_ACTIVITY,TEXT_MANAGER_APPRENTICE,TEXT_MANAGER_ABOUTUS">
-						<li id="na_li10"><a href="#"><i class="fa fa-file-o"></i> <span
-								class="nav-label">官网文章</span><span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level collapse">
-								<shiro:hasPermission name="TEXT_MANGER_PC_ACTIVITY">
-									<li id="na_li10_1" ><a href="${ctx}/admin/information/pcactivity/list">精彩资讯</a></li>	
-								</shiro:hasPermission>
-								<shiro:hasPermission name="TEXT_MANAGER_APPRENTICE">
-									<li id="na_li10_2" ><a href="${ctx}/admin/information/apprentice">收徒指南</a></li>	
-								</shiro:hasPermission>
-								<shiro:hasPermission name="TEXT_MANAGER_ABOUTUS">
-									<li id="na_li10_3" ><a href="${ctx}/admin/information/about">关于我们</a></li>	
-								</shiro:hasPermission>
-							</ul>
-						</li>
-					</shiro:hasAnyPermissions>
-					
-					 <shiro:hasAnyPermissions name="AD_MANAGER_PC,AD_MANAGER_WEIXIN">
-						<li id="na_li7"><a href="#"><i class="fa fa-picture-o"></i> <span
-								class="nav-label">广告管理</span><span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level collapse">
-								<shiro:hasPermission name="AD_MANAGER_PC">
-									<li id="na_li7_1"><a href="${ctx }/admin/advertisement/pc/ad/list">PC官网</a></li>	
-								</shiro:hasPermission>
-								<shiro:hasPermission name="AD_MANAGER_WEIXIN">
-									<li id="na_li7_2" ><a href="${ctx}/admin/advertisement/weixin/ad/list">微信站</a></li>	
-								</shiro:hasPermission>
-							</ul>
-						</li>
-					</shiro:hasAnyPermissions> 
-
-
-				    <shiro:hasAnyPermissions name="SET_MANAGER_BASE,SET_MANAGER_INFO,SET_MANAGER_AGGREMENT,SET_WECHAT_NOTIFY,SET_ORDERFORM_NOTIFY,SET_SEO_SETTING">
-						<li id="na_li8"><a href="#"><i class="fa fa-laptop"></i> <span
-								class="nav-label">平台设置</span><span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level collapse">
-								<shiro:hasPermission name="SET_MANAGER_BASE">
-									<li id="na_li8_1"><a href="<c:url value='/admin/platformSetting/baseSetting'/>">基础设置</a></li>
-								</shiro:hasPermission>
-								<shiro:hasPermission name="SET_MANAGER_INFO">
-									<li id="na_li8_2"><a href="<c:url value='/admin/platformSetting/toAddMessage'/>">短信通知</a></li>
-								</shiro:hasPermission>
-								<shiro:hasPermission name="SET_ORDERFORM_NOTIFY">
-									<li id="na_li8_3"><a href="<c:url value='/admin/platformSetting/orderMessage'/>">订单通知</a></li>
-								</shiro:hasPermission> 
-								<shiro:hasPermission name="SET_MANAGER_AGGREMENT">
-									<li id="na_li8_4"><a href="<c:url value='/admin/platformSetting/toServiceAgreement'/>">服务协议</a></li>
-								</shiro:hasPermission> 
-								<shiro:hasPermission name="SET_WECHAT_NOTIFY">
-									<li id="na_li8_5"><a href="<c:url value='/admin/weixinPost/weixinPost'/>">微信推送</a></li>
-								</shiro:hasPermission>
-								<shiro:hasPermission name="SET_SEO_SETTING">
-									<li id="na_li8_6"><a href="<c:url value='/admin/platformSetting/seoSetting'/>">SEO设置</a></li>
-								</shiro:hasPermission>
-								<shiro:hasPermission name="SET_FRIENDSHIPLINK">
-									<li id="na_li8_7"><a href="<c:url value='/admin/platformSetting/friendshiplink/list'/>">友情链接</a></li>
-								</shiro:hasPermission>
-							</ul>
-						</li>
-					</shiro:hasAnyPermissions>
-						 <shiro:hasAnyPermissions name="STATISTICS_MANAGER_USER,STATISTICS_REPORT_USER,STATISTICS_MANAGER_ORDER,STATISTICS_MANAGER_PRODUCT,STATISTICS_MANAGER_DEPART,STATISTICS_MANAGER_BROKERAGE">
-						<li id="na_li9"><a href="#"><i class="fa fa-pie-chart"></i> <span
-								class="nav-label">报表统计</span><span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level collapse">
-									<shiro:hasPermission name="STATISTICS_MANAGER_USER">
-										<li id="na_li9_1" ><a href="<c:url value='/admin/reportStatistics/userStatistics/userStatistics'/>">会员统计</a></li>
-									</shiro:hasPermission>
-									<shiro:hasPermission name="STATISTICS_REPORT_USER">
-										<li id="na_li9_2" ><a href="<c:url value='/admin/reportStatistics/userReport/userReport'/>">会员报表</a></li>
-									</shiro:hasPermission>
-									<shiro:hasPermission name="STATISTICS_MANAGER_ORDER">
-										<li id="na_li9_3" ><a href="<c:url value='/admin/reportStatistics/orderStatistics/orderStatistics'/>">订单统计</a></li>
-									</shiro:hasPermission>
-									<shiro:hasPermission name="STATISTICS_MANAGER_PRODUCT">
-										<li id="na_li9_4"><a href="<c:url value='/admin/reportStatistics/productStatistics/productStatistics'/>">产品统计</a></li>
-									</shiro:hasPermission>
-									<shiro:hasPermission name="STATISTICS_MANAGER_DEPART">
-										<li id="na_li9_5"><a href="<c:url value='/admin/reportStatistics/departmentStatistics/departmentStatistics'/>">部门统计</a></li>
-									</shiro:hasPermission>
-									<shiro:hasPermission name="STATISTICS_MANAGER_BROKERAGE">
-										<li id="na_li9_6"><a href="<c:url value='/admin/reportStatistics/brokerageStatistics/brokerageStatistics'/>">佣金统计</a></li>
-									</shiro:hasPermission>
-									<shiro:hasPermission name="STATISTICS_SELLER">
-										<li id="na_li9_7"><a href="<c:url value='/admin/reportStatistics/sellerStatistics'/>">商家统计</a></li>
-									</shiro:hasPermission>
-										<li id="na_li9_8"><a href="<c:url value='/admin/reportStatistics/pv'/>">访问量统计</a></li>
-							</ul>
-						</li>
-					</shiro:hasAnyPermissions>
-					
 					<shiro:hasPermission name="SYS_LOG">
-						<li id="na_li11"><a href="${ctx}/admin/operlog/list"><i class="fa fa-magic"></i> <span class="nav-label">操作日志</span></a>
+						<li id="na_li3"><a href="${ctx}/admin/orderform/list"><i class="fa fa-magic"></i> <span class="nav-label">订单管理</span></a>
 						</li>
-					</shiro:hasPermission> 
+					</shiro:hasPermission>
+					<shiro:hasPermission name="SYS_LOG">
+						<li id="na_li4"><a href="${ctx}/admin/line/list"><i class="fa fa-magic"></i> <span class="nav-label">线路管理</span></a>
+						</li>
+					</shiro:hasPermission>
+					<shiro:hasPermission name="SYS_LOG">
+						<li id="na_li5"><a href="${ctx}/admin/driver/list"><i class="fa fa-magic"></i> <span class="nav-label">司机管理</span></a>
+						</li>
+					</shiro:hasPermission>
+					<shiro:hasPermission name="SYS_LOG">
+						<li id="na_li6"><a href="${ctx}//admin/orderform/list"><i class="fa fa-magic"></i> <span class="nav-label">乘客管理</span></a>
+						</li>
+					</shiro:hasPermission>
 	
 				 </ul>
 			</div>
