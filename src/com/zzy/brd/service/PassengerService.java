@@ -1,7 +1,6 @@
 package com.zzy.brd.service;
 
 import com.zzy.brd.dao.TbPassengerDao;
-import com.zzy.brd.entity.TbOrder;
 import com.zzy.brd.entity.TbPassenger;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,7 @@ public class PassengerService extends BaseService{
             String sort = sortName+":"+sortType;
             pageRequest = createPageRequest(pageNum, pageSize, sort, false);
         }else{
-            pageRequest = createPageRequest(pageNum,pageSize,"orderTime:desc",false);
+            pageRequest = createPageRequest(pageNum,pageSize,"createTime:desc",false);
         }
         @SuppressWarnings("unchecked")
         Specification<TbPassenger> spec = (Specification<TbPassenger>) createSpecification(

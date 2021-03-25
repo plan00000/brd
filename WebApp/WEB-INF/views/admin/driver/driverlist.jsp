@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>司机列表</title>
+<title>司机管理</title>
 <script type="text/javascript">
 $(function(){
 	activeNav2("3","3_2");
@@ -66,8 +66,8 @@ function requestLoad(){
 	</form>
 	<div class="row border-bottom">
 		<div class="basic">
-	   		<p>司机</p>
-	        <span><a href="${ctx }/admin/main;JSESSIONID=<%=request.getSession().getId()%>"  style="margin-left:0;">首页</a>><a href="#" >订单管理</a>><a><strong>官网订单</strong></a></span>
+	   		<p>司机管理</p>
+	        <span><a href="${ctx }/admin/main;JSESSIONID=<%=request.getSession().getId()%>"  style="margin-left:0;">首页</a>><a href="#" >司机管理</a>><a><strong>司机列表</strong></a></span>
 	    </div>
     </div>
     <div class="employee animated fadeInRight ">
@@ -101,8 +101,9 @@ function requestLoad(){
        </dl>
        <shiro:hasPermission name="USER_EXPORT">
        <dl>
-       	 <dt></dt>
+       	 <dt>操作：</dt>
          <dd>
+			 <a href="${ctx}/admin/driver/toAddDriver" ><samp>新增司机</samp></a>
             <%--<samp id = "btn_excel">导出EXCEL</samp>--%><span class="e_loy">共<b>${totalcount }</b>条订单记录</span>
          </dd>
        </dl>
@@ -144,7 +145,7 @@ function requestLoad(){
 						<td>${driverforms.carMark }</td>
 						<td>${driverforms.carColor }</td>
 	                    <td class="l_ls">${driverforms.driverStatus.getDes() }</td>
-	                    <td><a href="${ctx }/admin/driver/detail/${driverforms.id}"><span><img src="${ctx }/static/brd/img/bjt1.png"></span></a></td>
+	                    <td><a href="${ctx }/admin/driver/toEditDriver/${driverforms.id}"><span><img src="${ctx }/static/brd/img/bjt1.png"></span></a></td>
                  	</tr>
                  </c:forEach>
                  

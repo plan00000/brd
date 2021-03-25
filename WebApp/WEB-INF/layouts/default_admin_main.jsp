@@ -193,7 +193,7 @@
 						</li>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="SYS_LOG">
-						<li id="na_li6"><a href="${ctx}//admin/orderform/list"><i class="fa fa-magic"></i> <span class="nav-label">乘客管理</span></a>
+						<li id="na_li6"><a href="${ctx}//admin/passenger/list"><i class="fa fa-magic"></i> <span class="nav-label">乘客管理</span></a>
 						</li>
 					</shiro:hasPermission>
 	

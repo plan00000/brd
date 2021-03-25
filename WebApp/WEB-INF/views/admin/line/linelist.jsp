@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>线路列表</title>
+<title>线路管理</title>
 <script type="text/javascript">
 $(function(){
 	activeNav2("3","3_2");
@@ -67,22 +67,10 @@ function requestLoad(){
 	<div class="row border-bottom">
 		<div class="basic">
 	   		<p>线路管理</p>
-	        <span><a href="${ctx }/admin/main;JSESSIONID=<%=request.getSession().getId()%>"  style="margin-left:0;">首页</a>><a href="#" >订单管理</a>><a><strong>官网订单</strong></a></span>
+	        <span><a href="${ctx }/admin/main;JSESSIONID=<%=request.getSession().getId()%>"  style="margin-left:0;">首页</a>><a href="#" >线路管理</a>><a><strong>线路列表</strong></a></span>
 	    </div>
     </div>
     <div class="employee animated fadeInRight ">
-       <%--<dl>
-       	 <dt>订单状态：</dt>
-         <dd>
-         	<p class=" orderstatus <c:if test = "${status =='' }"> e_class</c:if>" data-type = "ordersStatus" data-value = "" onclick = "changeValue(this)">全部状态</p>
-            <p class=" orderstatus <c:if test = "${status =='0' }"> e_class</c:if>" data-type = "ordersStatus" data-value = "0" onclick = "changeValue(this)">已取消</p>
-            <p class=" orderstatus <c:if test = "${status =='1' }"> e_class</c:if>" data-type = "ordersStatus" data-value = "1" onclick = "changeValue(this)">派单中</p>
-            <p class=" orderstatus <c:if test = "${status =='2' }"> e_class</c:if>" data-type = "ordersStatus" data-value = "2" onclick = "changeValue(this)">司机已接单</p>
-            <p class=" orderstatus <c:if test = "${status =='3' }"> e_class</c:if>" data-type = "ordersStatus" data-value = "3" onclick = "changeValue(this)">行程开始</p>
-            <p class=" orderstatus <c:if test = "${status =='4' }"> e_class</c:if>" data-type = "ordersStatus" data-value = "4" onclick = "changeValue(this)">行程已完成</p>
-            <p class=" orderstatus <c:if test = "${status =='5' }"> e_class</c:if>" data-type = "ordersStatus" data-value = "5" onclick = "changeValue(this)">超时订单</p>
-         </dd>
-       </dl>--%>
        <dl>
        	 <dt>线路查询：</dt>
          <dd>
@@ -104,8 +92,9 @@ function requestLoad(){
        </dl>
        <shiro:hasPermission name="USER_EXPORT">
        <dl>
-       	 <dt></dt>
+       	 <dt>操作</dt>
          <dd>
+			 <a href="${ctx}/admin/line/addLine" ><samp>新增线路</samp></a>
             <%--<samp id = "btn_excel">导出EXCEL</samp>--%><span class="e_loy">共<b>${totalcount }</b>条订单记录</span>
          </dd>
        </dl>

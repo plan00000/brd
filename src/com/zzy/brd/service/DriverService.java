@@ -2,6 +2,7 @@ package com.zzy.brd.service;
 
 import com.zzy.brd.dao.TbDriverDao;
 import com.zzy.brd.dao.TbOrderDao;
+import com.zzy.brd.dto.rep.RepSimpleMessageDTO;
 import com.zzy.brd.entity.TbDriver;
 import com.zzy.brd.entity.TbOrder;
 import org.apache.commons.lang3.StringUtils;
@@ -12,7 +13,9 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.DigestUtils;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,6 +28,15 @@ public class DriverService extends BaseService{
     @Autowired
     private TbDriverDao tbDriverDao;
 
+    /**
+     * 列表
+     * @param searchParams
+     * @param sortName
+     * @param sortType
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     public Page<TbDriver> adminDriverformList(Map<String,Object> searchParams, String sortName, String sortType, int pageNum, int pageSize){
         PageRequest pageRequest ;
         if(!StringUtils.isBlank(sortName) && !StringUtils.isBlank(sortType)){
@@ -38,5 +50,63 @@ public class DriverService extends BaseService{
                 searchParams, TbDriver.class);
         Page<TbDriver> result = tbDriverDao.findAll(spec, pageRequest);
         return result;
+    }
+
+    /**
+     * 添加订单
+     * @param tbDriver
+     * @return
+     */
+    public RepSimpleMessageDTO addDriver(TbDriver tbDriver){
+        RepSimpleMessageDTO repSimpleMessageDTO = new RepSimpleMessageDTO();
+        List<TbDriver> checkTbDriverList =tbDriverDao.findTbDriverByMobileno(tbDriver.getMobileno());
+        if(checkTbDriverList !=null || checkTbDriverList.size()!=0){
+            repSimpleMessageDTO.setCode(0);
+            repSimpleMessageDTO.setMes("该手机号已注册过");
+        }
+        if(tbDriverDao.save(tbDriver)==null?false:true){
+            repSimpleMessageDTO.setCode(1);
+            repSimpleMessageDTO.setMes("新增成功");
+        }else{
+            repSimpleMessageDTO.setCode(0);
+            repSimpleMessageDTO.setMes("新增失败");
+        }
+        return repSimpleMessageDTO;
+    }
+
+    /**
+     * 修改
+     * @param tbDriver
+     * @return
+     */
+    public RepSimpleMessageDTO editDriver(TbDriver tbDriver){
+        TbDriver editTbDriver = tbDriverDao.findOne(tbDriver.getId());
+        editTbDriver.setMobileno(tbDriver.getMobileno());
+        editTbDriver.setPassword(tbDriver.getPassword());
+        editTbDriver.setUserName(tbDriver.getUserName());
+        editTbDriver.setCarNo(tbDriver.getCarNo());
+        editTbDriver.setIdCard(tbDriver.getIdCard());
+        editTbDriver.setDriverNo(tbDriver.getDriverNo());
+        editTbDriver.setCarMark(tbDriver.getCarMark());
+        editTbDriver.setCarColor(tbDriver.getCarColor());
+        RepSimpleMessageDTO repSimpleMessageDTO = new RepSimpleMessageDTO();
+
+        if(tbDriverDao.save(editTbDriver)==null?false:true){
+            repSimpleMessageDTO.setCode(1);
+            repSimpleMessageDTO.setMes("编辑成功");
+        }else{
+            repSimpleMessageDTO.setCode(0);
+            repSimpleMessageDTO.setMes("编辑失败");
+        }
+        return repSimpleMessageDTO;
+    }
+
+    /**
+     *
+     * @param driverId
+     * @return
+     */
+    public TbDriver findById(long driverId){
+        return tbDriverDao.findOne(driverId);
     }
 }

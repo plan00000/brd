@@ -37,31 +37,22 @@ public class PassengerController {
         Map<String,Object> searchParams = new HashMap<String, Object>();
         if(!StringUtils.isBlank(status)){
             if("0".equals(status)){
-                searchParams.put("EQ_orderStatus", 0);
+                searchParams.put("EQ_state", 0);
             }
             if("1".equals(status)){
-                searchParams.put("EQ_orderStatus", 1);
+                searchParams.put("EQ_state", 1);
             }
             if("2".equals(status)){
-                searchParams.put("EQ_orderStatus", 2);
-            }
-            if("3".equals(status)){
-                searchParams.put("EQ_orderStatus", 3);
-            }
-            if("4".equals(status)){
-                searchParams.put("EQ_orderStatus", 4);
-            }
-            if("5".equals(status)){
-                searchParams.put("EQ_orderStatus", 5);
+                searchParams.put("EQ_state", 2);
             }
         }
         if(!StringUtils.isBlank(searchName)){
-            if("passengerName".equals(searchName)){
-                String search = "LIKE_tbPassenger.userName";
+            if("userName".equals(searchName)){
+                String search = "LIKE_userName";
                 searchParams.put(search, searchValue);
             }
-            if("driverName".equals(searchName)){
-                String search = "LIKE_tbDriver.userName";
+            if("mobileno".equals(searchName)){
+                String search = "LIKE_mobileno";
                 searchParams.put(search, searchValue);
             }
 

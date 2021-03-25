@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>官网订单</title>
+<title>订单管理</title>
 <script type="text/javascript">
 $(function(){
 	activeNav2("3","3_2");
@@ -67,7 +67,7 @@ function requestLoad(){
 	<div class="row border-bottom">
 		<div class="basic">
 	   		<p>订单管理</p>
-	        <span><a href="${ctx }/admin/main;JSESSIONID=<%=request.getSession().getId()%>"  style="margin-left:0;">首页</a>><a href="#" >订单管理</a>><a><strong>官网订单</strong></a></span>
+	        <span><a href="${ctx }/admin/main;JSESSIONID=<%=request.getSession().getId()%>"  style="margin-left:0;">首页</a>><a href="#" >订单管理</a>><a><strong>订单列表</strong></a></span>
 	    </div>
     </div>
     <div class="employee animated fadeInRight ">

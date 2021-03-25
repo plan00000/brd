@@ -1,8 +1,10 @@
 package com.zzy.brd.controller.admin.line;
 
 import com.zzy.brd.constant.Constant;
+import com.zzy.brd.dto.rep.RepSimpleMessageDTO;
 import com.zzy.brd.entity.TbLine;
 import com.zzy.brd.entity.TbOrder;
+import com.zzy.brd.mobile.util.ShiroUtil;
 import com.zzy.brd.service.LineService;
 import com.zzy.brd.service.OrderService;
 import org.apache.commons.lang3.StringUtils;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -90,5 +93,40 @@ public class LineController {
         model.addAttribute("queryStr", request.getQueryString());
         model.addAttribute("totalcount", lineforms.getTotalElements());
         return "admin/line/linelist";
+    }
+
+    /**
+     * 跳转到新增司机页面
+     * @return
+     */
+    @RequestMapping(value = "toAddLine")
+    public String toAddDriver() {
+
+        return "admin/line/addLine";
+    }
+
+    @RequestMapping(value = "addLine")
+    @ResponseBody
+    public RepSimpleMessageDTO addLine(
+            @RequestParam(value = "startAddress", required = false) String startAddress,
+            @RequestParam(value = "endAddress", required = false) String endAddress,
+            HttpServletRequest request) {
+        TbLine tbLine = new TbLine();
+        tbLine.setStartAddress(startAddress);
+        tbLine.setEndAddress(endAddress);
+        RepSimpleMessageDTO res = lineService.addLine(tbLine);
+        return res;
+    }
+    /**
+     * 删除线路
+     * @param id
+     * @return
+     */
+    @RequestMapping("delete")
+    @ResponseBody
+    public RepSimpleMessageDTO deleteProduct(@RequestParam("id") long id
+            ,HttpServletRequest request){
+        RepSimpleMessageDTO rep = lineService.deleteLine(id);
+        return rep;
     }
 }

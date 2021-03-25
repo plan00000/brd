@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>官网订单</title>
+<title>乘客管理</title>
 <script type="text/javascript">
 $(function(){
 	activeNav2("3","3_2");
@@ -66,29 +66,26 @@ function requestLoad(){
 	</form>
 	<div class="row border-bottom">
 		<div class="basic">
-	   		<p>订单管理</p>
-	        <span><a href="${ctx }/admin/main;JSESSIONID=<%=request.getSession().getId()%>"  style="margin-left:0;">首页</a>><a href="#" >订单管理</a>><a><strong>官网订单</strong></a></span>
+	   		<p>乘客管理</p>
+	        <span><a href="${ctx }/admin/main;JSESSIONID=<%=request.getSession().getId()%>"  style="margin-left:0;">首页</a>><a href="#" >乘客管理</a>><a><strong>乘客列表</strong></a></span>
 	    </div>
     </div>
     <div class="employee animated fadeInRight ">
        <dl>
-       	 <dt>订单状态：</dt>
+       	 <dt>状态：</dt>
          <dd>
          	<p class=" orderstatus <c:if test = "${status =='' }"> e_class</c:if>" data-type = "ordersStatus" data-value = "" onclick = "changeValue(this)">全部状态</p>
-            <p class=" orderstatus <c:if test = "${status =='0' }"> e_class</c:if>" data-type = "ordersStatus" data-value = "0" onclick = "changeValue(this)">已取消</p>
-            <p class=" orderstatus <c:if test = "${status =='1' }"> e_class</c:if>" data-type = "ordersStatus" data-value = "1" onclick = "changeValue(this)">派单中</p>
-            <p class=" orderstatus <c:if test = "${status =='2' }"> e_class</c:if>" data-type = "ordersStatus" data-value = "2" onclick = "changeValue(this)">司机已接单</p>
-            <p class=" orderstatus <c:if test = "${status =='3' }"> e_class</c:if>" data-type = "ordersStatus" data-value = "3" onclick = "changeValue(this)">行程开始</p>
-            <p class=" orderstatus <c:if test = "${status =='4' }"> e_class</c:if>" data-type = "ordersStatus" data-value = "4" onclick = "changeValue(this)">行程已完成</p>
-            <p class=" orderstatus <c:if test = "${status =='5' }"> e_class</c:if>" data-type = "ordersStatus" data-value = "5" onclick = "changeValue(this)">超时订单</p>
-         </dd>
+            <p class=" orderstatus <c:if test = "${status =='0' }"> e_class</c:if>" data-type = "ordersStatus" data-value = "0" onclick = "changeValue(this)">禁用</p>
+            <p class=" orderstatus <c:if test = "${status =='1' }"> e_class</c:if>" data-type = "ordersStatus" data-value = "1" onclick = "changeValue(this)">正常</p>
+            <p class=" orderstatus <c:if test = "${status =='2' }"> e_class</c:if>" data-type = "ordersStatus" data-value = "2" onclick = "changeValue(this)">注销</p>
+            </dd>
        </dl>
        <dl>
-       	 <dt>订单查询：</dt>
+       	 <dt>乘客查询：</dt>
          <dd>
          	<select id = "selectorder" class="e_inpt" style="margin:0 10px 0 0;">
-            	<option value ="passengerName" >乘客姓名</option>
-                <option value ="driverName">司机姓名</option>
+            	<option value ="userName" >姓名</option>
+                <option value ="mobileno">手机号</option>
             </select>
             <script type="text/javascript">
 				$("#selectorder option").each(function(){
@@ -124,18 +121,19 @@ function requestLoad(){
                  	<td class="l_width">
                    <!--  <input type="checkbox" class="l_in"> -->
                     </td>
-                    <td><strong>乘客</strong></td>
-					 <td><strong>乘客电话</strong></td>
-                    <td><strong>起点</strong></td>
-                    <td><strong>终点</strong></td>
+                    <td><strong>姓名</strong></td>
+					 <td><strong>性别</strong></td>
+                    <td><strong>手机号</strong></td>
+                     <td><strong>身份证号</strong></td>
+                    <td><strong>状态</strong></td>
                     <td>
                     <div class="level_triangle">
-                    	<p><strong>下单时间</strong></p>
+                    	<p><strong>注册时间</strong></p>
                     	<c:choose>
-                    		<c:when test="${sortName eq 'orderTime' && sortType eq 'desc' }">
+                    		<c:when test="${sortName eq 'createTime' && sortType eq 'desc' }">
                     			<span class="l_sanj2" id ="sortorderTime" data-id = 1></span>
                     		</c:when>
-                    		<c:when test="${sortName eq 'orderTime' && sortType eq 'asc' }">
+                    		<c:when test="${sortName eq 'createTime' && sortType eq 'asc' }">
                     			<span class="l_sanj1" id ="sortorderTime" data-id = 2></span>
                     		</c:when>
                     		<c:otherwise>
@@ -144,30 +142,25 @@ function requestLoad(){
                     	</c:choose>
 
                     </div></td>
-                    <td><strong>司机</strong></td>
-                    <td><strong>车牌号</strong></td>
-                    <td><strong>订单类型</strong></td>
                      <td><strong>操作</strong></td>
                  </tr>
-                 <c:forEach items = "${orderforms.content }" var ="orderform">
+                 <c:forEach items = "${passengerforms.content }" var ="passengerforms">
                  	<tr>
                  		<td></td>
-	                    <td>${orderform.tbPassenger.userName }</td>
-						<td>${orderform.tbPassenger.mobileno }</td>
-						<td>${orderform.orderStartAddress }</td>
-						<td>${orderform.orderEndAddress }</td>
-						<td>${util:formatNormalDate(orderform.orderTime) }</td>
-						<td>${orderform.tbDriver.userName }</td>
-						<td>${orderform.tbDriver.carNo }</td>
-	                    <td class="l_ls">${orderform.orderStatus.getDes() }</td>
-	                    <td><a href="${ctx }/admin/orderform/detail/${orderform.id}"><span><img src="${ctx }/static/brd/img/bjt1.png"></span></a></td>
+	                    <td>${passengerforms.userName }</td>
+						<td class="l_ls">${passengerforms.sex.getDes() }</td>
+						<td>${passengerforms.mobileno }</td>
+						<td>${passengerforms.idCard }</td>
+                        <td class="l_ls">${passengerforms.state.getDes() }</td>
+						<td>${util:formatNormalDate(passengerforms.createTime) }</td>
+	                    <td><a href="${ctx }/admin/passenger/detail/${passengerforms.id}"><span><img src="${ctx }/static/brd/img/bjt1.png"></span></a></td>
                  	</tr>
                  </c:forEach>
                  
                  </tbody>
                  </table>
        			<div class=" m_right">
-                     <tags:pagination paginationSize="10" page="${orderforms}" hrefPrefix="${ctx }/admin/passenger/list" hrefSubfix="${queryStr}"></tags:pagination>
+                     <tags:pagination paginationSize="10" page="${passengerforms}" hrefPrefix="${ctx }/admin/passenger/list" hrefSubfix="${queryStr}"></tags:pagination>
                  </div>
         </div>
         </div>
