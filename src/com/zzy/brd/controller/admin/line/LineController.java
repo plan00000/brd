@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -115,6 +116,47 @@ public class LineController {
         tbLine.setStartAddress(startAddress);
         tbLine.setEndAddress(endAddress);
         RepSimpleMessageDTO res = lineService.addLine(tbLine);
+        return res;
+    }
+    /**
+     * 跳转到编辑页面
+     * @param pageNumber
+     * @param type
+     * * @param model
+     * @return
+     */
+    @RequestMapping(value = "toEditLine/{lineId}")
+    public String toEditDriver(
+            @PathVariable long lineId,
+            @RequestParam(value = "page", required = true, defaultValue = "1") int pageNumber,
+            @RequestParam(value = "type", required = false, defaultValue = "brokerage") String type,
+            Model model) {
+        TbLine tbLine = lineService.findById(lineId);
+
+        model.addAttribute("tbLine", tbLine);
+        model.addAttribute("type", type);
+        return "admin/line/editLine";
+    }
+
+    /**
+     * 编辑
+     * @param phone
+     * @param password
+
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "editLine")
+    @ResponseBody
+    public RepSimpleMessageDTO editLine(
+            @RequestParam(value="id",required = true) long id,
+            @RequestParam(value = "startAddress", required = false) String startAddress,
+            @RequestParam(value = "endAddress", required = false) String endAddress,
+            HttpServletRequest request) {
+        TbLine tbLine = new TbLine();
+        tbLine.setEndAddress(startAddress);
+        tbLine.setEndAddress(endAddress);
+        RepSimpleMessageDTO res = lineService.editLine(tbLine);
         return res;
     }
     /**

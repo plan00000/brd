@@ -63,6 +63,27 @@ public class LineService extends BaseService{
         repSimpleMessageDTO.setMes("新增线路成功");
         return repSimpleMessageDTO;
     }
+    /**
+     * 修改
+     * @param tbLine
+     * @return
+     */
+    public RepSimpleMessageDTO editLine(TbLine tbLine){
+        TbLine editTbLine = tbLineDao.findOne(tbLine.getId());
+        editTbLine.setStartAddress(tbLine.getStartAddress());
+        editTbLine.setEndAddress(tbLine.getEndAddress());
+        editTbLine.setUpdateTime(new Date());
+        RepSimpleMessageDTO repSimpleMessageDTO = new RepSimpleMessageDTO();
+
+        if(tbLineDao.save(editTbLine)==null?false:true){
+            repSimpleMessageDTO.setCode(1);
+            repSimpleMessageDTO.setMes("编辑成功");
+        }else{
+            repSimpleMessageDTO.setCode(0);
+            repSimpleMessageDTO.setMes("编辑失败");
+        }
+        return repSimpleMessageDTO;
+    }
 
     /**
      * 删除
@@ -84,5 +105,14 @@ public class LineService extends BaseService{
             return repSimpleMessageDTO;
         }
         return repSimpleMessageDTO;
+    }
+
+    /**
+     *
+     * @param lineId
+     * @return
+     */
+    public TbLine findById(long lineId){
+        return tbLineDao.findOne(lineId);
     }
 }

@@ -11,7 +11,7 @@
 <script type="text/javascript" src="${ctx }/static/js/common.js"></script>
 <script type="text/javascript" src="${ctx }/static/js/md5-min.js"></script>
 <script src="${ctx}/static/js/input-number-change.js"></script>
-<title>新增线路</title>
+<title>编辑线路</title>
 <script type="text/javascript">
 	$(function() {
 		activeNav("2");
@@ -55,9 +55,9 @@
 
 			$("#submitform").unbind("click");
 			password =hex_md5($("#password").val());
-			$.post("${ctx}/admin/line/addLine",{startAddress:startAddress,endAddress:endAddress},function(data){
+			$.post("${ctx}/admin/line/editLine",{startAddress:startAddress,endAddress:endAddress,id:'${tbLine.id}'},function(data){
 					if(data.code==1){
-						showCallBackDialog("添加成功",function(){
+						showCallBackDialog("编辑成功",function(){
 							location.href = "${ctx}/admin/driver/list";
 						})
 					}else{
@@ -76,22 +76,22 @@
 <body>
 <div class="row  border-bottom">
 	<div class="basic">
-        <p>新增线路</p>
+        <p>编辑线路</p>
         <span><a href="<c:url value='/admin/main'/>"  style="margin-left:0;">首页</a>><a href="#" >线路管理</a>><a><strong>新增线路</strong></a></span>
     </div>
     </div>
 	<div class="new_emp animated fadeInRight">
             <div class="new_xinxi"><p><font>线路信息</font></p></div>
-            <form id="myform" action="${ctx }/admin/line/addLine" >
+            <form id="myform" action="${ctx }/admin/line/editLine" >
 	            <div class="new_text">
 	                <div class="new_batt" >
 						<dl>
 							<dt>起点：</dt>
-							<dd><input type="text" name="startAddress" id="startAddress" maxlength="31"  class="n_la" ></dd>
+							<dd><input type="text" name="startAddress" id="startAddress" value="${tbLine.startAddress}" maxlength="31"  class="n_la" ></dd>
 						</dl>
 						<dl>
 							<dt>终点：</dt>
-							<dd><input type="text" name="endAddress" id="endAddress" maxlength="31"  class="n_la" ></dd>
+							<dd><input type="text" name="endAddress" id="endAddress" value="${tbLine.endAddress}" maxlength="31"  class="n_la" ></dd>
 						</dl>
 	            </div>
 	            </div>
