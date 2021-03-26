@@ -49,6 +49,23 @@ function changeValue(object){
 		requestLoad();
 	}
 }
+/** 删除*/
+function deleteLine(object){
+    var $this = $(object);
+    var id = $this.data('value');
+    var data = {};
+    data.id=id;
+    showCallBackDialog("是否确定删除？",function(){
+        $.post('${ctx }/admin/line/delete;JSESSIONID=<%=request.getSession().getId()%>',data,function(res){
+            if(res.code == 1){
+                alert("删除成功");
+                location.reload();
+            }else{
+                alert(res.mes);
+            }
+        })
+    });
+}
 function requestLoad(){
 	$("#request_form").submit();
 }
@@ -92,9 +109,9 @@ function requestLoad(){
        </dl>
        <shiro:hasPermission name="USER_EXPORT">
        <dl>
-       	 <dt>操作</dt>
+       	 <dt>操作：</dt>
          <dd>
-			 <a href="${ctx}/admin/line/addLine" ><samp>新增线路</samp></a>
+			 <a href="${ctx}/admin/line/toAddLine" ><samp>新增线路</samp></a>
             <%--<samp id = "btn_excel">导出EXCEL</samp>--%><span class="e_loy">共<b>${totalcount }</b>条订单记录</span>
          </dd>
        </dl>
@@ -131,7 +148,7 @@ function requestLoad(){
                     	</c:choose>
 
                     </div></td>
-                     <td><strong>操作</strong></td>
+                     <td><strong>操作：</strong></td>
                  </tr>
                  <c:forEach items = "${lineforms.content }" var ="lineforms">
                  	<tr>
@@ -140,8 +157,9 @@ function requestLoad(){
 						<td>${lineforms.endAddress }</td>
 						<td>${util:formatNormalDate(lineforms.createTime) }</td>
 	                    <%--<td class="l_ls">${orderform.orderStatus.getDes() }</td>--%>
-	                    <td><a href="${ctx }/admin/line/detail/${lineforms.id}"><span><img src="${ctx }/static/brd/img/bjt1.png"></span></a></td>
-                 	</tr>
+	                    <td><a href="${ctx }/admin/line/toEditLine/${lineforms.id}"><span><img src="${ctx }/static/brd/img/bjt1.png"></span></a>
+						<a href="#" class ="btn_delete" data-value = "${lineforms.id }" onclick = "deleteLine(this)"><span><img src="${ctx }/static/brd/img/bjt3.png"></span></a></td>
+					</tr>
                  </c:forEach>
                  
                  </tbody>

@@ -253,34 +253,17 @@ public class UserService extends BaseService {
 	 */
 	@Transactional(readOnly = true)
 	public Page<User> listUsers(Map<String, Object> searchParams,
-			int pageNumber, int pageSize, String sortName, String sortType,boolean contacted) {
+			int pageNumber, int pageSize, String sortName, String sortType) {
 		PageRequest pageRequest;
-		
-		if (sortName != null && sortType !=null) {
-			String search ="";
-			if(sortName.equals("loginTimes")){
-				search="loginTimes:"+sortType;
-			}else{
-				search="userInfoBoth."+sortName + ":" + sortType;
-			}
-			pageRequest = createPageRequest(pageNumber, pageSize, search, false);
-		} else {
-			pageRequest = createPageRequest(pageNumber, pageSize,
-					"id:desc", false);
+
+		if(!StringUtils.isBlank(sortName) && !StringUtils.isBlank(sortType)){
+			String sort = sortName+":"+sortType;
+			pageRequest = createPageRequest(pageNumber, pageSize, sort, false);
+		}else{
+			pageRequest = createPageRequest(pageNumber,pageSize,"createTime:desc",false);
 		}
 		@SuppressWarnings("unchecked")
 		Specification<User> spec = (Specification<User>) createSpecification(searchParams, User.class);
-		if(contacted){
-			Specification<User> userSpec =  new Specification<User>(){
-				@Override
-				public Predicate toPredicate(Root<User> root,
-						CriteriaQuery<?> query, CriteriaBuilder cb) {
-					// TODO Auto-generated method stub
-					return cb.and(cb.isEmpty(root.get("remarks")));
-				}
-			};		
-			spec = Specifications.where(spec).and(userSpec);		
-		}
 		Page<User> result = userDao.findAll(spec, pageRequest);
 		return result;
 	}

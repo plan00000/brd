@@ -175,11 +175,11 @@
 								class="nav-label">首页</span></a>
 					</li>
 
-					<shiro:hasPermission name="USER_MANAGER">
+					<%--<shiro:hasPermission name="USER_MANAGER">
 						<li id="na_li2"><a href="${ctx}/admin/user/list"><i class="fa fa-user"></i> <span
 								class="nav-label">后台用户管理</span></a>
 						</li>
-					</shiro:hasPermission>
+					</shiro:hasPermission>--%>
 					<shiro:hasPermission name="SYS_LOG">
 						<li id="na_li3"><a href="${ctx}/admin/orderform/list"><i class="fa fa-magic"></i> <span class="nav-label">订单管理</span></a>
 						</li>

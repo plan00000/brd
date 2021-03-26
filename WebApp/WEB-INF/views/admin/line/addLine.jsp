@@ -54,7 +54,6 @@
             }
 
 			$("#submitform").unbind("click");
-			password =hex_md5($("#password").val());
 			$.post("${ctx}/admin/line/addLine",{startAddress:startAddress,endAddress:endAddress},function(data){
 					if(data.code==1){
 						showCallBackDialog("添加成功",function(){

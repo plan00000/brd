@@ -85,239 +85,25 @@ public class AdminUserController {
 	private @Autowired UserDao userDao;
 
 	@RequestMapping(value = "list")
-	public String list(
-			@RequestParam(value = "page", required = true, defaultValue = "1") int pageNumber,
-			@RequestParam(value = "sortName", required = false) String sortName,
-			@RequestParam(value = "sortType", required = false) String sortType,
-			@RequestParam(value = "state", required = false, defaultValue = "-1") int state,
-			@RequestParam(value = "userType", required = false) User.UserType userType,
-			@RequestParam(value = "loginTimes", required = false, defaultValue = "0") int loginTimes,
-			@RequestParam(value = "sonSum", required = false, defaultValue = "0") int sonSum,
-			@RequestParam(value = "grandsonSum", required = false, defaultValue = "0") int grandsonSum,
-			@RequestParam(value = "ggrandsonSum", required = false, defaultValue = "0") int ggrandsonSum,
-			@RequestParam(value = "orderSum", required = false, defaultValue = "0") int orderSum,
-			@RequestParam(value = "orderSuccessSum", required = false, defaultValue = "0") int orderSuccessSum,
-			@RequestParam(value = "keywordType", required = false, defaultValue = "0") int keywordType,
-			@RequestParam(value = "keyword", required = false) String keyword,
-			@RequestParam(value = "timeRange", required = false, defaultValue = "all") String timeRange,
-			@RequestParam(value = "startTimestr", required = false, defaultValue = "") String startTimestr,
-			@RequestParam(value = "endTimestr", required = false, defaultValue = "") String endTimestr,
-			@RequestParam(value = "userId", required = false, defaultValue = "-1") long userId,
-			@RequestParam(value = "getType", required = false) String getType,
-			@RequestParam(value = "lastLoginDate", required = false, defaultValue = "") String lastLoginDate,// 最后登录时间
-			@RequestParam(value = "departid", required = false, defaultValue = "-1") long departid,  //所属业务员部门id
-			@RequestParam(value = "contacted",required=false,defaultValue="false") boolean contacted,
-			@RequestParam(value = "step",required =false,defaultValue="0") int step,
-			@RequestParam(value ="registerStarttime",required=false) String registerStarttime,
-			@RequestParam(value ="registerEndtime",required=false) String registerEndtime,
-			Model model) {			
-		
-		Map<String, Object> searchParams = new HashMap<String, Object>();
-		List<User.UserType> userTypeList = new ArrayList<User.UserType>();
-		userTypeList.add(User.UserType.USER);
-		userTypeList.add(User.UserType.SELLER);
-		userTypeList.add(User.UserType.MANAGER);
-		userTypeList.add(User.UserType.SALESMAN);
-		searchParams.put("IN_userType", userTypeList);
-		if (state == 0) {
-			searchParams.put("EQ_state", User.State.OFF);
-		} else if (state == 1) {
-			searchParams.put("EQ_state", User.State.ON);
-		} else {
-			searchParams.put("NE_state", User.State.DEL);
-		}
-
-		if (userType != null) {
-			searchParams.put("EQ_userType", userType);
-		}
-		if (loginTimes > 0) {
-			searchParams.put("GTE_loginTimes", loginTimes);
-		}
-		if (sonSum > 0) {
-			searchParams.put("GTE_userInfoBoth.sonSum", sonSum);
-		}
-		if (grandsonSum > 0) {
-			searchParams.put("GTE_userInfoBoth.grandsonSum", grandsonSum);
-		}
-		if (orderSum > 0) {
-			searchParams.put("GTE_userInfoBoth.orderSum", orderSum);
-		}
-		if (orderSuccessSum > 0) {
-			searchParams.put("GTE_userInfoBoth.orderSuccessSum",
-					orderSuccessSum);
-		}
-		if (ggrandsonSum > 0) {
-			searchParams.put("GTE_userInfoBoth.ggsonsSum", ggrandsonSum);
-		}
-		if (keyword != null) {
-			if (keywordType == 0) {
-				searchParams.put("LIKE_username", keyword);
-			} else {
-				searchParams.put("LIKE_mobileno", keyword);
+	public String list(@RequestParam(value = "page",required = true,defaultValue = "1") int pageNum
+			, @RequestParam(value = "status",required = false,defaultValue = "") String status
+			, @RequestParam(value = "sortName",required = false,defaultValue = "") String sortName
+			, @RequestParam(value = "sortType",required = false,defaultValue = "") String sortType
+			, @RequestParam(value = "searchName",required = false,defaultValue ="") String searchName
+			, @RequestParam(value = "searchValue",required = false,defaultValue = "") String searchValue
+            ,Model model) {
+		Map<String,Object> searchParams = new HashMap<String, Object>();
+		if(!StringUtils.isBlank(searchName)){
+			if("username".equals(searchName)){
+				String search = "LIKE_username";
+				searchParams.put(search, searchValue);
 			}
-		}
-		if (!timeRange.equals("all")) {
-			if (timeRange.equalsIgnoreCase("today")) {
-				StringBuilder startTime = new StringBuilder(
-						DateUtil.DateToString(new Date()));
-				startTime.append(" 00:00:00");
-				Timestamp starttimeTime = DateUtil
-						.StringToTimestampLong(startTime.toString());
-				StringBuilder endTime = new StringBuilder(
-						DateUtil.DateToString(new Date()));
-				endTime.append(" 23:59:59");
-				Timestamp endtimeTime = DateUtil.StringToTimestampLong(endTime
-						.toString());
-				searchParams.put("GTE_createdate", starttimeTime);
-				searchParams.put("LTE_createdate", endtimeTime);
-			}
-			if(timeRange.equalsIgnoreCase("three")){
-				Timestamp endTimestamp = DateUtil.getNowTimestamp();
-				searchParams.put("LTE_createdate", endTimestamp);
-				StringBuilder startBuilder = new StringBuilder(DateUtil.DateToString(DateUtil.getPreDay(new Date(), -2)));
-				startBuilder.append(" 00:00:00");
-				Timestamp startTimeTime = DateUtil
-						.StringToTimestampLong(startBuilder.toString());
-				searchParams.put("GTE_createdate", startTimeTime);
-			}			
-			if (timeRange.equalsIgnoreCase("week")) {
-				Timestamp endTimestamp = DateUtil.getNowTimestamp();
-				searchParams.put("LTE_createdate", endTimestamp);
-				StringBuilder startBuilder = new StringBuilder(
-						DateUtil.DateToString(DateUtil.getPreWeek(new Date())));
-				startBuilder.append(" 00:00:00");
-				Timestamp startTimeTime = DateUtil
-						.StringToTimestampLong(startBuilder.toString());
-				searchParams.put("GTE_createdate", startTimeTime);
-			}
-			if (timeRange.equalsIgnoreCase("month")) {
-				Timestamp endTimestamp = DateUtil.getNowTimestamp();
-				searchParams.put("LTE_createdate", endTimestamp);
-				StringBuilder startBuilder = new StringBuilder(
-						DateUtil.DateToString(DateUtil.getPreDate(new Date())));
-				startBuilder.append(" 00:00:00");
-				Timestamp startTimeTime = DateUtil
-						.StringToTimestampLong(startBuilder.toString());
-				searchParams.put("GTE_createdate", startTimeTime);
-			}
-		}
-		if (!StringUtil.isNullString(startTimestr)) {
-			StringBuilder startBuilder = new StringBuilder(startTimestr);
-			startBuilder.append(" 00:00:00");
-			Timestamp startTimeTime = DateUtil
-					.StringToTimestampLong(startBuilder.toString());
-			searchParams.put("GTE_createdate", startTimeTime);
-		}
-		if (!StringUtil.isNullString(endTimestr)) {
-			StringBuilder endBuilder = new StringBuilder(endTimestr);
-			endBuilder.append(" 23:59:59");
-			Timestamp endTimeTime = DateUtil.StringToTimestampLong(endBuilder
-					.toString());
-			searchParams.put("LTE_createdate", endTimeTime);
-		}
-		if (!StringUtil.isNullString(lastLoginDate)) { // 最后登录时间
-			StringBuilder startBuilder = new StringBuilder(lastLoginDate);
-			startBuilder.append(" 00:00:00");
-			Timestamp startTimeTime = DateUtil
-					.StringToTimestampLong(startBuilder.toString());
-			searchParams.put("GTE_lastlogindate", startTimeTime);
-			StringBuilder endBuilder = new StringBuilder(lastLoginDate);
-			endBuilder.append(" 23:59:59");
-			Timestamp endTimeTime = DateUtil.StringToTimestampLong(endBuilder
-					.toString());
-			searchParams.put("LTE_lastlogindate", endTimeTime);
-		}
-
-		if (userId > -1 && getType != null) {
-			if (getType.equals("getSons")) {
-				searchParams.put("EQ_userInfoBoth.parent.id", userId);
-			}
-			if (getType.equals("getGrandSons")) {
-				searchParams.put("EQ_userInfoBoth.grandParent.id", userId);
-			}
-			if (getType.equals("getGGrandSons")) {
-				User user = userService.findById(userId);
-//				List<User> grandSons =userService.findAllGrandSon(user);
-				List<User> grandSons = new ArrayList<>();
-				if(grandSons.size()>0){
-					List<Long> ids = Lists.transform(grandSons, new Function<User,Long>(){
-						@Override
-						public Long apply(User user) {
-							// TODO Auto-generated method stub
-							return user.getId();
-						}
-					});				
-//					List<User> ggrandSonsList = userService.findAllGGrandSon(ids);
-					List<User> ggrandSonsList = new ArrayList<>();
-					List<Long> idss = new ArrayList<Long>();
-					idss.addAll(ids);
-					while(ggrandSonsList.size()>0){
-						List<Long> idsss = Lists.transform(ggrandSonsList,new Function<User,Long>(){
-							@Override
-							public Long apply(User user) {
-								// TODO Auto-generated method stub
-								return user.getId();
-							}
-						});
-						idss.addAll(idsss);
-//						ggrandSonsList = userService.findAllGGrandSon(idsss);
-					}
-					searchParams.put("IN_userInfoBoth.parent.id",idss);
-				} else{
-					searchParams.put("EQ_userInfoBoth.grandParent.userInfoBoth.parent.id",userId);
-				}
-			}
-			if (getType.equals("getSeller")) {
-				searchParams.put("EQ_userInfoBoth.seller.id", userId);
-			}
-			if (getType.equals("getSales")) {
-				searchParams.put("EQ_userInfoBoth.salesman.id", userId);
-			}		
-		}	
-		if(StringUtils.isNotBlank(registerStarttime)){
-			StringBuilder sStartTimeStr = new StringBuilder(registerStarttime);
-			sStartTimeStr.append(" 00:00:00");
-			Date sStartTimeTime = DateUtil.StringToTimestampLong(sStartTimeStr.toString());
-			searchParams.put("GTE_createdate",sStartTimeTime);
-		}
-		if(StringUtils.isNotBlank(registerEndtime)){
-			StringBuilder sEndTimeStr = new StringBuilder(registerEndtime);
-			sEndTimeStr.append(" 23:59:59");
-			Date sEndTimeTime = DateUtil.StringToTimestampLong(sEndTimeStr.toString());
-			searchParams.put("LTE_createdate",sEndTimeTime);
-		}
-		
-		if(departid > 0){
-			searchParams.put("EQ_userInfoBoth.salesman.userInfoEmployee.department.id", departid);
 		}
 			
-		Page<User> users = userService.listUsers(searchParams, pageNumber,Constant.PAGE_SIZE, sortName, sortType,contacted);
-		model.addAttribute("registerStarttime",registerStarttime);
-		model.addAttribute("registerEndtime", registerEndtime);
-		model.addAttribute("getType", getType);
-		model.addAttribute("userId", userId);
+		Page<User> users = userService.listUsers(searchParams, pageNum,Constant.PAGE_SIZE, sortName, sortType);
 		model.addAttribute("users", users);
 		model.addAttribute("sortName", sortName);
 		model.addAttribute("sortType", sortType);
-		model.addAttribute("state", state);
-		model.addAttribute("userType", userType);
-		model.addAttribute("loginTimes", loginTimes);
-		model.addAttribute("sonSum", sonSum);
-		model.addAttribute("grandsonSum", grandsonSum);
-		model.addAttribute("ggrandsonSum", ggrandsonSum);
-		model.addAttribute("orderSum", orderSum);
-		model.addAttribute("orderSuccessSum", orderSuccessSum);
-		model.addAttribute("keywordType", keywordType);
-		model.addAttribute("keyword", keyword);
-		model.addAttribute("timeRange", timeRange);
-		model.addAttribute("startTimestr", startTimestr);
-		model.addAttribute("endTimestr", endTimestr);
-		model.addAttribute("userId", userId);
-		model.addAttribute("getType", getType);
-		model.addAttribute("lastLoginDate", lastLoginDate);
-		model.addAttribute("departid", departid);
-		model.addAttribute("contacted",contacted );
-		model.addAttribute("step", step);
 		return "admin/user/list";
 	}
 

@@ -164,7 +164,7 @@ public class LineController {
      * @param id
      * @return
      */
-    @RequestMapping("delete")
+    @RequestMapping("/delete")
     @ResponseBody
     public RepSimpleMessageDTO deleteProduct(@RequestParam("id") long id
             ,HttpServletRequest request){

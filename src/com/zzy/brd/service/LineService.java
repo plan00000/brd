@@ -58,9 +58,13 @@ public class LineService extends BaseService{
             repSimpleMessageDTO.setMes("该线路已存在");
         }
         tbLine.setCreateTime(new Date());
-        tbLineDao.save(tbLine);
-        repSimpleMessageDTO.setCode(1);
-        repSimpleMessageDTO.setMes("新增线路成功");
+        if(tbLineDao.save(tbLine)==null?false:true){
+            repSimpleMessageDTO.setCode(1);
+            repSimpleMessageDTO.setMes("新增成功");
+        }else{
+            repSimpleMessageDTO.setCode(0);
+            repSimpleMessageDTO.setMes("新增失败");
+        }
         return repSimpleMessageDTO;
     }
     /**

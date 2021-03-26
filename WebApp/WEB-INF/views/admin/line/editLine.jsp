@@ -54,7 +54,6 @@
             }
 
 			$("#submitform").unbind("click");
-			password =hex_md5($("#password").val());
 			$.post("${ctx}/admin/line/editLine",{startAddress:startAddress,endAddress:endAddress,id:'${tbLine.id}'},function(data){
 					if(data.code==1){
 						showCallBackDialog("编辑成功",function(){
