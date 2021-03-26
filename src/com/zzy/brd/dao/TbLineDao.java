@@ -11,4 +11,7 @@ import java.util.List;
 public interface TbLineDao extends BaseDao<TbLine>{
     @Query("select u from TbLine u where u.startAddress =?1 and u.endAddress =?2")
     List<TbLine> findByStartAddressAndEndAddress(String startAddress,String endAddress);
+
+    @Query("select count(u) from TbLine u")
+    int countLine();
 }

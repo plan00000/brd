@@ -5,9 +5,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -20,11 +18,6 @@ import java.util.Date;
 public class TbEvaluate extends IdEntity implements java.io.Serializable{
     private static final long serialVersionUID = 1820717433366616051L;
 
-    /**
-     * 用户id，对应表字段为：tb_evaluate.user_id
-     */
-    @Column(name="user_id")
-    private long userId;
 
     /**
      * 司机id，对应表字段为：tb_evaluate.driver_id
@@ -32,11 +25,6 @@ public class TbEvaluate extends IdEntity implements java.io.Serializable{
     @Column(name="driver_id")
     private long driverId;
 
-    /**
-     * 订单id，对应表字段为：tb_evaluate.order_id
-     */
-    @Column(name="order_id")
-    private long orderId;
 
     /**
      * 订单表id，对应表字段为：tb_evaluate.order_no
@@ -74,12 +62,22 @@ public class TbEvaluate extends IdEntity implements java.io.Serializable{
     @Column(name="update_time")
     private Date updateTime;
 
-    public long getUserId() {
-        return userId;
+    /** 乘客 */
+    @ManyToOne(targetEntity = TbPassenger.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private TbPassenger tbPassenger;
+
+    /** 订单 */
+    @ManyToOne(targetEntity = TbOrder.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
+    private TbOrder tbOrder;
+
+    public TbPassenger getTbPassenger() {
+        return tbPassenger;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setTbPassenger(TbPassenger tbPassenger) {
+        this.tbPassenger = tbPassenger;
     }
 
     public long getDriverId() {
@@ -88,14 +86,6 @@ public class TbEvaluate extends IdEntity implements java.io.Serializable{
 
     public void setDriverId(long driverId) {
         this.driverId = driverId;
-    }
-
-    public long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(long orderId) {
-        this.orderId = orderId;
     }
 
     public String getOrderNo() {
@@ -144,5 +134,13 @@ public class TbEvaluate extends IdEntity implements java.io.Serializable{
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public TbOrder getTbOrder() {
+        return tbOrder;
+    }
+
+    public void setTbOrder(TbOrder tbOrder) {
+        this.tbOrder = tbOrder;
     }
 }

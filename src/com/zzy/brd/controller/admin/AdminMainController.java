@@ -2,6 +2,8 @@ package com.zzy.brd.controller.admin;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.zzy.brd.entity.*;
+import com.zzy.brd.service.*;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,10 +21,7 @@ import com.zzy.brd.dto.rep.RepSimpleMessageDTO;
 //import com.zzy.brd.entity.Orderform.OrderSource;
 //import com.zzy.brd.entity.Orderform.OrderformStatus;
 //import com.zzy.brd.entity.ProductType.BillType;
-import com.zzy.brd.entity.Role;
-import com.zzy.brd.entity.User;
 import com.zzy.brd.mobile.util.ShiroUtil;
-import com.zzy.brd.service.UserService;
 import com.zzy.brd.shiro.principal.ShiroUser;
 import com.zzy.brd.util.date.DateUtil;
 import com.zzy.brd.util.file.FileUtil;
@@ -37,6 +36,14 @@ import com.zzy.brd.util.file.FileUtil;
 public class AdminMainController {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private OrderService orderService;
+	@Autowired
+	private DriverService driverService;
+	@Autowired
+	private PassengerService passengerService;
+	@Autowired
+	private LineService lineService;
 
 	@RequestMapping
 	public String main(Model model){
@@ -49,77 +56,43 @@ public class AdminMainController {
 		}
 		model.addAttribute("name", user.getUsername());
 		model.addAttribute("logintime",user.getLogindate());
-		//贷款订单
-		/*int countSelfhelploanNum = orderformService.countLoanUncheckNum(BillType.SELFHELPLOAN, OrderformStatus.UNCHECKED,OrderSource.WECHAT);
-		int countEarndifferenceNum = orderformService.countLoanUncheckNum(BillType.EARNDIFFERENCE, OrderformStatus.UNCHECKED,OrderSource.WECHAT);
-		int countEarncommissionNum = orderformService.countLoanUncheckNum(BillType.EARNCOMMISSION, OrderformStatus.UNCHECKED,OrderSource.WECHAT);
-		int countUncheckNum = countSelfhelploanNum +countEarndifferenceNum + countEarncommissionNum;
-		*/
-		int countSelfhelploanNum = 0;
-		int countEarndifferenceNum = 0;
-		int countEarncommissionNum = 0;
-		int countUncheckNum = countSelfhelploanNum +countEarndifferenceNum + countEarncommissionNum;
 
-		//官网订单
-//		int countPcUncheckNum = orderformService.countPcOrderNum(OrderformStatus.UNCHECKED, OrderSource.PC);
-//		int countPcUnloanNum = orderformService.countPcOrderNum(OrderformStatus.UNLOAN, OrderSource.PC);
-		int countPcUncheckNum = 0;
-		int countPcUnloanNum = 0;
+		//订单各个状态统计
+		int orderQx = orderService.countOrderStatus(TbOrder.OrderStatus.yqx);
+		int orderYwc = orderService.countOrderStatus(TbOrder.OrderStatus.xcjs);
+		int orderCs = orderService.countOrderStatus(TbOrder.OrderStatus.csdd);
+		int orderAll = orderService.countOrderStatus(TbOrder.OrderStatus.pdz)+ orderService.countOrderStatus(TbOrder.OrderStatus.sjyjd)+orderService.countOrderStatus(TbOrder.OrderStatus.xcks)+orderQx+orderCs+orderYwc;
 
-		int countPcNum = countPcUncheckNum + countPcUnloanNum ;
-		//体现订单
-//		int countFlowWithdrawUncheckNum = flowWithdrawService.countFlowWithdrawByStatusNum(WithdrawStatus.NOCHECK);
-//		int countFlowWithdrawUnloadNum = flowWithdrawService.countFlowWithdrawByStatusNum(WithdrawStatus.NOLENDING);
-		int countFlowWithdrawUncheckNum = 0;
-		int countFlowWithdrawUnloadNum = 0;
+		//司机
+		int driverXb = driverService.countDriverState(TbDriver.DriverStatus.xb);
+		int driverSb = driverService.countDriverState(TbDriver.DriverStatus.sb);
+		int driverAll = driverSb + driverXb;
 
-		int countFlowNum = countFlowWithdrawUncheckNum + countFlowWithdrawUnloadNum;
-		//佣金订单
-		int countBrokerageUncheckNum = 0;
-//		int countBrokerageUnenteringNum = brokerageApplyService.countBrokerageNum(BrokerageApplyStatus.UNENTERING);//待入佣金
-//		int countBrokerageRiskUncheckNum = brokerageApplyService.countBrokerageNum(BrokerageApplyStatus.RISKCHECK);//风控审核
-//		int countBrokerageCeoUncheckNum = brokerageApplyService.countBrokerageNum(BrokerageApplyStatus.CEOCHECK);//ceo审核
-//		int countBrokerageCeoPassNum = brokerageApplyService.countBrokerageNum(BrokerageApplyStatus.CEOPASS);//ceo确定
-		int countBrokerageUnenteringNum = 0;
-		int countBrokerageRiskUncheckNum = 0;
-		int countBrokerageCeoUncheckNum = 0;
-		int countBrokerageCeoPassNum = 0;
+		//乘客
+		int passengerJy = passengerService.countTbPassengerState(TbPassenger.State.jy);
+		int passengerZc = passengerService.countTbPassengerState(TbPassenger.State.zc);
+		int passengerZx = passengerService.countTbPassengerState(TbPassenger.State.zx);
+		int passengerAll = passengerJy+passengerZc+passengerZx;
+		//线路
+		int lines = lineService.countLine();
 
-		if("Admin".equals(rolename)){
-			countBrokerageUncheckNum = countBrokerageCeoUncheckNum;
-		}
-		if("财务".equals(rolename)){
-			countBrokerageUncheckNum =countBrokerageUnenteringNum;
-		}
-		if("风控经理".equals(rolename)){
-			countBrokerageUncheckNum =countBrokerageRiskUncheckNum;
-		}
-//		int countBrokerageFinanceNum = brokerageApplyService.countBrokerageNum(BrokerageApplyStatus.FINANCESEND);
-		int countBrokerageFinanceNum= 0;
-		int countBrokerageNum = 0;
-		if("Admin".equals(rolename)){
-			countBrokerageNum = countBrokerageUncheckNum + countBrokerageFinanceNum + countBrokerageCeoPassNum;
-		}else{
-			countBrokerageNum = countBrokerageUncheckNum + countBrokerageFinanceNum;
-		}
+
 		
 		//会员管理
 //		int pendingAudit = userService.pendingAudit();
 		model.addAttribute("rolename",rolename);
-		model.addAttribute("countSelfhelploanNum",countSelfhelploanNum);
-		model.addAttribute("countEarndifferenceNum",countEarndifferenceNum);
-		model.addAttribute("countEarncommissionNum",countEarncommissionNum);
-		model.addAttribute("countUncheckNum",countUncheckNum);
-		model.addAttribute("countPcUncheckNum",countPcUncheckNum);
-		model.addAttribute("countPcUnloanNum",countPcUnloanNum);
-		model.addAttribute("countPcNum",countPcNum);
-		model.addAttribute("countFlowWithdrawUncheckNum",countFlowWithdrawUncheckNum);
-		model.addAttribute("countFlowWithdrawUnloadNum",countFlowWithdrawUnloadNum);
-		model.addAttribute("countFlowNum",countFlowNum);
-		model.addAttribute("countBrokerageUncheckNum",countBrokerageUncheckNum);
-		model.addAttribute("countBrokerageCeoPassNum",countBrokerageCeoPassNum);
-		model.addAttribute("countBrokerageFinanceNum",countBrokerageFinanceNum);
-		model.addAttribute("countBrokerageNum",countBrokerageNum);
+		model.addAttribute("orderQx",orderQx);
+		model.addAttribute("orderYwc",orderYwc);
+		model.addAttribute("orderCs",orderCs);
+		model.addAttribute("orderAll",orderAll);
+		model.addAttribute("driverXb",driverXb);
+		model.addAttribute("driverSb",driverSb);
+		model.addAttribute("driverAll",driverAll);
+		model.addAttribute("passengerJy",passengerJy);
+		model.addAttribute("passengerZc",passengerZc);
+		model.addAttribute("passengerZx",passengerZx);
+		model.addAttribute("passengerAll",passengerAll);
+		model.addAttribute("lines",lines);
 		model.addAttribute("timename", DateUtil.getTimeName());
 		
 		

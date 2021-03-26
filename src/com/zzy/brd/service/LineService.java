@@ -119,4 +119,8 @@ public class LineService extends BaseService{
     public TbLine findById(long lineId){
         return tbLineDao.findOne(lineId);
     }
+
+    public int countLine(){
+        return  tbLineDao.countLine();
+    }
 }

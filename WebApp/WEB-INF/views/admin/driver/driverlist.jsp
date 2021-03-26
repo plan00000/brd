@@ -145,7 +145,7 @@ function requestLoad(){
 						<td>${driverforms.carMark }</td>
 						<td>${driverforms.carColor }</td>
 	                    <td class="l_ls">${driverforms.driverStatus.getDes() }</td>
-	                    <td><a href="${ctx }/admin/driver/toEditDriver/${driverforms.id}"><span><img src="${ctx }/static/brd/img/bjt1.png"></span></a></td>
+	                    <td><a href="${ctx }/admin/driver/toDriverEvalute/${driverforms.id}"><span><img src="${ctx }/static/brd/img/bjt1.png"></span></a></td>
                  	</tr>
                  </c:forEach>
                  

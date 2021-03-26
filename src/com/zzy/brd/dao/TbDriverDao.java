@@ -12,4 +12,7 @@ public interface TbDriverDao extends BaseDao<TbDriver>{
 
     @Query("select u from TbDriver u where u.mobileno =?1")
     List<TbDriver> findTbDriverByMobileno(String mobileno);
+
+    @Query("select count(u) from TbDriver u where u.driverStatus =?1")
+    int countDriverState( TbDriver.DriverStatus driverStatus);
 }

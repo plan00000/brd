@@ -1,8 +1,10 @@
 package com.zzy.brd.controller.admin.driver;
 
 import com.zzy.brd.constant.Constant;
+import com.zzy.brd.dao.TbEvaluateDao;
 import com.zzy.brd.dto.rep.RepSimpleMessageDTO;
 import com.zzy.brd.entity.TbDriver;
+import com.zzy.brd.entity.TbEvaluate;
 import com.zzy.brd.entity.TbOrder;
 import com.zzy.brd.service.DriverService;
 import com.zzy.brd.service.OrderService;
@@ -29,6 +31,8 @@ import java.util.*;
 public class DriverController {
     @Autowired
     private DriverService driverService;
+    @Autowired
+    private TbEvaluateDao tbEvaluateDao;
 
     @RequestMapping("list")
     public String list(@RequestParam(value = "page",required = true,defaultValue = "1") int pageNum
@@ -169,6 +173,31 @@ public class DriverController {
         tbDriver.setCarColor(carColor);
         RepSimpleMessageDTO res = driverService.editDriver(tbDriver);
         return res;
+    }
+
+    /**
+     * 跳转到编辑页面
+     * @param
+     * @param type
+     * * @param model
+     * @return
+     */
+    @RequestMapping(value = "toDriverEvalute/{driverId}")
+    public String toDriverEvalute(
+            @PathVariable long driverId,
+            @RequestParam(value = "page", required = true, defaultValue = "1") int pageNum,
+            @RequestParam(value = "type", required = false, defaultValue = "brokerage") String type
+            , @RequestParam(value = "sortName",required = false,defaultValue = "") String sortName
+            , @RequestParam(value = "sortType",required = false,defaultValue = "") String sortType
+            , @RequestParam(value = "searchName",required = false,defaultValue ="") String searchName
+            , @RequestParam(value = "searchValue",required = false,defaultValue = "") String searchValue
+            , HttpServletRequest request,Model model) {
+        Map<String,Object> searchParams = new HashMap<String, Object>();
+        Page<TbEvaluate> tbEvaluates = driverService.tbEvaluateformList(searchParams, sortName, sortType, pageNum, Constant.PAGE_SIZE);
+        model.addAttribute("tbEvaluates", tbEvaluates);
+        model.addAttribute("driverId",driverId);
+        model.addAttribute("type", type);
+        return "admin/driver/evaluatelist";
     }
 
 }

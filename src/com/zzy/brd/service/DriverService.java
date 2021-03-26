@@ -1,9 +1,11 @@
 package com.zzy.brd.service;
 
 import com.zzy.brd.dao.TbDriverDao;
+import com.zzy.brd.dao.TbEvaluateDao;
 import com.zzy.brd.dao.TbOrderDao;
 import com.zzy.brd.dto.rep.RepSimpleMessageDTO;
 import com.zzy.brd.entity.TbDriver;
+import com.zzy.brd.entity.TbEvaluate;
 import com.zzy.brd.entity.TbOrder;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,8 @@ public class DriverService extends BaseService{
 
     @Autowired
     private TbDriverDao tbDriverDao;
+    @Autowired
+    private TbEvaluateDao tbEvaluateDao;
 
     /**
      * 列表
@@ -108,5 +112,24 @@ public class DriverService extends BaseService{
      */
     public TbDriver findById(long driverId){
         return tbDriverDao.findOne(driverId);
+    }
+
+    public Page<TbEvaluate> tbEvaluateformList(Map<String,Object> searchParams, String sortName, String sortType, int pageNum, int pageSize){
+        PageRequest pageRequest ;
+        if(!StringUtils.isBlank(sortName) && !StringUtils.isBlank(sortType)){
+            String sort = sortName+":"+sortType;
+            pageRequest = createPageRequest(pageNum, pageSize, sort, false);
+        }else{
+            pageRequest = createPageRequest(pageNum,pageSize,"createTime:desc",false);
+        }
+        @SuppressWarnings("unchecked")
+        Specification<TbEvaluate> spec = (Specification<TbEvaluate>) createSpecification(
+                searchParams, TbEvaluate.class);
+        Page<TbEvaluate> result = tbEvaluateDao.findAll(spec, pageRequest);
+        return result;
+    }
+
+    public int countDriverState(TbDriver.DriverStatus driverStatus){
+        return  tbDriverDao.countDriverState(driverStatus);
     }
 }

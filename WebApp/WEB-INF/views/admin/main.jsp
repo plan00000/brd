@@ -87,12 +87,13 @@ $(function() {
               	<shiro:hasPermission name="ORDER_MANAGER">
                     <div class="username-01">
                     	<p>订单</p>
-                        <samp>进行中的 ${countUncheckNum}条</samp>
+                        <samp>共有 ${orderAll}条</samp>
                         <div class="username-02">
                             <span>订单：</span>
                             <ul>
-                                <li id="countEarncommissionNum">包车单<font>${ countEarncommissionNum}</font></li>
-                                <li id="countEarndifferenceNum">拼车单<font>${ countEarndifferenceNum}</font></li>
+                                <li id="orderQx">取消订单<font>${ orderQx}</font></li>
+                                <li id="orderYwc">已完成订单<font>${ orderYwc}</font></li>
+                                <li id="orderCs">超时订单<font>${ orderCs}</font></li>
                             </ul>
                         </div>
                     </div>
@@ -100,12 +101,12 @@ $(function() {
                     <shiro:hasPermission name="ORDER_MANAGER_PC">
                     <div class="username-01">
                     	<p>司机</p>
-                        <samp>执行中的 ${countPcNum}条</samp>
+                        <samp>共有 ${driverAll}条</samp>
                         <div class="username-02">
                             <span>实时状态：</span>
                             <ul>
-                                <li id="countPcUncheckNum">接单中<font>${ countPcUncheckNum}</font></li>
-                                <li id="countPcUnloanNum">休息中<font>${ countPcUnloanNum}</font></li>
+                                <li id="countPcUncheckNum">上班<font>${ driverSb}</font></li>
+                                <li id="countPcUnloanNum">下班<font>${ driverXb}</font></li>
                             </ul>
                         </div>
                     </div>
@@ -113,12 +114,13 @@ $(function() {
                     <shiro:hasPermission name="ORDER_MANAGER_WITHDRAW">
                     <div class="username-01">
                     	<p>乘客</p>
-                        <samp>共 ${countFlowNum}个会员</samp>
+                        <samp>共 ${passengerAll}个会员</samp>
                         <div class="username-02">
                             <span>待操作：</span>
                             <ul>
-                                <li id="countFlowWithdrawUncheckNum">待审核<font>${countFlowWithdrawUncheckNum }</font></li>
-                                <li id="countFlowWithdrawUnloadNum">待放款<font>${ countFlowWithdrawUnloadNum}</font></li> 
+                                <li id="passengerJy">禁用<font>${passengerJy }</font></li>
+                                <li id="passengerZc">正常<font>${ passengerZc}</font></li>
+                                <li id="passengerZx">注销<font>${ passengerZx}</font></li>
                             </ul>
                         </div>
                     </div>
@@ -126,12 +128,11 @@ $(function() {
                     <shiro:hasPermission name="ORDER_MANAGER_BROKERAGE">
                     <div class="username-01">
                     	<p>线路</p>
-                        <samp>共 ${countBrokerageNum}条</samp>
+                        <samp>共 ${passengerAll}条</samp>
                         <div class="username-02">
                             <span>最热门线路：</span>
                             <ul>
-                                <li id="oneLine">最热线路<font>${countFlowWithdrawUncheckNum }</font></li>
-                                <li id="twoLin">第二热线路<font>${ countFlowWithdrawUnloadNum}</font></li>
+                                <li id="oneLine">最热线路<font>${passengerAll }</font></li>
                             </ul>
                         </div>
                     </div>

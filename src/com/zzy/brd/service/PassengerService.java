@@ -37,4 +37,7 @@ public class PassengerService extends BaseService{
         Page<TbPassenger> result = tbPassengerDao.findAll(spec, pageRequest);
         return result;
     }
+    public int countTbPassengerState(TbPassenger.State state){
+        return  tbPassengerDao.countTbPassengerByState(state);
+    }
 }

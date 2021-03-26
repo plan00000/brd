@@ -23,6 +23,15 @@ public class OrderService extends BaseService{
     @Autowired
     private TbOrderDao tbOrderDao;
 
+    /**
+     *
+     * @param searchParams
+     * @param sortName
+     * @param sortType
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     public Page<TbOrder> adminOrderformList(Map<String,Object> searchParams, String sortName, String sortType, int pageNum, int pageSize){
         PageRequest pageRequest ;
         if(!StringUtils.isBlank(sortName) && !StringUtils.isBlank(sortType)){
@@ -36,5 +45,11 @@ public class OrderService extends BaseService{
                 searchParams, TbOrder.class);
         Page<TbOrder> result = tbOrderDao.findAll(spec, pageRequest);
         return result;
+    }
+    /*统计订单状态的值
+     */
+    public int countOrderStatus(TbOrder.OrderStatus orderStatus){
+        int count =tbOrderDao.countOrderStatus(orderStatus);
+        return count;
     }
 }
