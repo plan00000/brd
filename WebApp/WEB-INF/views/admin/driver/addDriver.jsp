@@ -91,7 +91,7 @@
 			password =hex_md5($("#password").val());
 			$.post("${ctx}/admin/driver/addDriver",{password:password,name:mangername,phone:phone,idCard:idCard
 					,carNo:carNo,driverNo:driverNo,carMark:carMark,carColor:carColor},function(data){
-					if(data.code==0){
+					if(data.code==1){
 						showCallBackDialog("添加成功",function(){
 							location.href = "${ctx}/admin/driver/list";
 						})

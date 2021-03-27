@@ -164,7 +164,6 @@
 							</a>
 							<ul class="dropdown-menu animated fadeInRight m-t-xs">
 								<li><a href="${ctx }/admin/main/toChangePassword">修改密码</a></li>
-								<li><a href="${ctx }/admin/main/toBaseInfo">基本信息</a></li>
 								<li class="divider"></li>
 								<li><a href="${ctx}/admin/login/logout">安全退出</a></li>
 							</ul>

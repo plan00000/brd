@@ -57,7 +57,7 @@
 			$.post("${ctx}/admin/line/addLine",{startAddress:startAddress,endAddress:endAddress},function(data){
 					if(data.code==1){
 						showCallBackDialog("添加成功",function(){
-							location.href = "${ctx}/admin/driver/list";
+							location.href = "${ctx}/admin/line/list";
 						})
 					}else{
 						alert(data.mes);
