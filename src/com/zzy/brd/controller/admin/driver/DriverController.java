@@ -96,6 +96,7 @@ public class DriverController {
     public RepSimpleMessageDTO addDriver(
             String phone,String password,
             @RequestParam(value = "name", required = false) String name,
+            @RequestParam(value = "sex", required = false) String sex,
             @RequestParam(value = "idCard", required = false) String idCard,
             @RequestParam(value = "carNo", required = false) String carNo,
             @RequestParam(value = "driverNo", required = false) String driverNo,
@@ -104,6 +105,11 @@ public class DriverController {
             HttpServletRequest request) {
         TbDriver tbDriver = new TbDriver();
         tbDriver.setMobileno(phone);
+        if("1".equals(sex)){
+            tbDriver.setSex(TbDriver.Sex.ns);
+        }else{
+            tbDriver.setSex(TbDriver.Sex.ns1);
+        }
         tbDriver.setPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
         tbDriver.setUserName(name);
         tbDriver.setCarNo(carNo);

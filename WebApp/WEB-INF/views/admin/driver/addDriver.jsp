@@ -18,18 +18,14 @@
 		
 		$(":radio").click(function(){
 			var value = $(this).val();
-			if(value==0){
+			if(value==1){
 				$("#user").css("display","block")
 				$("#manger").css("display","none");
 				$("#seller").css("display","none")
-			}else if(value==1){
+			}else if(value==2){
 				$("#user").css("display","none")
 				$("#manger").css("display","block");
 				$("#seller").css("display","none")
-			}else if(value==2){
-				$("#user").css("display","none")
-				$("#manger").css("display","none");
-				$("#seller").css("display","block")
 			}
 		})
 		
@@ -41,7 +37,7 @@
 		});
 		
 		function submitAdd(){
-
+            var sex=$('input[name="userType"]:checked ').val();
 			var mangername =$("#mangername").val();
             var phone =$("#phone").val();
             var password =$("#password").val();
@@ -54,6 +50,10 @@
 				alert("请输入密码");
 				return ;
 			}
+            if(sex==null || sex=='undefined'){
+                alert("请选择性别");
+                return ;
+            }
 			if(password.length<6 || password.length>15){
 				alert("密码只能在6-15位之间");
 				return ;
@@ -89,7 +89,7 @@
 
 			$("#submitform").unbind("click");
 			password =hex_md5($("#password").val());
-			$.post("${ctx}/admin/driver/addDriver",{password:password,name:mangername,phone:phone,idCard:idCard
+			$.post("${ctx}/admin/driver/addDriver",{sex:sex,password:password,name:mangername,phone:phone,idCard:idCard
 					,carNo:carNo,driverNo:driverNo,carMark:carMark,carColor:carColor},function(data){
 					if(data.code==1){
 						showCallBackDialog("添加成功",function(){
@@ -119,7 +119,16 @@
             <div class="new_xinxi"><p><font>司机信息</font></p></div>
             <form id="myform" action="${ctx }/admin/driver/addDriver" >
 	            <div class="new_text">
-	                <div class="new_batt" >
+					<dl>
+						<dt>性别：</dt>
+						<dd>
+							<ul>
+								<li class="us" id="r_was1" ><input name="userType" checked="checked" value="1" type="radio" class="n_rad" >男</li>
+								<li id="r_was2" ><input type="radio" name="userType" value="2" class="n_rad">女</li>
+							</ul>
+						</dd>
+					</dl>
+					<div class="new_batt" >
 						<dl>
 							<dt>姓名：</dt>
 							<dd><input type="text" name="mangername" maxlength="5" id="mangername" class="n_la"
@@ -143,7 +152,7 @@
 							<dt>车牌号：</dt>
 							<dd><input type="text" name="carNo" id="carNo" maxlength="11"  class="n_la" ></dd>
 						</dl>
-	                <div id="user" >
+	                <div >
 	                	<dl >
 	                		<dt>驾驶证：</dt>
 	                		<dd><input type="text" name="driverNo" id="driverNo" class="n_la" /> </dd>
