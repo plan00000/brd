@@ -105,8 +105,8 @@ $(function() {
                         <div class="username-02">
                             <span>实时状态：</span>
                             <ul>
-                                <li id="countPcUncheckNum">上班<font>${ driverSb}</font></li>
-                                <li id="countPcUnloanNum">下班<font>${ driverXb}</font></li>
+                                <li id="driverSb">上班<font>${ driverSb}</font></li>
+                                <li id="driverXb">下班<font>${ driverXb}</font></li>
                             </ul>
                         </div>
                     </div>
@@ -128,11 +128,11 @@ $(function() {
                     <shiro:hasPermission name="ORDER_MANAGER_BROKERAGE">
                     <div class="username-01">
                     	<p>线路</p>
-                        <samp>共 ${passengerAll}条</samp>
+                        <samp>共 ${lines}条</samp>
                         <div class="username-02">
                             <span>最热门线路：</span>
                             <ul>
-                                <li id="oneLine">最热线路<font>${passengerAll }</font></li>
+                                <li id="oneLine">最热线路<font>${lines }</font></li>
                             </ul>
                         </div>
                     </div>
