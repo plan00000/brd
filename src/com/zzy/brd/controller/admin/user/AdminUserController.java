@@ -1,26 +1,16 @@
 package com.zzy.brd.controller.admin.user;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
-import java.net.URLEncoder;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import com.zzy.brd.dto.rep.admin.user.RepApprenticesRecordDTO;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,19 +25,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
 import com.zzy.brd.algorithm.encrypt.shiro.PasswordInfo;
 import com.zzy.brd.algorithm.encrypt.shiro.SHA1Encrypt;
-import com.zzy.brd.constant.ConfigSetting;
 import com.zzy.brd.constant.Constant;
 import com.zzy.brd.dao.UserDao;
 import com.zzy.brd.dto.rep.RepSimpleMessageDTO;
-import com.zzy.brd.dto.rep.admin.user.RepApprenticesRecordDTO;
-import com.zzy.brd.dto.rep.admin.user.RepUserApprenticesDTO;
 import com.zzy.brd.dto.req.admin.user.ReqUsernidyfyImgDTO;
 import com.zzy.brd.entity.User;
-import com.zzy.brd.entity.User.State;
 //import com.zzy.brd.entity.UserInfoSeller;
 //import com.zzy.brd.entity.UserRemark;
 import com.zzy.brd.mobile.util.ShiroUtil;
@@ -55,14 +39,10 @@ import com.zzy.brd.service.RoleService;
 //import com.zzy.brd.service.UserInfoBothService;
 import com.zzy.brd.service.UserService;
 import com.zzy.brd.shiro.session.SessionService;
-import com.zzy.brd.util.date.DateUtil;
-import com.zzy.brd.util.excel.ExcelUtil;
-import com.zzy.brd.util.excel.ExcelUtil.ExcelBean;
+//import com.zzy.brd.util.excel.ExcelUtil;
+//import com.zzy.brd.util.excel.ExcelUtil.ExcelBean;
 import com.zzy.brd.util.file.FileUtil;
-import com.zzy.brd.util.map.BaiduMapUtils;
-import com.zzy.brd.util.map.baidu.dto.rep.geocoder.RepGeocoderResolve;
-import com.zzy.brd.util.map.baidu.req.geocoder.ReqGeocoderResolve;
-import com.zzy.brd.util.phone.PhoneUtils;
+//import com.zzy.brd.util.phone.PhoneUtils;
 import com.zzy.brd.util.string.StringUtil;
 
 /***
@@ -244,16 +224,6 @@ public class AdminUserController {
 				if(phone.trim().length()!=11){
 					res.setCode(1);
 					res.setMes("请输入11位手机号码");
-					return res;
-				}			
-				if (PhoneUtils.getPhoneProv(phone).equals("未知")) {
-					res.setCode(1);
-					res.setMes("请输入正确的号码");
-					return res;
-				}
-				if (!PhoneUtils.getPhoneProv(phone).contains("福建")) {
-					res.setCode(1);
-					res.setMes("手机号码必须为福建号码");
 					return res;
 				}
 			}

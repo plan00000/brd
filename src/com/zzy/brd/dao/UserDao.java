@@ -3,12 +3,9 @@ package com.zzy.brd.dao;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import com.zzy.brd.dto.rep.admin.user.RepApprenticesRecordDTO;
 import com.zzy.brd.entity.Role;
 import com.zzy.brd.entity.User;
 import com.zzy.brd.entity.User.State;

@@ -8,11 +8,10 @@ package com.zzy.brd.filter;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import com.zzy.brd.shiro.token.CaptchaUsernamePasswordToken;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.util.WebUtils;
-
-import com.zzy.brd.shiro.token.CaptchaUsernamePasswordToken;
 
 
 /**

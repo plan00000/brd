@@ -12,8 +12,6 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.zzy.brd.constant.ConfigSetting;
-import com.zzy.brd.util.ipparse.City;
-import com.zzy.brd.util.ipparse.IpParseThread;
 
 
 
